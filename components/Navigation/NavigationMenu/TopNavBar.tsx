@@ -11,11 +11,9 @@ import { DevToolbarTrigger } from 'dev-tools'
 import { buttonVariants, cn } from 'ui'
 import { getCustomContent } from '../../../lib/custom-content/getCustomContent'
 import GlobalNavigationMenu from './GlobalNavigationMenu'
+import { TopNavDropdown } from './TopNavDropdown'
 
 const GlobalMobileMenu = dynamic(() => import('./GlobalMobileMenu'))
-const TopNavDropdown = dynamic(() =>
-  import('./TopNavDropdown').then((mod) => ({ default: mod.TopNavDropdown }))
-)
 
 const largeLogo = isFeatureEnabled('branding:large_logo')
 

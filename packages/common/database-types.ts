@@ -155,7 +155,7 @@ export type Database = {
         Row: {
           id: string
           slug: string
-          brand_line: string | null
+          brand: string | null
           name: string
           my_rating: number | null
           perfumer: string | null
@@ -192,7 +192,7 @@ export type Database = {
         Insert: {
           id?: string
           slug: string
-          brand_line?: string | null
+          brand?: string | null
           name: string
           my_rating?: number | null
           perfumer?: string | null
@@ -229,7 +229,7 @@ export type Database = {
         Update: {
           id?: string
           slug?: string
-          brand_line?: string | null
+          brand?: string | null
           name?: string
           my_rating?: number | null
           perfumer?: string | null

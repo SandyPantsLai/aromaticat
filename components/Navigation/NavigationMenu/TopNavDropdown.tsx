@@ -38,6 +38,7 @@ export function TopNavDropdown() {
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild className="flex">
         <button
+          type="button"
           title="Menu dropdown button"
           className={cn(
             buttonVariants({ type: 'default' }),

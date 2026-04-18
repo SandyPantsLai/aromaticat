@@ -1,8 +1,7 @@
 'use client'
 
-import ReactMarkdown from 'react-markdown'
+import { cn } from 'ui'
 
-import { guideHeadingMarkdownComponents } from '~/features/docs/guideHeadingMarkdown'
 import { useGuide } from './Guide'
 
 interface GuideHeaderProps {
@@ -15,20 +14,19 @@ export function GuideHeader({ className }: GuideHeaderProps) {
 
   return (
     <div className={className}>
-      <h1 className="mb-0">
-        <ReactMarkdown components={guideHeadingMarkdownComponents}>
-          {meta?.title || 'Supabase Docs'}
-        </ReactMarkdown>
-      </h1>
+      <h1 className="mb-0">{meta?.title || 'Supabase Docs'}</h1>
       {meta?.brand && (
-        <div className="mt-2 text-sm text-foreground-light">
-          <ReactMarkdown components={guideHeadingMarkdownComponents}>{meta.brand}</ReactMarkdown>
-        </div>
+        <div className="mt-2 text-sm text-foreground-light">{meta.brand}</div>
       )}
       {tagline && (
-        <h2 className="mt-3 text-xl text-foreground-light">
-          <ReactMarkdown components={guideHeadingMarkdownComponents}>{tagline}</ReactMarkdown>
-        </h2>
+        <div
+          className={cn(
+            'not-prose text-sm text-foreground-light',
+            meta?.brand ? 'mt-1' : 'mt-2'
+          )}
+        >
+          {tagline}
+        </div>
       )}
       <hr className="not-prose border-t-0 border-b my-8" />
     </div>

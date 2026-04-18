@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react'
 import { cn } from 'ui'
 
-import Breadcrumbs from '~/components/Breadcrumbs'
+import BreadcrumbsDefer from '~/components/BreadcrumbsDefer'
 
 interface GuideArticleProps {
   children: ReactNode
@@ -11,7 +11,7 @@ interface GuideArticleProps {
 export function GuideArticle({ children, className }: GuideArticleProps) {
   return (
     <>
-      <Breadcrumbs className="mb-2" />
+      <BreadcrumbsDefer className="mb-2" />
       <article
         // Used to get headings for the table of contents
         id="sb-docs-guide-main-article"

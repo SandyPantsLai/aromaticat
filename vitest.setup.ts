@@ -2,6 +2,25 @@ import { afterAll, beforeAll, vi } from 'vitest'
 
 let oldEnv: NodeJS.ProcessEnv
 
+/** jsdom does not implement `matchMedia`; `common` reads it at import time. */
+function installMatchMediaMock() {
+  if (typeof window === 'undefined') return
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    configurable: true,
+    value: vi.fn().mockImplementation((query: string) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    })),
+  })
+}
+
 beforeAll(() => {
   // Use local Supabase to run e2e tests
   oldEnv = { ...process.env }
@@ -22,3 +41,5 @@ afterAll(() => {
   process.env = oldEnv
   vi.doUnmock('server-only')
 })
+
+installMatchMediaMock()

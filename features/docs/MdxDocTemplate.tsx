@@ -1,11 +1,9 @@
 import { type ReactNode } from 'react'
-import ReactMarkdown from 'react-markdown'
 
 import { cn } from 'ui'
 
-import Breadcrumbs from '~/components/Breadcrumbs'
+import BreadcrumbsDefer from '~/components/BreadcrumbsDefer'
 import GuidesSidebar from '~/components/GuidesSidebar'
-import { guideHeadingMarkdownComponents } from '~/features/docs/guideHeadingMarkdown'
 import { TocAnchorsProvider } from '~/features/docs/MdxToc.client'
 import { MDXRemoteBase } from '~/features/docs/MdxBase'
 import type { WithRequired } from '~/features/helpers.types'
@@ -38,25 +36,24 @@ const MdxDocTemplate = ({ meta, content, children, mdxOptions }: MdxDocTemplateP
             'col-span-12 md:col-span-9'
           )}
         >
-          <Breadcrumbs className="mb-2" />
+          <BreadcrumbsDefer className="mb-2" />
           <article
             id="sb-docs-guide-main-article"
             className="prose max-w-none"
           >
-            <h1 className="mb-0">
-              <ReactMarkdown components={guideHeadingMarkdownComponents}>
-                {meta?.title || 'Supabase Docs'}
-              </ReactMarkdown>
-            </h1>
+            <h1 className="mb-0">{meta?.title || 'Supabase Docs'}</h1>
             {meta?.brand && (
-              <div className="mt-2 text-sm text-foreground-light">
-                <ReactMarkdown components={guideHeadingMarkdownComponents}>{meta.brand}</ReactMarkdown>
-              </div>
+              <div className="mt-2 text-sm text-foreground-light">{meta.brand}</div>
             )}
             {tagline && (
-              <h2 className="mt-3 text-xl text-foreground-light">
-                <ReactMarkdown components={guideHeadingMarkdownComponents}>{tagline}</ReactMarkdown>
-              </h2>
+              <div
+                className={cn(
+                  'not-prose text-sm text-foreground-light',
+                  meta?.brand ? 'mt-1' : 'mt-2'
+                )}
+              >
+                {tagline}
+              </div>
             )}
             <hr className="not-prose border-t-0 border-b my-8" />
 

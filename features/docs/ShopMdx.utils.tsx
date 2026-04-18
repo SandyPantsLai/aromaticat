@@ -16,6 +16,7 @@ import {
   SHOP_DIRECTORY,
   type GuideFrontmatter,
 } from '~/lib/docs'
+import { resolveShopFragranceMeta } from '~/lib/resolveShopFragranceMeta'
 import { GuideModelLoader, type GuideFsContext } from '~/resources/guide/guideModelLoader'
 import { checkGuidePageEnabled } from './NavigationPageStatus.utils'
 import { getCustomContent } from '~/lib/custom-content/getCustomContent'
@@ -149,11 +150,13 @@ export const genShopMeta =
   ) =>
   async (props: { params: Promise<Params> }, parent: ResolvingMetadata): Promise<Metadata> => {
     const params = await props.params
-    const [parentAlternates, parentOg, { meta, pathname }] = await Promise.all([
+    const [parentAlternates, parentOg, raw] = await Promise.all([
       pluckPromise(parent, 'alternates'),
       pluckPromise(parent, 'openGraph'),
       generate(params),
     ])
+    const meta = await resolveShopFragranceMeta(raw.meta, raw.pathname)
+    const pathname = raw.pathname
 
     const htmlDescription = meta.description || meta.family || meta.subtitle
     const ogDescription = composeOpenGraphDescription(meta)

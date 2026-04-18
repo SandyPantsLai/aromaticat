@@ -53,7 +53,13 @@ const Heading = forwardRef(
     )
 
     return (
-      <HeadingTag id={anchor} ref={combinedRef} className="group scroll-mt-24" {...props}>
+      <HeadingTag
+        id={anchor}
+        ref={combinedRef}
+        className="group scroll-mt-24"
+        {...props}
+        suppressHydrationWarning
+      >
         {removeAnchor(children)}
         {anchor && (
           <a

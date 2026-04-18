@@ -10,6 +10,7 @@ import {
 } from '~/features/docs/ShopMdx.utils'
 import { IS_PROD } from 'common'
 import { getEmptyArray } from '~/features/helpers.fn'
+import { resolveShopFragranceMeta } from '~/lib/resolveShopFragranceMeta'
 
 type Params = { section: string; slug?: string[] }
 
@@ -24,10 +25,11 @@ const ShopProductPage = async (props: { params: Promise<Params> }) => {
     redirect(`/shop/${section}/overview`)
   }
   const data = await getShopMarkdown(section, parts)
+  const meta = await resolveShopFragranceMeta(data.meta, data.pathname)
 
   return (
     <MdxDocTemplate
-      meta={data.meta}
+      meta={meta}
       content={removeRedundantH1(data.content)}
     />
   )

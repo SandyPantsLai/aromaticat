@@ -3,7 +3,7 @@
 create table if not exists public.fragrances (
   id uuid primary key default gen_random_uuid(),
   slug text not null,
-  brand_line text,
+  brand text,
   name text not null,
   my_rating numeric,
   perfumer text,
@@ -39,7 +39,7 @@ create table if not exists public.fragrances (
   constraint fragrances_slug_key unique (slug)
 );
 
-create index if not exists fragrances_brand_line_name_idx on public.fragrances (brand_line, name);
+create index if not exists fragrances_brand_name_idx on public.fragrances (brand, name);
 
 comment on table public.fragrances is 'Fragrance inventory rows; slug is stable key for MDX (github-slugger style).';
 

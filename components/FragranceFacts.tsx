@@ -1,6 +1,6 @@
 import { cn } from 'ui'
 
-import { getFragranceBySlug } from '~/lib/fragrances'
+import { getFragranceByName } from '~/lib/fragrances'
 
 function formatUsdPerMl(value: number): string {
   const formatted = new Intl.NumberFormat('en-US', {
@@ -20,32 +20,31 @@ function describeRetailPricePerMl(value: number | null): string {
 }
 
 /**
- * Loads a fragrance row by `slug` (must match `public.fragrances.slug` in Supabase)
- * and shows retail $/ml and a few other facts for use inside MDX.
+ * Loads a fragrance row by `name` (must match `public.fragrances.name`, case-insensitive).
  */
 export async function FragranceFacts({
-  slug,
+  name,
   className,
 }: {
-  slug: string
+  name: string
   className?: string
 }) {
-  const row = await getFragranceBySlug(slug.trim())
+  const row = await getFragranceByName(name.trim())
 
   if (!row) {
     return (
       <p
         className={cn('not-prose text-sm text-foreground-lighter', className)}
-        data-fragrance-slug={slug}
+        data-fragrance-name={name}
       >
-        No fragrance found for slug <code className="text-xs">{slug}</code>. Check that the slug
+        No fragrance found for name <code className="text-xs">{name}</code>. Check that the name
         matches a row in Supabase and that <code className="text-xs">NEXT_PUBLIC_SUPABASE_URL</code>{' '}
         and the anon key point at the same project.
       </p>
     )
   }
 
-  const title = [row.brand_line, row.name].filter(Boolean).join(' — ')
+  const title = [row.brand, row.name].filter(Boolean).join(' — ')
 
   return (
     <aside

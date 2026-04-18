@@ -8,11 +8,17 @@ import type { Database } from 'common'
 
 export type FragranceRow = Database['public']['Tables']['fragrances']['Row']
 
-export const getFragranceBySlug = cache(async (slug: string): Promise<FragranceRow | null> => {
-  const { data, error } = await supabase().from('fragrances').select('*').eq('slug', slug).maybeSingle()
+/**
+ * Loads a row where `fragrances.name` matches (case-insensitive).
+ */
+export const getFragranceByName = cache(async (name: string): Promise<FragranceRow | null> => {
+  const q = name.trim()
+  if (!q) return null
+
+  const { data, error } = await supabase().from('fragrances').select('*').ilike('name', q).maybeSingle()
 
   if (error) {
-    console.error('[fragrances] getFragranceBySlug', slug, error.message)
+    console.error('[fragrances] getFragranceByName', q, error.message)
     return null
   }
 

@@ -16,7 +16,10 @@ export const REF_DOCS_DIRECTORY = join(DOCS_DIRECTORY, 'docs/ref')
 export const SPEC_DIRECTORY = join(DOCS_DIRECTORY, 'spec')
 
 export type GuideFrontmatter = {
+  /** Page title; on shop product pages this can match `public.fragrances.name` for catalog merge. */
   title: string
+  /** Optional stable id (e.g. URL segment); not used for fragrance DB lookup. */
+  id?: string
   /** Short tagline; prefer `family` for shop / fragrance-notes when both exist. */
   subtitle?: string
   /** Optional tagline for shop and fragrance-notes (falls back to `subtitle`). */
@@ -60,6 +63,9 @@ export function isValidGuideFrontmatter(obj: object): obj is GuideFrontmatter {
       // @ts-expect-error - Getting undefined for unknown property is desired here.
       `Invalid guide frontmatter: Title must exist and be a string. Received: ${obj.title}`
     )
+  }
+  if ('id' in obj && typeof obj.id !== 'string') {
+    throw Error(`Invalid guide frontmatter: id must be a string. Received: ${obj.id}`)
   }
   if ('subtitle' in obj && typeof obj.subtitle !== 'string') {
     throw Error(`Invalid guide frontmatter: Subtitle must be a string. Received: ${obj.subtitle}`)

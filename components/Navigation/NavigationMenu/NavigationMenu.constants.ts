@@ -95,8 +95,18 @@ export const decants: NavMenuConstant = {
   items: [
     { name: 'Overview', url: '/shop/decants/overview' as `/${string}` },
     {
+      name: 'Byredo',
+      items: [
+        { name: 'Mojave Ghost EDP', url: '/shop/decants/mojave-ghost-edp' as `/${string}` },
+        { name: 'Rose of No Man\'s Land Absolu', url: '/shop/decants/rose-of-no-mans-land-absolu' as `/${string}` },
+      ],
+    },
+    {
       name: 'Soulvent',
-      items: [{ name: 'Northern', url: '/shop/decants/northern' as `/${string}` }],
+      items: [
+        { name: 'Hugging', url: '/shop/decants/hugging' as `/${string}` },
+        { name: 'Northern', url: '/shop/decants/northern' as `/${string}` },
+      ],
     },
   ],
 }
