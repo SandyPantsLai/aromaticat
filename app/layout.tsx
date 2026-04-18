@@ -32,7 +32,7 @@ const metadata: Metadata = {
     type: 'article',
     authors: 'Supabase',
     url: `${BASE_PATH}`,
-    images: `${BASE_PATH}/img/supabase-og-image.png`,
+    images: `${BASE_PATH}/aromaticat-long-logo.svg`,
     publishedTime: new Date().toISOString(),
     modifiedTime: new Date().toISOString(),
   },
@@ -40,7 +40,7 @@ const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@supabase',
     creator: '@supabase',
-    images: `${BASE_PATH}/img/supabase-og-image.png`,
+    images: `${BASE_PATH}/aromaticat-long-logo.svg`,
   },
 }
 

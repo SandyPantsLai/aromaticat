@@ -63,7 +63,7 @@ export const AuthenticatedDropdownMenu = ({ user, menu, site }: Props) => {
               src={userAvatar}
               alt={user?.email ?? ''}
               placeholder="blur"
-              blurDataURL="/images/blur.png"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
               fill
               sizes="30px"
               className="object-cover object-center"

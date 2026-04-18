@@ -4,6 +4,10 @@ import Image from 'next/image'
 import React, { ReactNode } from 'react'
 import { cn, Modal } from 'ui'
 
+/** Tiny neutral placeholder when no poster URL is provided (avoids missing `/images/blur.png`). */
+const DEFAULT_VIDEO_POSTER =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=='
+
 interface ExpandableVideoProps {
   videoId: string
   imgUrl?: string
@@ -71,11 +75,12 @@ export function ExpandableVideo({
         <p className="text-sm">{imgOverlayText ?? 'Watch video guide'}</p>
       </div>
       <Image
-        src={imgUrl ?? '/images/blur.png'}
+        src={imgUrl ?? DEFAULT_VIDEO_POSTER}
         alt={imgAltText ?? 'Video guide preview'}
         fill
         sizes="100%"
         priority={priority}
+        unoptimized={!imgUrl}
         className="absolute inset-0 object-cover blur-sm scale-105"
       />
     </div>
