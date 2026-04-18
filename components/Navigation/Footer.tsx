@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button, cn, IconDiscord, IconGitHubSolid, IconTwitterX, IconYoutubeSolid } from 'ui'
+import { Button, cn, IconBasenotes, IconFragrantica, IconParfumo, IconYoutubeSolid } from 'ui'
 import { primaryLinks, secondaryLinks } from '~/data/footer'
 import { LayoutMainContent } from '~/layouts/DefaultLayout'
 
@@ -37,15 +37,15 @@ const Footer = ({ className }: { className?: string }) => (
             className="text-foreground-muted hover:text-foreground transition"
           >
             <span className="sr-only">Parfumo</span>
-            <IconTwitterX size={14} />
+            <IconParfumo size={14} />
           </a>
 
           <a
             href="https://fragrantica.com"
             className="text-foreground-muted hover:text-foreground transition"
           >
-            <span className="sr-only">Fragantica</span>
-            <IconGitHubSolid size={14} />
+            <span className="sr-only">Fragrantica</span>
+            <IconFragrantica size={14} />
           </a>
 
           <a
@@ -53,7 +53,7 @@ const Footer = ({ className }: { className?: string }) => (
             className="text-foreground-muted hover:text-foreground transition"
           >
             <span className="sr-only">Basenotes</span>
-            <IconDiscord size={14} />
+            <IconBasenotes size={14} />
           </a>
         </div>
       </div>
