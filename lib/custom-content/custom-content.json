@@ -1,0 +1,8 @@
+{
+  "homepage:heading": "Supabase Documentation",
+  "metadata:application_name": "Supabase Docs",
+  "metadata:title": "Supabase Docs",
+  "navigation:logo": {
+    "light": "/aromaticat-long-logo.svg"
+  }
+}
