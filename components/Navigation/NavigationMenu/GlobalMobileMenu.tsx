@@ -37,7 +37,6 @@ const AccordionMenuItem = ({ section }: { section: DropdownMenuItem[] }) => {
     <m.div
       variants={listItem}
       className="border-b border-muted [&>div]:!rounded-none [&_div[data-state=open]>div]:py-1"
-      key={section[0].label}
     >
       {section[0].menuItems ? (
         <Accordion.Item
@@ -55,11 +54,15 @@ const AccordionMenuItem = ({ section }: { section: DropdownMenuItem[] }) => {
                 .filter((item) => item.enabled !== false)
                 .map((item) =>
                   !item.href ? (
-                    <div className="font-mono tracking-wider flex items-center text-foreground-muted text-xs uppercase rounded-md p-2 leading-none">
+                    <div
+                      key={item.label}
+                      className="font-mono tracking-wider flex items-center text-foreground-muted text-xs uppercase rounded-md p-2 leading-none"
+                    >
                       {item.label}
                     </div>
                   ) : (
                     <MenuItem
+                      key={item.href}
                       href={item.href}
                       title={item.label}
                       community={item.community}
@@ -92,7 +95,7 @@ const Menu = () => (
     chevronAlign="right"
   >
     {GLOBAL_MENU_ITEMS.filter((section) => section[0].enabled !== false).map((section) => (
-      <AccordionMenuItem section={section} />
+      <AccordionMenuItem key={section[0].label} section={section} />
     ))}
   </Accordion>
 )

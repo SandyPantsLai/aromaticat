@@ -18,18 +18,18 @@ export const GLOBAL_MENU_ITEMS: GlobalMenuItems = [
   ],
   [
     {
-      label: 'Fragrance Notes',
-      icon: 'fragrance',
-      href: '/fragrance-notes' as `/${string}`,
-      level: 'fragrance-notes',
-    },
-  ],
-  [
-    {
       label: 'Shop',
       icon: 'shop',
       href: '/shop' as `/${string}`,
       level: 'shop',
+    },
+  ],
+  [
+    {
+      label: 'Fragrance Notes',
+      icon: 'fragrance',
+      href: '/fragrance-notes' as `/${string}`,
+      level: 'fragrance-notes',
     },
   ],
   [

@@ -5,8 +5,8 @@ import type { MenuIconKey } from '../Navigation.types'
 
 const MENU_ICONS = {
   home: Home,
-  fragrance: Sparkles,
   shop: ShoppingBag,
+  fragrance: Sparkles,
   blog: BookOpen,
 } satisfies Record<MenuIconKey, LucideIcon>
 

@@ -13,8 +13,8 @@ import ButtonCard from '~/components/ButtonCard'
 function SearchButton() {
   return (
     <Button type="primary" size="small" asChild>
-      <Link href="/fragrance-notes" className="no-underline">
-        Browse fragrance notes
+      <Link href="/shop" className="no-underline">
+        Browse Shop
       </Link>
     </Button>
   )

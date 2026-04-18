@@ -38,13 +38,13 @@ const TopNavBar: FC = () => {
             <div className="flex gap-2 items-center">
               <DevToolbarTrigger />
               <Link
-                href="/fragrance-notes"
+                href="/shop"
                 className={cn(
                   buttonVariants({ type: 'default', size: 'tiny' }),
                   'hidden sm:inline-flex border-default bg-surface-100/75 text-foreground-light rounded-md px-3 h-[30px] items-center text-sm no-underline'
                 )}
               >
-                Browse Fragrance Notes
+                Browse Shop
               </Link>
               <button
                 title="Menu dropdown button"
