@@ -1,38 +1,42 @@
-# Reference Docs
+# AromatiCat
 
-Supabase Reference Docs
+AromatiCat is a [Next.js](https://nextjs.org/) application for fragrance-related content and tooling. The app includes areas such as guides, fragrance notes, a blog, and shop routes, and uses a [pnpm](https://pnpm.io/) monorepo with shared packages under `packages/*` (for example `ui`, `common`, and `config`).
 
-## Maintainers
+The UI is built with React and TypeScript. Data and auth integrate with [Supabase](https://supabase.com/) where configured.
 
-If you are a maintainer of any tools in the Supabase ecosystem, you can use this site to provide documentation for the tools & libraries that you maintain.
+## Prerequisites
 
-## Versioning
+- Node.js — a current LTS version compatible with this repo’s TypeScript and Next.js versions.
+- pnpm — required; installs are enforced with `only-allow pnpm` in `package.json`.
 
-All tools have versioned docs, which are kept in separate folders. For example, the CLI has the following folders and files:
+## Getting started
 
-- `cli`: the "next" release.
-- `cli_spec`: contains the DocSpec for the "next" release (see below).
-- `cli_versioned_docs`: a version of the documentation for every release (including the most current version).
-- `cli_versioned_sidebars`: a version of the sidebar for every release (including the most current version).
-
-When you release a new version of a tool, you should also release a new version of the docs. You can do this via the command line. For example, if you just released the CLI version `1.0.1`:
-
-```
-npm run cli:version 1.0.1
+```bash
+pnpm install
+pnpm dev
 ```
 
-## DocSpec
+The dev server listens on port 3001 (see the `dev` script in `package.json`).
 
-We use documentation specifications which can be used to generate human-readable docs.
+GraphQL codegen runs before `dev` and `build` via `predev` / `prebuild`; ensure environment variables needed for codegen are present if those steps fail locally.
 
-- OpenAPI: for documenting API endpoints.
-- SDKSpec (custom to Supabase): for SDKs and client libraries.
-- ConfigSpec (custom to Supabase): for configuration options.
-- CLISpec (custom to Supabase): for CLI commands and usage.
+## Common scripts
 
-The benefit of using custom specifications is that we can generate many other types from a strict schema (eg, HTML and manpages).
-It also means that we can switch to any documentation system we want. On this site we use Next.js, but on Supabase's official website, we use a custom React site and expose only a subset of the available API for each tool.
+| Script        | Description |
+|---------------|-------------|
+| `pnpm dev`    | Next.js dev server and blog file watcher |
+| `pnpm build`  | Production build (runs codegen and doc markdown generation first) |
+| `pnpm start`  | Start the production server |
+| `pnpm lint`   | ESLint |
+| `pnpm typecheck` | TypeScript check |
+| `pnpm test:local` | Vitest (excluding smoke tests) |
 
-## Contributing
+Integration tests that need a local database use `pnpm test` (starts Supabase locally, runs tests, then stops Supabase).
 
-To contribute to docs, see the [developers' guide](https://github.com/supabase/supabase/blob/master/apps/docs/DEVELOPERS.md) and [contributing guide](https://github.com/supabase/supabase/blob/master/apps/docs/CONTRIBUTING.md).
+## Environment
+
+Copy or create `.env.local` (and other env files your setup expects). Do not commit secrets. Use `pnpm dev:secrets:pull` if your workflow pulls secrets via the provided script.
+
+## License
+
+This project is private (see `package.json`).
