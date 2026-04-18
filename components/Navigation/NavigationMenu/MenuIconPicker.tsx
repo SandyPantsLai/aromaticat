@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import { BookOpen, Home, ShoppingBag, Sparkles } from 'lucide-react'
+import { BookOpen, Droplets, Home, Repeat, ShoppingBag, Sparkles, Wine } from 'lucide-react'
 
 import type { MenuIconKey } from '../Navigation.types'
 
@@ -8,6 +8,9 @@ const MENU_ICONS = {
   shop: ShoppingBag,
   fragrance: Sparkles,
   blog: BookOpen,
+  decants: Droplets,
+  catchAndRelease: Repeat,
+  bottles: Wine,
 } satisfies Record<MenuIconKey, LucideIcon>
 
 type MenuIconPickerProps = {

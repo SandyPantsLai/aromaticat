@@ -27,6 +27,7 @@ import {
 } from 'ui'
 
 import * as NavItems from '~/components/Navigation/NavigationMenu/NavigationMenu.constants'
+import { shopBreadcrumbNav } from '~/components/Navigation/NavigationMenu/shopSidebarNav'
 import { getMenuId } from '~/components/Navigation/NavigationMenu/NavigationMenu.utils'
 
 interface BreadcrumbsProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -161,7 +162,7 @@ function useBreadcrumbs() {
   const pathname = usePathname()
 
   const menuId = getMenuId(pathname)
-  const menu = NavItems[menuId]
+  const menu = menuId === 'shop' ? shopBreadcrumbNav : NavItems[menuId]
   if (!menu) return null
   return findMenuItemByUrl(menu, pathname, [])
 }

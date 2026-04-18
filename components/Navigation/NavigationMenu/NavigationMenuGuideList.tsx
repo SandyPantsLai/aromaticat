@@ -1,18 +1,23 @@
 'use client'
 
-import { type NavMenuSection } from '../Navigation.types'
-import * as NavItems from './NavigationMenu.constants'
-import NavigationMenuGuideListItems from './NavigationMenuGuideListItems'
+import { usePathname } from 'next/navigation'
 import { PropsWithChildren } from 'react'
 
-const NavigationMenuGuideList = ({
+import { type NavMenuSection } from '../Navigation.types'
+import * as NavItems from './NavigationMenu.constants'
+import { getShopSidebarNav } from './shopSidebarNav'
+import NavigationMenuGuideListItems from './NavigationMenuGuideListItems'
+
+export function NavigationMenuGuideList({
   id,
 }: {
   id: string
   additionalNavItems?: Record<string, Partial<NavMenuSection>[]>
-}) => {
-  // eslint-disable-next-line import/namespace -- dynamic access, can't lint properly
-  const menu = NavItems[id]
+}) {
+  const pathname = usePathname()
+
+  const menu =
+    id === 'shop' ? getShopSidebarNav(pathname) : NavItems[id as keyof typeof NavItems]
 
   return (
     <NavigationMenuGuideListWrapper id={id}>
@@ -21,6 +26,11 @@ const NavigationMenuGuideList = ({
   )
 }
 
+/**
+ * Plain wrapper — not Radix `Accordion.Root`. Upstream uses a root accordion with
+ * `value={firstLevelRoute}`; that can mismatch SSR vs client `usePathname()` and the
+ * children here are not `Accordion.Item`s anyway, which risks hydration errors.
+ */
 export function NavigationMenuGuideListWrapper({
   id,
   children,
@@ -36,5 +46,3 @@ export function NavigationMenuGuideListWrapper({
     </div>
   )
 }
-
-export default NavigationMenuGuideList

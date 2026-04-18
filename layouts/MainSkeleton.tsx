@@ -157,6 +157,7 @@ const Container = memo(function Container({
   )
 })
 
+/** Fixed / sticky left rail for the guide tree (`DefaultNavigationMenu`), replacing older `SideBar` patterns. */
 const NavContainer = memo(function NavContainer({ children }: PropsWithChildren) {
   const mobileMenuOpen = useMenuMobileOpen()
 

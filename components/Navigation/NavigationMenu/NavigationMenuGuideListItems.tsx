@@ -7,6 +7,15 @@ import React, { useEffect, useRef } from 'react'
 
 import MenuIconPicker from './MenuIconPicker'
 
+/** True if `pathname` matches this node or any nested `items` URL. */
+function navItemContainsPath(item: { url?: string; items?: unknown[] }, pathname: string | null): boolean {
+  if (!pathname) return false
+  if (item.url === pathname) return true
+  const items = item.items as { url?: string; items?: unknown[] }[] | undefined
+  if (!items?.length) return false
+  return items.some((child) => navItemContainsPath(child, pathname))
+}
+
 const HeaderLink = React.memo(function HeaderLink(props: {
   title: string
   id: string
@@ -37,8 +46,9 @@ const ContentAccordionLink = React.memo(function ContentAccordionLink(props: any
   const activeItem = props.subItem.url === pathname
   const activeItemRef = useRef<HTMLLIElement>(null)
 
-  const isChildActive =
-    props.subItem.items && props.subItem.items.some((child: any) => child.url === pathname)
+  const isChildActive = props.subItem.items?.some((child: any) => navItemContainsPath(child, pathname))
+  const accordionValue = props.subItem.url ?? props.subItem.name
+  const isAccordionRowActive = activeItem || isChildActive
 
   const LinkContainer = (props) => {
     const isExternal = props.url.startsWith('https://')
@@ -79,14 +89,14 @@ const ContentAccordionLink = React.memo(function ContentAccordionLink(props: any
           collapsible
           type="single"
           className="space-y-0.5"
-          defaultValue={isChildActive ? props.subItem.url : undefined}
+          defaultValue={isChildActive ? accordionValue : undefined}
         >
-          <Accordion.Item key={props.subItem.url || props.subItem.name} value={props.subItem.url}>
+          <Accordion.Item key={accordionValue} value={accordionValue}>
             <Accordion.Trigger
               className={[
                 'flex items-center gap-2 w-full',
                 'cursor-pointer transition text-sm',
-                activeItem
+                isAccordionRowActive
                   ? 'text-brand-link font-medium'
                   : 'hover:text-foreground text-foreground-lighter',
               ].join(' ')}
@@ -110,10 +120,13 @@ const ContentAccordionLink = React.memo(function ContentAccordionLink(props: any
               {props.subItem.items
                 .filter((subItem) => subItem.enabled !== false)
                 .map((subSubItem) => {
+                  if (!subSubItem.url) {
+                    return null
+                  }
                   return (
-                    <li key={`${props.subItem.name}-${subSubItem.url}`}>
+                    <li key={`${props.subItem.name}-${subSubItem.url ?? subSubItem.name}`}>
                       <Link
-                        href={`${subSubItem.url}`}
+                        href={subSubItem.url}
                         className={[
                           'cursor-pointer transition text-sm',
                           subSubItem.url === pathname
@@ -129,7 +142,7 @@ const ContentAccordionLink = React.memo(function ContentAccordionLink(props: any
             </Accordion.Content>
           </Accordion.Item>
         </Accordion.Root>
-      ) : (
+      ) : props.subItem.url ? (
         <li key={props.subItem.name} ref={activeItem ? activeItemRef : null}>
           <LinkContainer
             url={props.subItem.url}
@@ -155,7 +168,7 @@ const ContentAccordionLink = React.memo(function ContentAccordionLink(props: any
             </div>
           </LinkContainer>
         </li>
-      )}
+      ) : null}
     </>
   )
 })

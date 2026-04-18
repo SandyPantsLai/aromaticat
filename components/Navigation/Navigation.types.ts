@@ -7,7 +7,15 @@ export interface NavMenuGroup {
   items: NavMenuSection[]
 }
 
-export const MENU_ICON_KEYS = ['home', 'fragrance', 'shop', 'blog'] as const
+export const MENU_ICON_KEYS = [
+  'home',
+  'fragrance',
+  'shop',
+  'blog',
+  'decants',
+  'catchAndRelease',
+  'bottles',
+] as const
 export type MenuIconKey = (typeof MENU_ICON_KEYS)[number]
 
 export interface NavMenuSection {

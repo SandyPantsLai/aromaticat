@@ -6,6 +6,11 @@ import { MenuId } from '~/components/Navigation/NavigationMenu/NavigationMenu'
 
 import { menuState } from '../../../hooks/useMenuState'
 
+/** Strip hash/query from a path string (parity with supabase apps/docs). */
+export function getPathWithoutHash(relativePath: string) {
+  return new URL(relativePath, 'http://placeholder').pathname
+}
+
 export const getMenuId = (pathname: string | null) => {
   if (!pathname) return MenuId.Fragrance
   if (pathname.startsWith('/shop')) return MenuId.Shop

@@ -1,3 +1,8 @@
+/**
+ * Legacy alternate sidebar (grouped accordion). The main docs shell uses `NavContainer` +
+ * `DefaultNavigationMenu` in MainSkeleton, matching the current supabase apps/docs layout.
+ * Kept for optional reuse or gradual migration; not mounted by default.
+ */
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 

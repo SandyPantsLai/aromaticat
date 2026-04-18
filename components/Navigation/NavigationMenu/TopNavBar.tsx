@@ -13,6 +13,9 @@ import { getCustomContent } from '../../../lib/custom-content/getCustomContent'
 import GlobalNavigationMenu from './GlobalNavigationMenu'
 
 const GlobalMobileMenu = dynamic(() => import('./GlobalMobileMenu'))
+const TopNavDropdown = dynamic(() =>
+  import('./TopNavDropdown').then((mod) => ({ default: mod.TopNavDropdown }))
+)
 
 const largeLogo = isFeatureEnabled('branding:large_logo')
 
@@ -57,6 +60,9 @@ const TopNavBar: FC = () => {
                 <Menu size={18} strokeWidth={1} />
               </button>
             </div>
+          </div>
+          <div className="hidden lg:flex items-center justify-end gap-3">
+            <TopNavDropdown />
           </div>
         </div>
       </nav>
