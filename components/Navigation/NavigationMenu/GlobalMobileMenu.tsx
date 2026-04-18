@@ -9,7 +9,7 @@ import { useKey } from 'react-use'
 import { Accordion, cn } from 'ui'
 
 import { getCustomContent } from '~/lib/custom-content/getCustomContent'
-import type { DropdownMenuItem } from '../Navigation.types'
+import { normalizeMenuItemGroups, type DropdownMenuItem } from '../Navigation.types'
 import { MenuItem, useActiveMenuLabel } from './GlobalNavigationMenu'
 import { GLOBAL_MENU_ITEMS } from './NavigationMenu.constants'
 
@@ -48,7 +48,7 @@ const AccordionMenuItem = ({ section }: { section: DropdownMenuItem[] }) => {
             itemClassName
           )}
         >
-          {section[0].menuItems?.map((menuItem, menuItemIndex) => (
+          {normalizeMenuItemGroups(section[0].menuItems).map((menuItem, menuItemIndex) => (
             <Fragment key={`desktop-docs-menu-section-${menuItemIndex}`}>
               {menuItem
                 .filter((item) => item.enabled !== false)

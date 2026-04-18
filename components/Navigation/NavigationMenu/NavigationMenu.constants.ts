@@ -19,9 +19,28 @@ export const GLOBAL_MENU_ITEMS: GlobalMenuItems = [
   [
     {
       label: 'Shop',
-      icon: 'shop',
-      href: '/shop' as `/${string}`,
-      level: 'shop',
+      menuItems: [
+        {
+          label: 'Overview',
+          href: '/shop' as `/${string}`,
+          level: 'shop',
+        },
+        {
+          label: 'Decants',
+          href: '/shop/decants' as `/${string}`,
+          level: 'decants',
+        },
+        {
+          label: 'Catch and Release',
+          href: '/shop/catch-and-release' as `/${string}`,
+          level: 'catch-and-release',
+        },
+        {
+          label: 'Bottles',
+          href: '/shop/bottles' as `/${string}`,
+          level: 'bottles',
+        },
+      ],
     },
   ],
   [

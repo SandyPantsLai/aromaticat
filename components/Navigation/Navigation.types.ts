@@ -20,7 +20,7 @@ export interface NavMenuSection {
   enabled?: boolean
 }
 
-type MenuItem = {
+export type MenuItem = {
   label: string
   icon?: MenuIconKey
   href?: `/${string}` | `https://${string}`
@@ -31,7 +31,23 @@ type MenuItem = {
 }
 
 export type DropdownMenuItem = MenuItem & {
-  menuItems?: MenuItem[][]
+  /** Nested groups (`MenuItem[][]`), or a single flat list (`MenuItem[]`) treated as one group. */
+  menuItems?: MenuItem[][] | MenuItem[]
+}
+
+/**
+ * Ensures `menuItems` is `MenuItem[][]`. A flat `MenuItem[]` is wrapped as one group
+ * so `.map` / `.filter` on each group never receives a plain link object.
+ */
+export function normalizeMenuItemGroups(
+  menuItems: MenuItem[][] | MenuItem[] | undefined
+): MenuItem[][] {
+  if (!menuItems?.length) return []
+  const first = menuItems[0]
+  if (Array.isArray(first)) {
+    return menuItems as MenuItem[][]
+  }
+  return [menuItems as MenuItem[]]
 }
 
 export type GlobalMenuItems = DropdownMenuItem[][]

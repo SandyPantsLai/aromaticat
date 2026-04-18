@@ -5,14 +5,14 @@ import { useCloseMenuOnRouteChange } from './NavigationMenu.utils'
 import NavigationMenuGuideList from './NavigationMenuGuideList'
 
 enum MenuId {
-  Fragrance = 'fragrance',
   Shop = 'shop',
+  Fragrance = 'fragrance',
   Blog = 'blog',
 }
 
 const menus: { id: MenuId }[] = [
-  { id: MenuId.Fragrance },
   { id: MenuId.Shop },
+  { id: MenuId.Fragrance },
   { id: MenuId.Blog },
 ]
 

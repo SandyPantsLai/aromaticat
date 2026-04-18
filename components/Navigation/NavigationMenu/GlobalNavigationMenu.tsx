@@ -16,7 +16,7 @@ import {
   navigationMenuTriggerStyle,
 } from 'ui'
 
-import type { MenuIconKey } from '../Navigation.types'
+import { normalizeMenuItemGroups, type MenuIconKey } from '../Navigation.types'
 import MenuIconPicker from './MenuIconPicker'
 import { GLOBAL_MENU_ITEMS } from './NavigationMenu.constants'
 
@@ -52,7 +52,7 @@ export const useActiveMenuLabel = (menu: typeof GLOBAL_MENU_ITEMS) => {
       }
 
       if (section[0].menuItems) {
-        for (const menuItemGroup of section[0].menuItems) {
+        for (const menuItemGroup of normalizeMenuItemGroups(section[0].menuItems)) {
           for (const menuItem of menuItemGroup.filter((item) => item.enabled !== false)) {
             if (matchesHref(menuItem.href)) {
               return setActiveLabel(section[0].label)
@@ -103,7 +103,7 @@ const GlobalNavigationMenu: FC = () => {
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="!top-[calc(100%+4px)] min-w-[14rem] max-h-[calc(100vh-4rem)] border-y w-screen md:w-64 overflow-hidden overflow-y-auto rounded-none md:rounded-md md:border border-overlay bg-overlay text-foreground-light shadow-md !duration-0">
                     <div className="p-3 md:p-1">
-                      {section[0].menuItems?.map((menuItem, menuItemIndex) => (
+                      {normalizeMenuItemGroups(section[0].menuItems).map((menuItem, menuItemIndex) => (
                         <Fragment
                           key={`desktop-docs-menu-section-${menuItemIndex}-${menuItemIndex}`}
                         >
