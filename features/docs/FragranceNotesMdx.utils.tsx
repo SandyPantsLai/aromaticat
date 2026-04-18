@@ -10,7 +10,12 @@ import { cache_fullProcess_withDevCacheBust, existsFile } from '~/features/helpe
 import type { OrPromise } from '~/features/helpers.types'
 import { generateOpenGraphImageMeta } from '~/features/seo/openGraph'
 import { BASE_PATH } from '~/lib/constants'
-import { FRAGRANCE_NOTES_DIRECTORY, isValidGuideFrontmatter, type GuideFrontmatter } from '~/lib/docs'
+import {
+  composeOpenGraphDescription,
+  FRAGRANCE_NOTES_DIRECTORY,
+  isValidGuideFrontmatter,
+  type GuideFrontmatter,
+} from '~/lib/docs'
 import { GuideModelLoader } from '~/resources/guide/guideModelLoader'
 import { checkGuidePageEnabled } from './NavigationPageStatus.utils'
 import { getCustomContent } from '~/lib/custom-content/getCustomContent'
@@ -117,10 +122,12 @@ const genGuideMeta =
     ])
 
     const ogType = pathname.startsWith('/fragrance-notes') ? 'fragrance-notes' : 'docs'
+    const htmlDescription = meta.description || meta.family || meta.subtitle
+    const ogDescription = composeOpenGraphDescription(meta)
 
     return {
       title: `${meta.title} | ${metadataTitle || 'Supabase'}`,
-      description: meta.description || meta.subtitle,
+      description: htmlDescription,
       // @ts-ignore
       alternates: {
         ...parentAlternates,
@@ -129,10 +136,11 @@ const genGuideMeta =
       openGraph: {
         ...parentOg,
         url: `${BASE_PATH}${pathname}`,
+        ...(ogDescription ? { description: ogDescription } : {}),
         images: generateOpenGraphImageMeta({
           type: ogType,
           title: meta.title,
-          description: meta.description,
+          description: ogDescription ?? meta.description,
         }),
       },
     }

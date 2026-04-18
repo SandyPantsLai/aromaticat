@@ -110,9 +110,11 @@ const genBlogMeta =
       generate(params),
     ])
 
+    const htmlDescription = meta.description || meta.subtitle || meta.family
+
     return {
       title: `${meta.title} | ${metadataTitle || 'Supabase'}`,
-      description: meta.description || meta.subtitle,
+      description: htmlDescription,
       // @ts-ignore
       alternates: {
         ...parentAlternates,
@@ -124,7 +126,7 @@ const genBlogMeta =
         images: generateOpenGraphImageMeta({
           type: 'docs',
           title: meta.title,
-          description: meta.description,
+          description: htmlDescription,
         }),
       },
     }

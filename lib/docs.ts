@@ -17,13 +17,36 @@ export const SPEC_DIRECTORY = join(DOCS_DIRECTORY, 'spec')
 
 export type GuideFrontmatter = {
   title: string
+  /** Short tagline; prefer `family` for shop / fragrance-notes when both exist. */
   subtitle?: string
+  /** Optional tagline for shop and fragrance-notes (falls back to `subtitle`). */
+  family?: string
+  /** House or line (e.g. shop product); shown in header and Open Graph when set. */
+  brand?: string
   description?: string
   canonical?: string
   hideToc?: boolean
   /** @deprecated */
   hide_table_of_contents?: boolean
   tocVideo?: string
+}
+
+const OG_DESCRIPTION_MAX = 280
+
+/**
+ * Link-preview / OG image description: brand, then description or family or subtitle.
+ */
+export function composeOpenGraphDescription(meta: GuideFrontmatter): string | undefined {
+  const blurb =
+    meta.description?.trim() || meta.family?.trim() || meta.subtitle?.trim() || ''
+  const brand = meta.brand?.trim() || ''
+  const parts = [brand, blurb].filter(Boolean)
+  if (!parts.length) return undefined
+  let out = parts.join(' — ')
+  if (out.length > OG_DESCRIPTION_MAX) {
+    out = `${out.slice(0, OG_DESCRIPTION_MAX - 1)}…`
+  }
+  return out
 }
 
 /**
@@ -39,7 +62,13 @@ export function isValidGuideFrontmatter(obj: object): obj is GuideFrontmatter {
     )
   }
   if ('subtitle' in obj && typeof obj.subtitle !== 'string') {
-    throw Error(`Invalid guide frontmatter: Subtitle must be a sring. Received: ${obj.subtitle}`)
+    throw Error(`Invalid guide frontmatter: Subtitle must be a string. Received: ${obj.subtitle}`)
+  }
+  if ('family' in obj && typeof obj.family !== 'string') {
+    throw Error(`Invalid guide frontmatter: family must be a string. Received: ${obj.family}`)
+  }
+  if ('brand' in obj && typeof obj.brand !== 'string') {
+    throw Error(`Invalid guide frontmatter: brand must be a string. Received: ${obj.brand}`)
   }
   if ('description' in obj && typeof obj.description !== 'string') {
     throw Error(

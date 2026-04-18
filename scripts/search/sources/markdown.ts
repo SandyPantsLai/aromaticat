@@ -80,6 +80,14 @@ export class MarkdownSource extends BaseSource {
     const sections = this.sections ?? []
     const sectionText = sections.map(({ content }) => content).join('\n\n')
 
-    return `# ${this.meta?.title ?? ''}\n\n${this.meta?.subtitle ?? ''}\n\n${sectionText}`
+    const brand = typeof this.meta?.brand === 'string' ? this.meta.brand : ''
+    const tagline =
+      typeof this.meta?.family === 'string'
+        ? this.meta.family
+        : typeof this.meta?.subtitle === 'string'
+          ? this.meta.subtitle
+          : ''
+    const headerBits = [`# ${this.meta?.title ?? ''}`, brand, tagline].filter(Boolean)
+    return `${headerBits.join('\n\n')}\n\n${sectionText}`
   }
 }

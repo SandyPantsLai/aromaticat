@@ -10,7 +10,12 @@ import { cache_fullProcess_withDevCacheBust, existsFile } from '~/features/helpe
 import type { OrPromise } from '~/features/helpers.types'
 import { generateOpenGraphImageMeta } from '~/features/seo/openGraph'
 import { BASE_PATH } from '~/lib/constants'
-import { isValidGuideFrontmatter, SHOP_DIRECTORY, type GuideFrontmatter } from '~/lib/docs'
+import {
+  composeOpenGraphDescription,
+  isValidGuideFrontmatter,
+  SHOP_DIRECTORY,
+  type GuideFrontmatter,
+} from '~/lib/docs'
 import { GuideModelLoader, type GuideFsContext } from '~/resources/guide/guideModelLoader'
 import { checkGuidePageEnabled } from './NavigationPageStatus.utils'
 import { getCustomContent } from '~/lib/custom-content/getCustomContent'
@@ -150,9 +155,12 @@ export const genShopMeta =
       generate(params),
     ])
 
+    const htmlDescription = meta.description || meta.family || meta.subtitle
+    const ogDescription = composeOpenGraphDescription(meta)
+
     return {
       title: `${meta.title} | ${metadataTitle || 'Supabase'}`,
-      description: meta.description || meta.subtitle,
+      description: htmlDescription,
       // @ts-ignore
       alternates: {
         ...parentAlternates,
@@ -161,10 +169,11 @@ export const genShopMeta =
       openGraph: {
         ...parentOg,
         url: `${BASE_PATH}${pathname}`,
+        ...(ogDescription ? { description: ogDescription } : {}),
         images: generateOpenGraphImageMeta({
           type: 'docs',
           title: meta.title,
-          description: meta.description,
+          description: ogDescription ?? meta.description,
         }),
       },
     }

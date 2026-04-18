@@ -84,12 +84,12 @@ async function generate() {
         const withPartials = await inlinePartials(rawContent)
         const processed = stripJsxTags(withPartials)
 
-        const header = [
-          data.title ? `# ${data.title}` : '',
-          data.subtitle || data.description ? `\n${data.subtitle ?? data.description}` : '',
-        ]
-          .filter(Boolean)
-          .join('\n')
+        const tagline = data.family ?? data.subtitle ?? data.description
+        const headerLines: string[] = []
+        if (data.title) headerLines.push(`# ${data.title}`)
+        if (data.brand) headerLines.push(String(data.brand))
+        if (tagline) headerLines.push(String(tagline))
+        const header = headerLines.join('\n')
 
         output = header ? `${header}\n\n${processed}` : processed
       } catch (err) {

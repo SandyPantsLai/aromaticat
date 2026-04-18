@@ -5,6 +5,7 @@ import { cn } from 'ui'
 
 import Breadcrumbs from '~/components/Breadcrumbs'
 import GuidesSidebar from '~/components/GuidesSidebar'
+import { guideHeadingMarkdownComponents } from '~/features/docs/guideHeadingMarkdown'
 import { TocAnchorsProvider } from '~/features/docs/MdxToc.client'
 import { MDXRemoteBase } from '~/features/docs/MdxBase'
 import type { WithRequired } from '~/features/helpers.types'
@@ -24,6 +25,7 @@ type MdxDocTemplateProps =
 
 const MdxDocTemplate = ({ meta, content, children, mdxOptions }: MdxDocTemplateProps) => {
   const hideToc = meta?.hideToc || meta?.hide_table_of_contents
+  const tagline = meta?.family ?? meta?.subtitle
 
   return (
     <TocAnchorsProvider>
@@ -41,12 +43,19 @@ const MdxDocTemplate = ({ meta, content, children, mdxOptions }: MdxDocTemplateP
             id="sb-docs-guide-main-article"
             className="prose max-w-none"
           >
-            <h1 className="mb-0 [&>p]:m-0">
-              <ReactMarkdown>{meta?.title || 'Supabase Docs'}</ReactMarkdown>
+            <h1 className="mb-0">
+              <ReactMarkdown components={guideHeadingMarkdownComponents}>
+                {meta?.title || 'Supabase Docs'}
+              </ReactMarkdown>
             </h1>
-            {meta?.subtitle && (
+            {meta?.brand && (
+              <div className="mt-2 text-sm text-foreground-light">
+                <ReactMarkdown components={guideHeadingMarkdownComponents}>{meta.brand}</ReactMarkdown>
+              </div>
+            )}
+            {tagline && (
               <h2 className="mt-3 text-xl text-foreground-light">
-                <ReactMarkdown>{meta.subtitle}</ReactMarkdown>
+                <ReactMarkdown components={guideHeadingMarkdownComponents}>{tagline}</ReactMarkdown>
               </h2>
             )}
             <hr className="not-prose border-t-0 border-b my-8" />
