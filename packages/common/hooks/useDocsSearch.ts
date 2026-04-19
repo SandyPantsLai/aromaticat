@@ -255,7 +255,7 @@ const useDocsSearch = () => {
       })
   }, [])
 
-  const debouncedSearch = useMemo(() => debounce(handleSearch, 150), [handleSearch])
+  const debouncedSearch = useMemo(() => debounce(handleSearch, 80), [handleSearch])
 
   const resetSearch = useCallback(() => {
     key.current += 1

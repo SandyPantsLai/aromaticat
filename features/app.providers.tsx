@@ -4,6 +4,7 @@ import { DevToolbar, DevToolbarProvider } from 'dev-tools'
 import type { PropsWithChildren } from 'react'
 import { TooltipProvider } from 'ui'
 
+import { DocsCommandMenu, DocsCommandProvider } from './command'
 import { QueryClientProvider } from './data/queryClient.client'
 import { Toaster } from './toaster'
 import { ScrollRestoration } from './ui/helpers.scroll.client'
@@ -20,12 +21,15 @@ function GlobalProviders({ children }: PropsWithChildren) {
           <ScrollRestoration />
           <ThemeProvider>
             <TooltipProvider delayDuration={0}>
-              <div className="flex flex-col">
-                <SiteLayout>
-                  {children}
-                </SiteLayout>
-                <ThemeSandbox />
-              </div>
+              <DocsCommandProvider>
+                <div className="flex flex-col">
+                  <SiteLayout>
+                    {children}
+                    <DocsCommandMenu />
+                  </SiteLayout>
+                  <ThemeSandbox />
+                </div>
+              </DocsCommandProvider>
               <Toaster />
               <DevToolbar />
             </TooltipProvider>

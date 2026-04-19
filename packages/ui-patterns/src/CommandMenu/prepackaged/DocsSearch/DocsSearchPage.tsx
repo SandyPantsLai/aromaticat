@@ -27,14 +27,7 @@ import {
 } from '../..'
 import { BASE_PATH } from '../shared/constants'
 
-const questions = [
-  'How do I get started with Supabase?',
-  'How do I run Supabase locally?',
-  'How do I connect to my database?',
-  'How do I run migrations? ',
-  'How do I listen to changes in a table?',
-  'How do I set up authentication?',
-]
+import { questions } from 'shared-data'
 
 const ChevronArrow = () => (
   <ChevronRight
@@ -134,6 +127,11 @@ const DocsSearchPage = () => {
     state.status === 'fullResults' ||
     state.status === 'partialResults' ||
     (state.status === 'loading' && state.staleResults.length > 0)
+
+  const showQuickPickQuestions =
+    (state.status === 'initial' ||
+      (state.status === 'loading' && state.staleResults.length === 0 && Boolean(query))) &&
+    !hasResults
 
   function handleResetPrompt() {
     setQuery('')
@@ -260,7 +258,7 @@ const DocsSearchPage = () => {
               </CommandGroup_Shadcn_>
             )
           })}
-        {state.status === 'initial' && (
+        {showQuickPickQuestions && (
           <CommandGroup_Shadcn_ className="overflow-hidden py-3 px-2 text-border-strong [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:pb-1.5 [&_[cmdk-group-heading]]:text-sm [&_[cmdk-group-heading]]:font-normal [&_[cmdk-group-heading]]:text-foreground-muted">
             {questions.map((question) => {
               const key = question.replace(/\s+/g, '_')
@@ -269,10 +267,8 @@ const DocsSearchPage = () => {
                   className={generateCommandClassNames(false)}
                   disabled={hasResults}
                   onSelect={() => {
-                    if (!query) {
-                      handleSearch(question)
-                      setQuery(question)
-                    }
+                    setQuery(question)
+                    handleSearch(question)
                   }}
                   key={key}
                 >

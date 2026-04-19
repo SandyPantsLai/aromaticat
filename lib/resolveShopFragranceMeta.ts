@@ -2,6 +2,7 @@ import 'server-only'
 
 import type { GuideFrontmatter } from '~/lib/docs'
 import { getFragranceByName } from '~/lib/fragrances'
+import { mergeCatalogIntoGuideMeta } from '~/lib/mergeCatalogIntoMeta'
 
 /** Section index pages (e.g. `/shop/decants/overview`) are not single products — skip DB lookup. */
 export function shopPathSkipsFragranceCatalogLookup(pathname: string): boolean {
@@ -26,20 +27,5 @@ export async function resolveShopFragranceMeta(
   if (!lookupName) return meta
 
   const row = await getFragranceByName(lookupName)
-  if (!row) return meta
-
-  const dbFamily = row.family?.trim()
-  const dbBrand = row.brand?.trim()
-  const dbLine = row.line?.trim()
-  const dbDescription = row.description?.trim()
-
-  if (!dbFamily && !dbBrand && !dbLine && !dbDescription) return meta
-
-  return {
-    ...meta,
-    ...(dbFamily ? { family: dbFamily } : {}),
-    ...(dbBrand ? { brand: dbBrand } : {}),
-    ...(dbLine ? { line: dbLine } : {}),
-    ...(dbDescription ? { description: dbDescription } : {}),
-  }
+  return mergeCatalogIntoGuideMeta(meta, row)
 }

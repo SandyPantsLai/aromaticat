@@ -1007,6 +1007,9 @@ importers:
       scroll-into-view-if-needed:
         specifier: ^3.1.0
         version: 3.1.0
+      shared-data:
+        specifier: workspace:*
+        version: link:../shared-data
       smol-toml:
         specifier: ^1.3.1
         version: 1.6.1

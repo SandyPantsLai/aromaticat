@@ -15,7 +15,8 @@ interface ConditionalNavItem {
   href?: string
   enabled?: boolean
   items?: Readonly<ConditionalNavItem[]>
-  menuItems?: Readonly<ConditionalNavItem[][]>
+  /** Matches `DropdownMenuItem.menuItems`: one group (`[]`) or nested groups (`[][]`). */
+  menuItems?: Readonly<ConditionalNavItem[] | ConditionalNavItem[][]>
 }
 
 function collectDisabledPaths(

@@ -11,8 +11,8 @@ import {
 import { DocsSearchPage } from './DocsSearchPage'
 
 const DOCS_SEARCH_COMMANDS = {
-  PAGE_NAME: 'Docs search',
-  SECTION_NAME: 'Docs',
+  PAGE_NAME: 'Search',
+  SECTION_NAME: '',
 }
 
 const identity = <T,>(x: T) => x

@@ -15,7 +15,6 @@ import {
   DialogContent,
   DialogDescription,
   DialogTitle,
-  KeyboardShortcut,
 } from 'ui'
 
 import { useCurrentPage, usePageComponent, usePopPage } from './hooks/pagesHooks'
@@ -172,11 +171,9 @@ function CommandMenuTrigger({ children }: PropsWithChildren) {
 function CommandMenuTriggerInput({
   className,
   placeholder = 'Search...',
-  showShortcut = true,
 }: {
   className?: string
   placeholder?: string | React.ReactNode
-  showShortcut?: boolean
 }) {
   return (
     <CommandMenuTrigger>
@@ -185,8 +182,8 @@ function CommandMenuTriggerInput({
         className={cn(
           'group',
           'flex-grow md:min-w-44 xl:min-w-56 h-[30px] rounded-md',
-          'pl-1.5 md:pl-2 pr-1',
-          'flex items-center justify-between',
+          'pl-1.5 md:pl-2 pr-2',
+          'flex items-center',
           'bg-surface-100/75 text-foreground-lighter border',
           'hover:bg-opacity-100 hover:border-stronger',
           'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-border-strong focus-visible:ring-offset-1 focus-visible:ring-offset-background',
@@ -194,22 +191,14 @@ function CommandMenuTriggerInput({
           className
         )}
       >
-        <div className="flex items-center space-x-1.5 text-foreground-lighter">
+        <div className="flex items-center space-x-1.5 text-foreground-lighter min-w-0">
           <Search
             size={16}
             strokeWidth={1.5}
-            className="group-hover:text-foreground-light transition-colors"
+            className="group-hover:text-foreground-light transition-colors shrink-0"
           />
-          <p className="flex text-xs pr-2 text-foreground-muted">{placeholder}</p>
+          <p className="flex text-xs text-foreground-muted truncate">{placeholder}</p>
         </div>
-        {showShortcut && (
-          <span aria-hidden="true">
-            <KeyboardShortcut
-              keys={['Meta', 'k']}
-              className="command-shortcut hidden md:inline-flex h-full border border-default bg-surface-300 text-foreground-lighter shadow-xs shadow-background-surface-100"
-            />
-          </span>
-        )}
       </button>
     </CommandMenuTrigger>
   )

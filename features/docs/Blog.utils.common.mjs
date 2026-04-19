@@ -23,6 +23,8 @@ export const BlogSchema = z
   .object({
     title: z.string(),
     description: z.string().optional(),
+    /** Listing / index pages may use subtitle alongside title. */
+    subtitle: z.string().optional(),
     tags: z.array(z.string()).default([]),
   })
   .strict()
