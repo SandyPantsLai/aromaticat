@@ -125,6 +125,49 @@ export type Database = {
       [_ in never]: never
     }
   }
+  notion: {
+    Tables: {
+      fragrances: {
+        Row: {
+          id: string
+          url: string | null
+          created_time: string | null
+          last_edited_time: string | null
+          archived: boolean | null
+          attrs: Json | null
+        }
+        Insert: {
+          id?: string
+          url?: string | null
+          created_time?: string | null
+          last_edited_time?: string | null
+          archived?: boolean | null
+          attrs?: Json | null
+        }
+        Update: {
+          id?: string
+          url?: string | null
+          created_time?: string | null
+          last_edited_time?: string | null
+          archived?: boolean | null
+          attrs?: Json | null
+        }
+        Relationships: []
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      [_ in never]: never
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       feedback: {
@@ -148,123 +191,6 @@ export type Database = {
           metadata?: Json | null
           page?: string
           vote?: Database['public']['Enums']['feedback_vote']
-        }
-        Relationships: []
-      }
-      fragrances: {
-        Row: {
-          id: string
-          slug: string
-          brand: string | null
-          name: string
-          my_rating: number | null
-          perfumer: string | null
-          bottle_type: string | null
-          retail_price_per_ml: number | null
-          paid_per_ml: number | null
-          remaining_ml: number | null
-          size_ml: number | null
-          received_ml: number | null
-          bottle_qty: number | null
-          paid_total: number | null
-          family: string | null
-          top_notes: string | null
-          mid_notes: string | null
-          base_notes: string | null
-          presentation: string | null
-          source: string | null
-          season: string | null
-          setting: string | null
-          gender: string | null
-          age: string | null
-          projection: number | null
-          sillage_min: number | null
-          longevity_hrs: number | null
-          review: string | null
-          comments: string | null
-          parfumo_url: string | null
-          fragantica_url: string | null
-          image: string | null
-          image_url: string | null
-          fragram_url: string | null
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          slug: string
-          brand?: string | null
-          name: string
-          my_rating?: number | null
-          perfumer?: string | null
-          bottle_type?: string | null
-          retail_price_per_ml?: number | null
-          paid_per_ml?: number | null
-          remaining_ml?: number | null
-          size_ml?: number | null
-          received_ml?: number | null
-          bottle_qty?: number | null
-          paid_total?: number | null
-          family?: string | null
-          top_notes?: string | null
-          mid_notes?: string | null
-          base_notes?: string | null
-          presentation?: string | null
-          source?: string | null
-          season?: string | null
-          setting?: string | null
-          gender?: string | null
-          age?: string | null
-          projection?: number | null
-          sillage_min?: number | null
-          longevity_hrs?: number | null
-          review?: string | null
-          comments?: string | null
-          parfumo_url?: string | null
-          fragantica_url?: string | null
-          image?: string | null
-          image_url?: string | null
-          fragram_url?: string | null
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          slug?: string
-          brand?: string | null
-          name?: string
-          my_rating?: number | null
-          perfumer?: string | null
-          bottle_type?: string | null
-          retail_price_per_ml?: number | null
-          paid_per_ml?: number | null
-          remaining_ml?: number | null
-          size_ml?: number | null
-          received_ml?: number | null
-          bottle_qty?: number | null
-          paid_total?: number | null
-          family?: string | null
-          top_notes?: string | null
-          mid_notes?: string | null
-          base_notes?: string | null
-          presentation?: string | null
-          source?: string | null
-          season?: string | null
-          setting?: string | null
-          gender?: string | null
-          age?: string | null
-          projection?: number | null
-          sillage_min?: number | null
-          longevity_hrs?: number | null
-          review?: string | null
-          comments?: string | null
-          parfumo_url?: string | null
-          fragantica_url?: string | null
-          image?: string | null
-          image_url?: string | null
-          fragram_url?: string | null
-          created_at?: string
-          updated_at?: string
         }
         Relationships: []
       }

@@ -16,7 +16,7 @@ export const REF_DOCS_DIRECTORY = join(DOCS_DIRECTORY, 'docs/ref')
 export const SPEC_DIRECTORY = join(DOCS_DIRECTORY, 'spec')
 
 export type GuideFrontmatter = {
-  /** Page title; on shop product pages this can match `public.fragrances.name` for catalog merge. */
+  /** Page title; on shop product pages this can match `notion.fragrances.attrs.name` for catalog merge. */
   title: string
   /** Optional stable id (e.g. URL segment); not used for fragrance DB lookup. */
   id?: string

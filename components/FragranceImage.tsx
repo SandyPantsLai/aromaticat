@@ -1,6 +1,5 @@
 import { cn } from 'ui'
 
-import Image from '~/components/Image'
 import { getFragranceByName } from '~/lib/fragrances'
 
 function isSafeHttpUrl(url: string): boolean {
@@ -13,8 +12,9 @@ function isSafeHttpUrl(url: string): boolean {
 }
 
 /**
- * Loads the bottle image URL from `public.fragrances` (`image`, or legacy `image_url`) by `name` (case-insensitive).
- * Renders nothing if the row or URL is missing or not a safe http(s) URL.
+ * Loads the bottle image URL from `notion.fragrances.attrs` (plain strings or Notion-style
+ * `file` / `external` objects) by `attrs.name` (case-insensitive).
+ * Uses a plain `<img>` so catalog hosts (Notion S3, retailers, etc.) are not blocked by Next image `remotePatterns`.
  */
 export async function FragranceImage({
   name,
@@ -26,7 +26,7 @@ export async function FragranceImage({
   className?: string
 }) {
   const row = await getFragranceByName(name.trim())
-  const raw = (row?.image ?? row?.image_url)?.trim()
+  const raw = row?.image?.trim() ?? ''
   if (!row || !raw || !isSafeHttpUrl(raw)) {
     return null
   }
@@ -36,14 +36,13 @@ export async function FragranceImage({
   return (
     <div className={cn('not-prose my-6 w-full max-w-sm', className)}>
       <div className="relative aspect-[3/4] w-full overflow-hidden rounded-md">
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element -- arbitrary https catalog URLs */}
+        <img
           src={raw}
           alt={altText}
-          fill
-          unoptimized
-          sizes="(max-width: 768px) 100vw, 384px"
-          className="object-cover"
-          containerClassName="relative m-0 h-full w-full min-h-0 p-0"
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
         />
       </div>
     </div>

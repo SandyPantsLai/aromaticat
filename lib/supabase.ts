@@ -5,6 +5,7 @@ import { type Database as DatabaseGenerated, getSupabasePublicApiKey } from 'com
 export type Database = {
   content: DatabaseGenerated['content']
   graphql_public: DatabaseGenerated['graphql_public']
+  notion: DatabaseGenerated['notion']
   public: {
     Tables: Omit<DatabaseGenerated['public']['Tables'], 'page_section'> & {
       page_section: Omit<

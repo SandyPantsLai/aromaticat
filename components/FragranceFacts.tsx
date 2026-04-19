@@ -20,7 +20,7 @@ function describeRetailPricePerMl(value: number | null): string {
 }
 
 /**
- * Loads a fragrance row by `name` (must match `public.fragrances.name`, case-insensitive).
+ * Loads a fragrance row by `name` (must match `notion.fragrances.attrs.name`, case-insensitive).
  */
 export async function FragranceFacts({
   name,
@@ -37,9 +37,11 @@ export async function FragranceFacts({
         className={cn('not-prose text-sm text-foreground-lighter', className)}
         data-fragrance-name={name}
       >
-        No fragrance found for name <code className="text-xs">{name}</code>. Check that the name
-        matches a row in Supabase and that <code className="text-xs">NEXT_PUBLIC_SUPABASE_URL</code>{' '}
-        and the anon key point at the same project.
+        No fragrance found for name <code className="text-xs">{name}</code>. Check{' '}
+        <code className="text-xs">notion.fragrances.attrs.name</code>, that the{' '}
+        <code className="text-xs">notion</code> schema is exposed to the API, and that this server
+        has <code className="text-xs">SUPABASE_SECRET_KEY</code> (service role) set for Notion FDW
+        reads.
       </p>
     )
   }
@@ -57,9 +59,9 @@ export async function FragranceFacts({
       <p className="font-medium text-foreground">{title}</p>
       <dl className="mt-2 grid gap-1 sm:grid-cols-2">
         <div>
-          <dt className="text-foreground-lighter">Retail (list) $/ml</dt>
+          <dt className="text-foreground-lighter">Cost / ml</dt>
           <dd className="font-mono text-foreground" translate="no">
-            {describeRetailPricePerMl(row.retail_price_per_ml)}
+            {describeRetailPricePerMl(row.cost_per_ml)}
           </dd>
         </div>
         {row.paid_per_ml != null && (
