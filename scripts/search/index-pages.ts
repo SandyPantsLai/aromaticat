@@ -15,6 +15,9 @@
  *
  * Database: `page` must have a UNIQUE constraint on `path` for upsert onConflict to work.
  * Optional: run `pnpm run index:docs` in deploy CI after setting the env vars as secrets.
+ *
+ * Shop routes (`/shop/...`, except paths ending in `/overview`): catalog fields (`brand`, `family`, etc.)
+ * are merged from `notion.fragrances` before indexing (same as runtime `resolveShopFragranceMeta`).
  */
 
 import { config as loadDotenv } from 'dotenv'
@@ -31,6 +34,8 @@ import { fileURLToPath } from 'node:url'
 import type { Database, Json } from '../../packages/common/database-types'
 import { fetchAllSources } from './sources/index.js'
 import type { SearchPageSource } from './sources/index.js'
+import type { MarkdownSource } from './sources/markdown.js'
+import { resolveShopMetaForIndexing } from './resolveShopMetaForIndexing.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -84,18 +89,28 @@ async function upsertPageAndSections(
 ) {
   const processed = await source.process()
   const path = normalizePath(source.path)
-  const content = source.extractIndexedContent()
-  const checksum =
-    (processed.checksum && processed.checksum.length > 0
-      ? processed.checksum
-      : stableChecksum(path, content)) ?? stableChecksum(path, content)
 
-  const meta = (processed.meta ?? {}) as Json
+  let meta: Record<string, unknown> = { ...(processed.meta ?? {}) }
+  if (path.startsWith('/shop/')) {
+    const merged = await resolveShopMetaForIndexing(client, meta, path)
+    meta = merged
+    if (source.type === 'markdown') {
+      ;(source as MarkdownSource).meta = merged
+    }
+  }
+
+  const content = source.extractIndexedContent()
+  const useFileChecksum =
+    !path.startsWith('/shop/') && Boolean(processed.checksum && processed.checksum.length > 0)
+  const checksum =
+    useFileChecksum && processed.checksum ? processed.checksum : stableChecksum(path, content)
+
+  const metaJson = meta as Json
   const pageRow = {
     path,
     content,
     checksum,
-    meta,
+    meta: metaJson,
     type: source.type,
     source: source.type === 'blog' ? 'blog' : 'markdown',
     version: 'aromaticat-fts',

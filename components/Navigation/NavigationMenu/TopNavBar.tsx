@@ -7,12 +7,10 @@ import { memo, useState } from 'react'
 // End of third-party imports
 
 import { isFeatureEnabled } from 'common/enabled-features'
-import { DevToolbarTrigger } from 'dev-tools'
 import { CommandMenuTriggerInput } from 'ui-patterns'
 import { buttonVariants, cn } from 'ui'
 import { getCustomContent } from '../../../lib/custom-content/getCustomContent'
 import GlobalNavigationMenu from './GlobalNavigationMenu'
-import { TopNavDropdown } from './TopNavDropdown'
 
 const GlobalMobileMenu = dynamic(() => import('./GlobalMobileMenu'))
 
@@ -44,21 +42,11 @@ const TopNavBar: FC = () => {
             </div>
           </div>
 
-          {/* Mobile: logo + tools; search lives here so it stays on small screens */}
+          {/* Mobile: logo + search + hamburger menu */}
           <div className="flex w-full min-w-0 gap-3 justify-between lg:hidden items-center h-full">
             <HeaderLogo />
             <div className="flex gap-2 items-center shrink-0">
-              <DevToolbarTrigger />
               <CommandMenuTriggerInput placeholder={searchPlaceholder} />
-              <Link
-                href="/shop"
-                className={cn(
-                  buttonVariants({ type: 'default', size: 'tiny' }),
-                  'hidden sm:inline-flex border-default bg-surface-100/75 text-foreground-light rounded-md px-3 h-[30px] items-center text-sm no-underline'
-                )}
-              >
-                Browse Shop
-              </Link>
               <button
                 title="Menu dropdown button"
                 className={cn(
@@ -70,21 +58,6 @@ const TopNavBar: FC = () => {
                 <Menu size={18} strokeWidth={1} />
               </button>
             </div>
-          </div>
-
-          {/* Desktop: dev tools, shop, account */}
-          <div className="hidden lg:flex items-center gap-3 shrink-0 ml-auto">
-            <DevToolbarTrigger />
-            <Link
-              href="/shop"
-              className={cn(
-                buttonVariants({ type: 'default', size: 'tiny' }),
-                'inline-flex border-default bg-surface-100/75 text-foreground-light rounded-md px-3 h-[30px] items-center text-sm no-underline'
-              )}
-            >
-              Browse Shop
-            </Link>
-            <TopNavDropdown />
           </div>
         </div>
       </nav>
