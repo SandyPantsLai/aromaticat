@@ -6,7 +6,7 @@ import { extractMessageFromAnyError, FileNotFoundError, MultiError } from '~/app
 import { preprocessMdxWithDefaults } from '~/features/directives/utils'
 import { checkGuidePageEnabled } from '~/features/docs/NavigationPageStatus.utils'
 import { Both, Result } from '~/features/helpers.fn'
-import { BLOG_DIRECTORY, FRAGRANCE_NOTES_DIRECTORY } from '~/lib/docs'
+import { BLOG_DIRECTORY, FRAGRANCE_NOTES_DIRECTORY, SHOP_DIRECTORY } from '~/lib/docs'
 import { processMdx } from '~/scripts/helpers.mdx'
 import { GuideModel } from './guideModel'
 
@@ -24,6 +24,11 @@ export const DEFAULT_GUIDE_FS_CONTEXT: GuideFsContext = {
 export const BLOG_GUIDE_FS_CONTEXT: GuideFsContext = {
   rootDirectory: BLOG_DIRECTORY,
   pathPrefix: '/blog',
+}
+
+export const SHOP_GUIDE_FS_CONTEXT: GuideFsContext = {
+  rootDirectory: SHOP_DIRECTORY,
+  pathPrefix: '/shop',
 }
 
 /**
