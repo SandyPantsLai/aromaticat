@@ -12,7 +12,7 @@ import {
 } from 'ui-patterns/CommandMenu'
 import { useDocsSearchCommands } from 'ui-patterns/CommandMenu/prepackaged/DocsSearch'
 
-const DOCS_SEARCH_PAGE = 'Docs search'
+const DOCS_SEARCH_PAGE = 'Search'
 
 /** When the palette opens from the nav search control, go straight to FTS search (no command list). */
 function OpenDocsSearchWhenMenuOpens() {
