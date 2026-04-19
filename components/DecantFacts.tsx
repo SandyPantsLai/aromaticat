@@ -2,10 +2,10 @@ import { cn } from 'ui'
 
 import { getFragranceByName } from '~/lib/fragrances'
 
-function formatUsdPerMl(value: number): string {
-  const formatted = new Intl.NumberFormat('en-US', {
+function formatCadPerMl(value: number): string {
+  const formatted = new Intl.NumberFormat('en-CA', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'CAD',
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(Math.abs(value))
@@ -15,7 +15,7 @@ function formatUsdPerMl(value: number): string {
 /**
  * Loads a fragrance row by `name` (must match `notion.fragrances.attrs.name`, case-insensitive).
  */
-export async function FragranceFacts({
+export async function DecantFacts({
   name,
   className,
 }: {
@@ -28,7 +28,7 @@ export async function FragranceFacts({
     return (
       <p
         className={cn('not-prose text-sm text-foreground-lighter', className)}
-        data-fragrance-name={name}
+        data-decant-name={name}
       >
         No fragrance found for name <code className="text-xs">{name}</code>. Check{' '}
         <code className="text-xs">notion.fragrances.attrs.name</code>, that the{' '}
@@ -47,15 +47,15 @@ export async function FragranceFacts({
         'not-prose my-6 rounded-md border border-default bg-surface-100 px-4 py-3 text-sm',
         className
       )}
-      aria-label={`Facts for ${title}`}
+      aria-label={`Decant facts for ${title}`}
     >
       <p className="font-medium text-foreground">{title}</p>
       <dl className="mt-2 grid gap-1 sm:grid-cols-2">
-        {row.paid_per_ml != null && (
+        {row.cost_per_ml != null && (
           <div>
-            <dt className="text-foreground-lighter">Paid / ml</dt>
-            <dd className="font-mono text-foreground" translate="no">
-              {formatUsdPerMl(row.paid_per_ml)}
+            <dt className="text-foreground-lighter">Cost</dt>
+            <dd className="text-foreground" translate="no">
+              {formatCadPerMl(row.cost_per_ml)}
             </dd>
           </div>
         )}
@@ -65,12 +65,10 @@ export async function FragranceFacts({
             <dd className="text-foreground">{row.remaining_ml} ml</dd>
           </div>
         )}
-        {row.size_ml != null && (
-          <div>
-            <dt className="text-foreground-lighter">Bottle size</dt>
-            <dd className="text-foreground">{row.size_ml} ml</dd>
-          </div>
-        )}
+        <div>
+          <dt className="text-foreground-lighter">Available Sizes</dt>
+          <dd className="text-foreground">3/5/10ml</dd>
+        </div>
       </dl>
     </aside>
   )

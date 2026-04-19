@@ -2,7 +2,7 @@ import { cn } from 'ui'
 
 import { getFragranceByName } from '~/lib/fragrances'
 
-function formatUsdPerMl(value: number): string {
+function formatCadPerMl(value: number): string {
   const formatted = new Intl.NumberFormat('en-CA', {
     style: 'currency',
     currency: 'CAD',
@@ -16,7 +16,7 @@ function describe(value: number | null | undefined): string {
   if (value == null) return '—'
   if (value < 0) return 'n/a'
   if (value === 0) return '$0.00/ml (gift or sample)'
-  return formatUsdPerMl(value)
+  return formatCadPerMl(value)
 }
 
 /**
