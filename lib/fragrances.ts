@@ -41,6 +41,8 @@ export type FragranceRow = {
   slug: string
   brand: string | null
   name: string
+  line: string | null
+  description: string | null
   rating: number | null
   perfumer: string | null
   bottle_type: string | null
@@ -201,6 +203,8 @@ export function notionFragranceRowToCatalog(row: NotionFragrancesRow): Fragrance
     slug: '',
     brand: richTextProp(props, 'brand'),
     name: titleProp(props, 'name') ?? '',
+    line: richTextProp(props, 'line'),
+    description: richTextProp(props, 'description'),
     rating: numberProp(props, 'rating'),
     perfumer: multiSelectProp(props, 'perfumer'),
     bottle_type: selectProp(props, 'bottle_type'),

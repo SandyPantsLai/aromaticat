@@ -9,8 +9,9 @@ export function shopPathSkipsFragranceCatalogLookup(pathname: string): boolean {
 }
 
 /**
- * When `title` matches a row, merge non-empty `family` and `brand` from Supabase
- * (`notion.fragrances.attrs.name`, case-insensitive; `attrs.brand` maps to frontmatter `brand`).
+ * When `title` matches a row, merge non-empty catalog fields from Supabase into frontmatter
+ * (`notion.fragrances` via `attrs.properties`: name match is case-insensitive; maps to
+ * `family`, `brand`, `line`, `description` when present).
  * Pass `pathname` from the shop loader so overview pages do not query `fragrances`.
  */
 export async function resolveShopFragranceMeta(
@@ -29,12 +30,16 @@ export async function resolveShopFragranceMeta(
 
   const dbFamily = row.family?.trim()
   const dbBrand = row.brand?.trim()
+  const dbLine = row.line?.trim()
+  const dbDescription = row.description?.trim()
 
-  if (!dbFamily && !dbBrand) return meta
+  if (!dbFamily && !dbBrand && !dbLine && !dbDescription) return meta
 
   return {
     ...meta,
     ...(dbFamily ? { family: dbFamily } : {}),
     ...(dbBrand ? { brand: dbBrand } : {}),
+    ...(dbLine ? { line: dbLine } : {}),
+    ...(dbDescription ? { description: dbDescription } : {}),
   }
 }

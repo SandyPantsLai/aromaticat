@@ -11,18 +11,29 @@ interface GuideHeaderProps {
 export function GuideHeader({ className }: GuideHeaderProps) {
   const { meta } = useGuide()
   const tagline = meta?.family ?? meta?.subtitle
+  const hasSubheading = Boolean(meta?.brand || meta?.line)
 
   return (
     <div className={className}>
-      <h1 className="mb-0">{meta?.title || 'Supabase Docs'}</h1>
+      <h1 className="mb-0">{meta?.title || 'AromatiCat'}</h1>
       {meta?.brand && (
         <div className="mt-2 text-sm text-foreground-light">{meta.brand}</div>
+      )}
+      {meta?.line && (
+        <div
+          className={cn(
+            'text-sm text-foreground-light',
+            meta?.brand ? 'mt-1' : 'mt-2'
+          )}
+        >
+          {meta.line}
+        </div>
       )}
       {tagline && (
         <div
           className={cn(
             'not-prose text-sm text-foreground-light',
-            meta?.brand ? 'mt-1' : 'mt-2'
+            hasSubheading ? 'mt-1' : 'mt-2'
           )}
         >
           {tagline}

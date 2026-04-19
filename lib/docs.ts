@@ -26,6 +26,7 @@ export type GuideFrontmatter = {
   family?: string
   /** House or line (e.g. shop product); shown in header and Open Graph when set. */
   brand?: string
+  line?: string
   description?: string
   canonical?: string
   hideToc?: boolean
@@ -43,7 +44,8 @@ export function composeOpenGraphDescription(meta: GuideFrontmatter): string | un
   const blurb =
     meta.description?.trim() || meta.family?.trim() || meta.subtitle?.trim() || ''
   const brand = meta.brand?.trim() || ''
-  const parts = [brand, blurb].filter(Boolean)
+  const line = meta.line?.trim() || ''
+  const parts = [brand, line, blurb].filter(Boolean)
   if (!parts.length) return undefined
   let out = parts.join(' — ')
   if (out.length > OG_DESCRIPTION_MAX) {
@@ -75,6 +77,9 @@ export function isValidGuideFrontmatter(obj: object): obj is GuideFrontmatter {
   }
   if ('brand' in obj && typeof obj.brand !== 'string') {
     throw Error(`Invalid guide frontmatter: brand must be a string. Received: ${obj.brand}`)
+  }
+  if ('line' in obj && typeof obj.line !== 'string') {
+    throw Error(`Invalid guide frontmatter: line must be a string. Received: ${obj.line}`)
   }
   if ('description' in obj && typeof obj.description !== 'string') {
     throw Error(

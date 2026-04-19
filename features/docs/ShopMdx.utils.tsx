@@ -162,7 +162,7 @@ export const genShopMeta =
     const ogDescription = composeOpenGraphDescription(meta)
 
     return {
-      title: `${meta.title} | ${metadataTitle || 'Supabase'}`,
+      title: `${meta.title} | ${metadataTitle || 'AromatiCat'}`,
       description: htmlDescription,
       // @ts-ignore
       alternates: {
