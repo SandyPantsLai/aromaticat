@@ -184,6 +184,7 @@ export type Database = {
           comments: string | null
           parfumo_url: string | null
           fragantica_url: string | null
+          image: string | null
           image_url: string | null
           fragram_url: string | null
           created_at: string
@@ -221,6 +222,7 @@ export type Database = {
           comments?: string | null
           parfumo_url?: string | null
           fragantica_url?: string | null
+          image?: string | null
           image_url?: string | null
           fragram_url?: string | null
           created_at?: string
@@ -258,6 +260,7 @@ export type Database = {
           comments?: string | null
           parfumo_url?: string | null
           fragantica_url?: string | null
+          image?: string | null
           image_url?: string | null
           fragram_url?: string | null
           created_at?: string

@@ -32,8 +32,8 @@ create table if not exists public.fragrances (
   comments text,
   parfumo_url text,
   fragantica_url text,
-  image_url text,
-  fragram_url text,
+  image text,
+  fragram text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   constraint fragrances_slug_key unique (slug)

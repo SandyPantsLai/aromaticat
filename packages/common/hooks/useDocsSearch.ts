@@ -1,6 +1,8 @@
 'use client'
 
-import { compact, debounce, uniqBy } from 'lodash'
+import compact from 'lodash/compact'
+import debounce from 'lodash/debounce'
+import uniqBy from 'lodash/uniqBy'
 import { useCallback, useMemo, useReducer, useRef } from 'react'
 
 import { isFeatureEnabled } from '../enabled-features'

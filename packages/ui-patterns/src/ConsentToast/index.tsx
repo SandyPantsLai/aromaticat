@@ -1,7 +1,7 @@
 'use client'
 
 import { useBreakpoint } from 'common'
-import { noop } from 'lodash'
+import noop from 'lodash/noop'
 import { Button } from 'ui'
 
 import { PrivacySettings } from '../PrivacySettings'

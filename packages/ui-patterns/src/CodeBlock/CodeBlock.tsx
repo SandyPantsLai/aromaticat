@@ -2,7 +2,7 @@
 
 // @ts-ignore
 import curl from 'highlightjs-curl'
-import { noop } from 'lodash'
+import noop from 'lodash/noop'
 import { Check, Copy } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Children, ReactNode, useState } from 'react'
