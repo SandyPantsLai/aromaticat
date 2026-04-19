@@ -50,7 +50,7 @@ export async function DecantFacts({
       aria-label={`Decant facts for ${title}`}
     >
       <p className="font-medium text-foreground">{title}</p>
-      <dl className="mt-2 grid gap-1 sm:grid-cols-2">
+      <dl className="mt-2 grid gap-1 sm:grid-cols-3">
         {row.cost_per_ml != null && (
           <div>
             <dt className="text-foreground-lighter">Cost</dt>

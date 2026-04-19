@@ -30,22 +30,22 @@ export const GLOBAL_MENU_ITEMS: GlobalMenuItems = [
       menuItems: [
         {
           label: 'Overview',
-          href: '/shop' as `/${string}`,
+          href: '/shop/overview' as `/${string}`,
           level: 'shop',
         },
         {
           label: 'Decants',
-          href: '/shop/decants' as `/${string}`,
+          href: '/shop/decants/overview' as `/${string}`,
           level: 'decants',
         },
         {
           label: 'Catch and Release',
-          href: '/shop/catch-and-release' as `/${string}`,
+          href: '/shop/catch-and-release/overview' as `/${string}`,
           level: 'catch-and-release',
         },
         {
           label: 'Bottles',
-          href: '/shop/bottles' as `/${string}`,
+          href: '/shop/bottles/overview' as `/${string}`,
           level: 'bottles',
         },
       ],
@@ -55,7 +55,7 @@ export const GLOBAL_MENU_ITEMS: GlobalMenuItems = [
     {
       label: 'Fragrance Notes',
       icon: 'fragrance',
-      href: '/fragrance-notes' as `/${string}`,
+      href: '/fragrance-notes/overview' as `/${string}`,
       level: 'fragrance-notes',
     },
   ],
@@ -63,7 +63,7 @@ export const GLOBAL_MENU_ITEMS: GlobalMenuItems = [
     {
       label: 'Blog',
       icon: 'blog',
-      href: '/blog' as `/${string}`,
+      href: '/blog/overview' as `/${string}`,
       level: 'blog',
     },
   ],

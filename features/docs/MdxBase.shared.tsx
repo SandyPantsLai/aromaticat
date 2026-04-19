@@ -15,6 +15,7 @@ import { Extensions } from '~/components/Extensions'
 import { DecantFacts } from '~/components/DecantFacts'
 import { FragranceCost } from '~/components/FragranceCost'
 import { FragranceImage } from '~/components/FragranceImage'
+import { FragranceNotes } from '~/components/FragranceNotes'
 import Image, { type ImageProps } from '~/components/Image'
 import { JwtGenerator, JwtGeneratorSimple } from '~/components/JwtGenerator'
 import { MetricsStackCards } from '~/components/MetricsStackCards'
@@ -52,6 +53,7 @@ const components = {
   Extensions,
   FragranceCost,
   FragranceImage,
+  FragranceNotes,
   GlassPanel,
   IconArrowDown: ArrowDown,
   IconCheck: Check,
