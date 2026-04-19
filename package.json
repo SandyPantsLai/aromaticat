@@ -19,7 +19,7 @@
     "last-changed:reset": "pnpm run last-changed -- --reset",
     "lint": "eslint .",
     "lint:mdx": "supa-mdx-lint content --config ./supa-mdx-lint.config.toml",
-    "postbuild": "pnpm run build:sitemap && ./scripts/upload-static-assets.sh",
+    "postbuild": "pnpm run build:sitemap && ./scripts/upload-static-assets.sh && pnpm run index:docs",
     "prebuild": "pnpm run codegen:graphql && pnpm run build:doc-markdown",
     "predev": "pnpm run codegen:graphql",
     "preinstall": "npx only-allow pnpm",

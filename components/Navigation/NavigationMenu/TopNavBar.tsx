@@ -18,7 +18,7 @@ const largeLogo = isFeatureEnabled('branding:large_logo')
 
 const searchPlaceholder = (
   <>
-    Search site
+    Search
     <span className="hidden xl:inline opacity-70"></span>
   </>
 )
