@@ -12,13 +12,6 @@ function formatUsdPerMl(value: number): string {
   return `${formatted}/ml`
 }
 
-function describeRetailPricePerMl(value: number | null): string {
-  if (value === null) return '—'
-  if (value < 0) return 'n/a'
-  if (value === 0) return '$0.00/ml (gift or sample)'
-  return formatUsdPerMl(value)
-}
-
 /**
  * Loads a fragrance row by `name` (must match `notion.fragrances.attrs.name`, case-insensitive).
  */
@@ -58,12 +51,6 @@ export async function FragranceFacts({
     >
       <p className="font-medium text-foreground">{title}</p>
       <dl className="mt-2 grid gap-1 sm:grid-cols-2">
-        <div>
-          <dt className="text-foreground-lighter">Cost / ml</dt>
-          <dd className="font-mono text-foreground" translate="no">
-            {describeRetailPricePerMl(row.cost_per_ml)}
-          </dd>
-        </div>
         {row.paid_per_ml != null && (
           <div>
             <dt className="text-foreground-lighter">Paid / ml</dt>

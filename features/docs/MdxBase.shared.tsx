@@ -12,6 +12,7 @@ import { AuthSmsProviderConfig } from '~/components/AuthSmsProviderConfig'
 import { CostWarning } from '~/components/AuthSmsProviderConfig/AuthSmsProviderConfig.Warnings'
 import ButtonCard from '~/components/ButtonCard'
 import { Extensions } from '~/components/Extensions'
+import { FragranceCost } from '~/components/FragranceCost'
 import { FragranceImage } from '~/components/FragranceImage'
 import Image, { type ImageProps } from '~/components/Image'
 import { JwtGenerator, JwtGeneratorSimple } from '~/components/JwtGenerator'
@@ -47,6 +48,7 @@ const components = {
   ComputeDiskLimitsTable,
   CostWarning,
   Extensions,
+  FragranceCost,
   FragranceImage,
   GlassPanel,
   IconArrowDown: ArrowDown,
