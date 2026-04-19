@@ -102,7 +102,7 @@ export const decants: NavMenuConstant = {
       ],
     },
     {
-      name: 'Soulvent',
+      name: 'Soulvent 所闻',
       items: [
         { name: 'Hugging', url: '/shop/decants/hugging' as `/${string}` },
         { name: 'Northern', url: '/shop/decants/northern' as `/${string}` },

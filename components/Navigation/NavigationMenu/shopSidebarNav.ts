@@ -45,7 +45,7 @@ const byredoGroup: Partial<NavMenuSection> = {
 }
 
 const soulventGroup: Partial<NavMenuSection> = {
-  name: 'Soulvent',
+  name: 'Soulvent 所闻',
   items: [
     { name: 'Hugging', url: '/shop/decants/hugging' as `/${string}` },
     { name: 'Northern', url: '/shop/decants/northern' as `/${string}` },
@@ -106,7 +106,7 @@ export const shopBreadcrumbNav: NavMenuConstant = {
           ],
         },
         {
-          name: 'Soulvent',
+          name: 'Soulvent 所闻',
           items: [
             { name: 'Hugging', url: '/shop/decants/hugging' as `/${string}` },
             { name: 'Northern', url: '/shop/decants/northern' as `/${string}` },
