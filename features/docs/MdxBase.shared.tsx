@@ -14,6 +14,7 @@ import ButtonCard from '~/components/ButtonCard'
 import { Extensions } from '~/components/Extensions'
 import { DecantInfo } from '~/components/DecantInfo'
 import { FragranceCost } from '~/components/FragranceCost'
+import { FragranceDescription } from '~/components/FragranceDescription'
 import { FragranceImage } from '~/components/FragranceImage'
 import { FragranceNotes } from '~/components/FragranceNotes'
 import Image, { type ImageProps } from '~/components/Image'
@@ -52,6 +53,7 @@ const components = {
   DecantInfo,
   Extensions,
   FragranceCost,
+  FragranceDescription,
   FragranceImage,
   FragranceNotes,
   GlassPanel,
