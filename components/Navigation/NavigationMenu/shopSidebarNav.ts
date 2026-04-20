@@ -125,6 +125,12 @@ const maisonShanGroup: Partial<NavMenuSection> = {
   ],
 }
 
+const mithGroup: Partial<NavMenuSection> = {
+  name: 'Mith',
+  items: [
+    { name: 'Ruddy Sparkle', url: '/shop/decants/ruddy-sparkle' as `/${string}` },
+  ],
+}
 const room1015Group: Partial<NavMenuSection> = {
   name: 'Room 1015',
   items: [
@@ -147,6 +153,13 @@ const stellarEssenceGroup: Partial<NavMenuSection> = {
   name: 'Stellar Essence',
   items: [
     { name: 'Wild Pine', url: '/shop/decants/wild-pine' as `/${string}` },
+  ],
+}
+
+const tamburinsGroup: Partial<NavMenuSection> = {
+  name: 'Tamburins',
+  items: [
+    { name: 'Unknown Oud', url: '/shop/decants/unknown-oud' as `/${string}` },
   ],
 }
 
@@ -181,9 +194,11 @@ export function getShopSidebarNav(pathname: string | null): NavMenuConstant {
           gabarGroup,
           goldfieldAndBanksGroup,
           maisonShanGroup,
+          mithGroup,
           room1015Group,
           soulventGroup,
-          stellarEssenceGroup
+          stellarEssenceGroup,
+          tamburinsGroup
         ] }
     case 'catch-and-release':
       return { ...SHOP_SHELL, items: [browseGroup(), vanillaGroup] }

@@ -175,6 +175,12 @@ export const decants: NavMenuConstant = {
       ],
     },
     {
+      name: 'Mith',
+      items: [
+        { name: 'Ruddy Sparkle', url: '/shop/decants/ruddy-sparkle' as `/${string}` },
+      ],
+    },
+    {
       name: 'Room 1015',
       items: [
         { name: 'Poppy Riot', url: '/shop/decants/poppy-riot' as `/${string}` },
@@ -194,6 +200,12 @@ export const decants: NavMenuConstant = {
       name: 'Stellar Essence',
       items: [
         { name: 'Wild Pine', url: '/shop/decants/wild-pine' as `/${string}` },
+      ],
+    },
+    {
+      name: 'Tamburins',
+      items: [
+        { name: 'Unknown Oud', url: '/shop/decants/unknown-oud' as `/${string}` },
       ],
     },
   ],
