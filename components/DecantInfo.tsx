@@ -15,7 +15,7 @@ function formatCadPerMl(value: number): string {
 /**
  * Loads a fragrance row by `name` (must match `notion.fragrances.attrs.name`, case-insensitive).
  */
-export async function DecantFacts({
+export async function DecantInfo({
   name,
   className,
 }: {
@@ -39,7 +39,7 @@ export async function DecantFacts({
     )
   }
 
-  const title = 'Decant Facts'
+  const title = 'Decant Info'
 
   return (
     <aside
