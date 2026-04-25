@@ -54,12 +54,10 @@ export async function DecantInfo({
           <dt className="text-foreground-lighter">Available Sizes</dt>
           <dd className="text-foreground">3/5/10ml</dd>
         </div>
-        {row.remaining_ml != null && (
-          <div>
-            <dt className="text-foreground-lighter">Remaining</dt>
-            <dd className="text-foreground">{row.remaining_ml} ml</dd>
-          </div>
-        )}
+        <div>
+          <dt className="text-foreground-lighter">Bottle Type</dt>
+          <dd className="text-foreground">Glass, screw-top from Evrair</dd>
+        </div>
       </dl>
     </aside>
   )

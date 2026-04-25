@@ -5,10 +5,8 @@
  * DO NOT add new components to this file.
  */
 export * from './src/admonition'
-export * from './src/AuthenticatedDropdownMenu'
 export * from './src/Chart'
 export * from './src/CommandMenu'
-export * from './src/ComputeBadge'
 export * from './src/EmptyStatePresentational'
 export * from './src/FilterBar'
 export * from './src/GlassPanel'
@@ -20,5 +18,4 @@ export * from './src/PageSection'
 export * from './src/Row'
 export * from './src/ShimmeringLoader'
 export * from './src/StatusCode'
-export * from './src/TimestampInfo'
 export * from './src/Toc'

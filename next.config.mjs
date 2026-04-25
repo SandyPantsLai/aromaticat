@@ -13,7 +13,6 @@ import { parse as parseToml } from 'smol-toml'
 import remotePatterns from './lib/remotePatterns.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const pgParserNodeStubsDir = path.join(__dirname, 'lib', 'webpack-stubs')
 
 const withBundleAnalyzer = configureBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -42,7 +41,7 @@ const nextConfig = {
     // @ts-ignore
     remotePatterns,
   },
-  webpack: (config, { isServer, webpack }) => {
+  webpack: (config) => {
     config.module.rules.push({
       test: /\.include$/,
       type: 'asset/source',
@@ -54,25 +53,6 @@ const nextConfig = {
         parse: parseToml,
       },
     })
-
-    // @supabase/pg-parser references `node:*` inside a Node-only branch, but webpack
-    // still resolves those specifiers when bundling the SqlToRest client chunk.
-    if (!isServer) {
-      const empty = path.join(pgParserNodeStubsDir, 'node-empty.cjs')
-      config.plugins.push(
-        new webpack.NormalModuleReplacementPlugin(
-          /^node:module$/,
-          path.join(pgParserNodeStubsDir, 'node-module.cjs')
-        ),
-        new webpack.NormalModuleReplacementPlugin(/^node:fs$/, empty),
-        new webpack.NormalModuleReplacementPlugin(/^node:path$/, empty),
-        new webpack.NormalModuleReplacementPlugin(
-          /^node:url$/,
-          path.join(pgParserNodeStubsDir, 'node-url.cjs')
-        ),
-        new webpack.NormalModuleReplacementPlugin(/^node:crypto$/, empty)
-      )
-    }
 
     return config
   },

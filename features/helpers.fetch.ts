@@ -6,12 +6,14 @@
  * third-party API.
  */
 
-import { ONE_DAY_IN_SECONDS } from './helpers.time'
+import { TIME_TO_CACHE } from './helpers.time'
 
 export const REVALIDATION_TAGS = {
   GRAPHQL: 'graphql',
   PARTNERS: 'partners',
   WRAPPERS: 'wrappers',
+  /** Bust `unstable_cache` for `getFragranceByName` / `notion.fragrances` (POST /api/revalidate). */
+  NOTION_FRAGRANCES: 'notion-fragrances',
 } as const
 // Casting to avoid problems with using this as a Zod enum, TypeScript does
 // not recognize the casted type as a supertype of the original type
@@ -31,7 +33,7 @@ function fetchWithNextOptions({
 }
 
 const fetchRevalidatePerDay = fetchWithNextOptions({
-  next: { revalidate: ONE_DAY_IN_SECONDS },
+  next: { revalidate: TIME_TO_CACHE },
 })
 
 export { fetchRevalidatePerDay, fetchWithNextOptions }

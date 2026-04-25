@@ -138,23 +138,13 @@ export const SHOP_CATALOG: readonly ShopSectionEntry[] = [
     id: 'catch-and-release',
     title: 'Catch and Release',
     icon: 'catchAndRelease',
-    brands: [
-      {
-        name: 'Chloé',
-        products: [{ name: 'Vanilla Planifolia', slug: 'vanilla-planifolia' }],
-      },
-    ],
+    brands: [],
   },
   {
     id: 'bottles',
     title: 'Bottles',
     icon: 'bottles',
-    brands: [
-      {
-        name: "Penhaligon's",
-        products: [{ name: 'Halfeti', slug: 'halfeti' }],
-      },
-    ],
+    brands: [],
   },
 ]
 

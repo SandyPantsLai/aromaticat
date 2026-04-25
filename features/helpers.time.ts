@@ -1,3 +1,3 @@
-const ONE_DAY_IN_SECONDS = 60 * 60 * 24
+const TIME_TO_CACHE = 60 * 60 * 24 * 30
 
-export { ONE_DAY_IN_SECONDS }
+export { TIME_TO_CACHE }
