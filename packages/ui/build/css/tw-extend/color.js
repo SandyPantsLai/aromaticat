@@ -605,7 +605,7 @@ module.exports = {
   },
   'brand-link': {
     cssVariable: 'var(--brand-link)',
-    value: 'hsl(155, 100%, 38.6%)',
+    value: 'hsl(267.79, 38.46%, 48.43%)',
   },
   '_secondary-200': {
     cssVariable: 'var(--secondary-200)',
