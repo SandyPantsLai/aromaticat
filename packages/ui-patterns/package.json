@@ -18,18 +18,6 @@
       "import": "./index.tsx",
       "types": "./index.tsx"
     },
-    "./AssistantChat/AssistantChatForm": {
-      "import": "./src/AssistantChat/AssistantChatForm.tsx",
-      "types": "./src/AssistantChat/AssistantChatForm.tsx"
-    },
-    "./AssistantChat/AssistantCommandsPopover": {
-      "import": "./src/AssistantChat/AssistantCommandsPopover.tsx",
-      "types": "./src/AssistantChat/AssistantCommandsPopover.tsx"
-    },
-    "./AssistantChat": {
-      "import": "./src/AssistantChat/index.ts",
-      "types": "./src/AssistantChat/index.ts"
-    },
     "./AuthenticatedDropdownMenu": {
       "import": "./src/AuthenticatedDropdownMenu/index.tsx",
       "types": "./src/AuthenticatedDropdownMenu/index.tsx"
