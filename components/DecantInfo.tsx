@@ -1,28 +1,19 @@
 import { cn } from 'ui'
 
-import { getFragranceByName } from '~/lib/fragrances'
-
-function formatCadPerMl(value: number): string {
-  const formatted = new Intl.NumberFormat('en-CA', {
-    style: 'currency',
-    currency: 'CAD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(Math.abs(value))
-  return `${formatted}/ml`
-}
+import { formatCadPerMl } from '~/components/fragrance/format'
+import { loadFragranceByName } from '~/components/fragrance/loadFragrance'
 
 /**
  * Loads a fragrance row by `name` (must match `notion.fragrances.attrs.name`, case-insensitive).
  */
-export async function DecantFacts({
+export async function DecantInfo({
   name,
   className,
 }: {
   name: string
   className?: string
 }) {
-  const row = await getFragranceByName(name.trim())
+  const row = await loadFragranceByName(name)
 
   if (!row) {
     return (
@@ -39,7 +30,7 @@ export async function DecantFacts({
     )
   }
 
-  const title = [row.brand, row.name].filter(Boolean).join(' — ')
+  const title = 'Decant Info'
 
   return (
     <aside
@@ -59,16 +50,16 @@ export async function DecantFacts({
             </dd>
           </div>
         )}
+        <div>
+          <dt className="text-foreground-lighter">Available Sizes</dt>
+          <dd className="text-foreground">3/5/10ml</dd>
+        </div>
         {row.remaining_ml != null && (
           <div>
             <dt className="text-foreground-lighter">Remaining</dt>
             <dd className="text-foreground">{row.remaining_ml} ml</dd>
           </div>
         )}
-        <div>
-          <dt className="text-foreground-lighter">Available Sizes</dt>
-          <dd className="text-foreground">3/5/10ml</dd>
-        </div>
       </dl>
     </aside>
   )

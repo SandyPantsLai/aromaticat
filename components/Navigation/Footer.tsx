@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { Button, cn, IconBasenotes, IconFragrantica, IconParfumo, IconYoutubeSolid } from 'ui'
-import { primaryLinks, secondaryLinks } from '~/data/footer'
+import { cn, IconBasenotes, IconFragrantica, IconParfumo } from 'ui'
+import { primaryLinks } from '~/data/footer'
 import { LayoutMainContent } from '~/layouts/DefaultLayout'
 
 const Footer = ({ className }: { className?: string }) => (
@@ -8,18 +8,26 @@ const Footer = ({ className }: { className?: string }) => (
     <footer role="contentinfo" aria-label="footer">
       <div className="mt-16">
         <ul className="flex flex-col gap-2">
-          {primaryLinks.map(({ url, featherIcon: Icon, text, ctaLabel }) => (
-            <li key={url} className="flex items-center gap-1 text-xs text-foreground-lighter">
+          {primaryLinks.map(({ url, featherIcon: Icon, text, ctaLabel }, index) => (
+            <li
+              key={url ?? `${text}-${index}`}
+              className="flex items-center gap-1 text-xs text-foreground-lighter"
+            >
               {Icon && <Icon aria-hidden="true" size={16} strokeWidth={1} />}
               <p>{text}</p>
-              <Link
-                href={url}
-                className="text-brand-link hover:underline"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                {ctaLabel}
-              </Link>
+              {ctaLabel &&
+                (url ? (
+                  <Link
+                    href={url}
+                    className="text-brand-link hover:underline"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    {ctaLabel}
+                  </Link>
+                ) : (
+                  <span className="text-brand-link">{ctaLabel}</span>
+                ))}
             </li>
           ))}
         </ul>
@@ -27,7 +35,7 @@ const Footer = ({ className }: { className?: string }) => (
       <hr className="border-default my-6"></hr>
       <div className="flex gap-4 items-center justify-between">
         <div className="flex flex-col lg:flex-row gap-3 ">
-          <Link href="https://supabase.com/" className="text-xs text-foreground-lighter">
+          <Link href="/" className="text-xs text-foreground-lighter">
             &copy; AromatiCat 2026
           </Link>
         </div>

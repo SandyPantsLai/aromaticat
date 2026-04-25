@@ -5,6 +5,13 @@ import type { IconPanel } from 'ui-patterns/IconPanel'
 import type { GlobalMenuItems, NavMenuConstant, NavMenuSection } from '../Navigation.types'
 
 import {
+  SHOP_CATALOG,
+  shopOverviewPath,
+  shopProductPath,
+  shopSectionEntry,
+  type ShopSectionId,
+} from './shopCatalog'
+import {
   getShopSection,
   getShopSidebarNav,
   shopBreadcrumbNav,
@@ -20,7 +27,7 @@ export const GLOBAL_MENU_ITEMS: GlobalMenuItems = [
     {
       label: 'Home',
       icon: 'home',
-      href: '/' as `/${string}`,
+      href: '/',
       level: 'home',
     },
   ],
@@ -30,24 +37,14 @@ export const GLOBAL_MENU_ITEMS: GlobalMenuItems = [
       menuItems: [
         {
           label: 'Overview',
-          href: '/shop/overview' as `/${string}`,
+          href: '/shop/overview',
           level: 'shop',
         },
-        {
-          label: 'Decants',
-          href: '/shop/decants/overview' as `/${string}`,
-          level: 'decants',
-        },
-        {
-          label: 'Catch and Release',
-          href: '/shop/catch-and-release/overview' as `/${string}`,
-          level: 'catch-and-release',
-        },
-        {
-          label: 'Bottles',
-          href: '/shop/bottles/overview' as `/${string}`,
-          level: 'bottles',
-        },
+        ...SHOP_CATALOG.map((section) => ({
+          label: section.title,
+          href: shopOverviewPath(section.id),
+          level: section.id,
+        })),
       ],
     },
   ],
@@ -55,7 +52,7 @@ export const GLOBAL_MENU_ITEMS: GlobalMenuItems = [
     {
       label: 'Fragrance Notes',
       icon: 'fragrance',
-      href: '/fragrance-notes/overview' as `/${string}`,
+      href: '/fragrance-notes/overview',
       level: 'fragrance-notes',
     },
   ],
@@ -63,7 +60,7 @@ export const GLOBAL_MENU_ITEMS: GlobalMenuItems = [
     {
       label: 'Blog',
       icon: 'blog',
-      href: '/blog/overview' as `/${string}`,
+      href: '/blog/overview',
       level: 'blog',
     },
   ],
@@ -87,59 +84,40 @@ export const fragrance: NavMenuConstant = {
 /** Default shop nav (root); sidebar uses `getShopSidebarNav(pathname)` for contextual sections. */
 export const shop: NavMenuConstant = getShopSidebarNav('/shop')
 
-/** Kept in sync with the Decants group under `shop` for imports (e.g. breadcrumbs). */
-export const decants: NavMenuConstant = {
-  icon: 'decants',
-  title: 'Decants',
-  url: '/shop/decants/overview' as `/${string}`,
-  items: [
-    { name: 'Overview', url: '/shop/decants/overview' as `/${string}` },
-    {
-      name: 'Byredo',
-      items: [
-        { name: 'Mojave Ghost EDP', url: '/shop/decants/mojave-ghost-edp' as `/${string}` },
-        { name: 'Rose of No Man\'s Land Absolu', url: '/shop/decants/rose-of-no-mans-land-absolu' as `/${string}` },
-      ],
-    },
-    {
-      name: 'Soulvent',
-      items: [
-        { name: 'Hugging', url: '/shop/decants/hugging' as `/${string}` },
-        { name: 'Northern', url: '/shop/decants/northern' as `/${string}` },
-      ],
-    },
-  ],
+/**
+ * Builds a per-section menu (Overview + brand groups) from `SHOP_CATALOG`.
+ * Used to derive the `decants` / `catchAndRelease` / `bottles` constants below.
+ */
+function buildSectionNav(sectionId: ShopSectionId): NavMenuConstant {
+  const section = shopSectionEntry(sectionId)
+  if (!section) {
+    throw new Error(`Unknown shop section: ${sectionId}`)
+  }
+  return {
+    icon: section.icon,
+    title: section.title,
+    url: shopOverviewPath(section.id),
+    items: [
+      { name: 'Overview', url: shopOverviewPath(section.id) },
+      ...section.brands.map((brand) => ({
+        name: brand.name,
+        items: brand.products.map((product) => ({
+          name: product.name,
+          url: shopProductPath(section.id, product.slug),
+        })),
+      })),
+    ],
+  }
 }
 
-/** Kept in sync with the Catch and Release group under `shop`. */
-export const catchAndRelease: NavMenuConstant = {
-  icon: 'catchAndRelease',
-  title: 'Catch and Release',
-  url: '/shop/catch-and-release/overview' as `/${string}`,
-  items: [
-    { name: 'Overview', url: '/shop/catch-and-release/overview' as `/${string}` },
-    {
-      name: 'Chloé',
-      items: [
-        { name: 'Vanilla Planifolia', url: '/shop/catch-and-release/vanilla-planifolia' as `/${string}` },
-      ],
-    },
-  ],
-}
+/** Decants section nav, derived from `SHOP_CATALOG`. */
+export const decants: NavMenuConstant = buildSectionNav('decants')
 
-/** Kept in sync with the Bottles group under `shop`. */
-export const bottles: NavMenuConstant = {
-  icon: 'bottles',
-  title: 'Bottles',
-  url: '/shop/bottles/overview' as `/${string}`,
-  items: [
-    { name: 'Overview', url: '/shop/bottles/overview' as `/${string}` },
-    {
-      name: 'Penhaligon\'s',
-      items: [{ name: 'Halfeti', url: '/shop/bottles/halfeti' as `/${string}` }],
-    },
-  ],
-}
+/** Catch and Release section nav, derived from `SHOP_CATALOG`. */
+export const catchAndRelease: NavMenuConstant = buildSectionNav('catch-and-release')
+
+/** Bottles section nav, derived from `SHOP_CATALOG`. */
+export const bottles: NavMenuConstant = buildSectionNav('bottles')
 
 export const blog: NavMenuConstant = {
   icon: 'blog',

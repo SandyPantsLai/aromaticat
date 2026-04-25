@@ -12,8 +12,11 @@ import { AuthSmsProviderConfig } from '~/components/AuthSmsProviderConfig'
 import { CostWarning } from '~/components/AuthSmsProviderConfig/AuthSmsProviderConfig.Warnings'
 import ButtonCard from '~/components/ButtonCard'
 import { Extensions } from '~/components/Extensions'
-import { DecantFacts } from '~/components/DecantFacts'
+import { DecantInfo } from '~/components/DecantInfo'
+import { Fragram } from '~/components/Fragram'
+import { FragranceAudience } from '~/components/FragranceAudience'
 import { FragranceCost } from '~/components/FragranceCost'
+import { FragranceDescription } from '~/components/FragranceDescription'
 import { FragranceImage } from '~/components/FragranceImage'
 import { FragranceNotes } from '~/components/FragranceNotes'
 import Image, { type ImageProps } from '~/components/Image'
@@ -49,9 +52,12 @@ const components = {
   ButtonCard,
   ComputeDiskLimitsTable,
   CostWarning,
-  DecantFacts,
+  DecantInfo,
   Extensions,
+  Fragram,
+  FragranceAudience,
   FragranceCost,
+  FragranceDescription,
   FragranceImage,
   FragranceNotes,
   GlassPanel,

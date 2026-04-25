@@ -1,28 +1,30 @@
-import { CheckCircle, FlaskConical, LifeBuoy } from 'lucide-react'
-import { PrivacySettings } from 'ui-patterns/PrivacySettings'
+import type { LucideIcon } from 'lucide-react'
+import { AtSign, Mail, Recycle } from 'lucide-react'
 
-export const primaryLinks = [
-  {
-    featherIcon: LifeBuoy,
-    text: 'Need some help?',
-    ctaLabel: 'Contact support',
-    url: 'https://supabase.com/support',
-  },
-  {
-    featherIcon: FlaskConical,
-    text: 'Latest product updates?',
-    ctaLabel: 'See Changelog',
-    url: 'https://supabase.com/changelog',
-  },
-  {
-    featherIcon: CheckCircle,
-    text: "Something's not right?",
-    ctaLabel: 'Check system status',
-    url: 'https://status.supabase.com/',
-  },
-]
+export type FooterPrimaryLink = {
+  featherIcon?: LucideIcon
+  text: string
+  ctaLabel?: string
+  /** External link for `ctaLabel`; omit when there is no link. */
+  url?: string
+}
 
-export const secondaryLinks = [
-  { title: 'Open Source', url: 'https://supabase.com/open-source' },
-  { title: 'Privacy Settings', component: PrivacySettings },
+export const primaryLinks: FooterPrimaryLink[] = [
+  {
+    featherIcon: Recycle,
+    text: 'Want to trade?',
+    ctaLabel: 'See my wish list!',
+    url: 'https://www.parfumo.com/Users/AromatiCat/Collection/Wish_List',
+  },
+  {
+    featherIcon: Mail,
+    text: 'Add $4 for untracked lettermail. Parcel shipping starts at $20. Ships in 3 business days.',
+  },
+  {
+    featherIcon: AtSign,
+    text: 'Have questions?',
+    ctaLabel: 'DM Sandy Pants on Facebook!',
+    // Add your Facebook profile or Messenger URL when ready.
+    // url: 'https://www.facebook.com/...',
+  },
 ]

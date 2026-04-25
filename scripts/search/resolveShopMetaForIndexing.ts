@@ -5,7 +5,7 @@
 
 import type { SupabaseClient } from '@supabase/supabase-js'
 
-import type { Database } from '../../packages/common/database-types'
+import type { Database } from '../../lib/supabase'
 import type { GuideFrontmatter } from '../../lib/docs'
 import { fetchFragranceByNameWithClient } from '../../lib/fragrancesQuery'
 import { mergeCatalogIntoGuideMeta } from '../../lib/mergeCatalogIntoMeta'
