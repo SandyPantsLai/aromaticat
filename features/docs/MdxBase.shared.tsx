@@ -21,10 +21,6 @@ import { FragranceNotes } from '~/components/FragranceNotes'
 import Image, { type ImageProps } from '~/components/Image'
 import { NavData } from '~/components/NavData'
 import { Price } from '~/components/Price'
-import { ProjectConfigVariables } from '~/components/ProjectConfigVariables'
-import { RealtimeLimitsEstimator } from '~/components/RealtimeLimitsEstimator'
-import { ComputeDiskLimitsTable } from '~/components/ComputeDiskLimitsTable'
-import { RegionsList, SmartRegionsList } from '~/components/RegionsList'
 import { SharedData } from '~/components/SharedData'
 import { Accordion, AccordionItem } from '~/features/ui/Accordion'
 import { MdxPlainPre } from '~/features/docs/MdxPlainPre'
@@ -47,7 +43,6 @@ const components = {
   Badge,
   Button,
   ButtonCard,
-  ComputeDiskLimitsTable,
   CostWarning,
   DecantInfo,
   Extensions,
@@ -65,10 +60,6 @@ const components = {
   Image: (props: ImageProps) => <Image className="rounded-md w-full" {...props} />,
   Link,
   NavData,
-  ProjectConfigVariables,
-  RealtimeLimitsEstimator,
-  RegionsList,
-  SmartRegionsList,
   SharedData,
   ShowUntil,
   Tabs,
