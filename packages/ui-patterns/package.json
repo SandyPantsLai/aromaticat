@@ -638,10 +638,6 @@
       "import": "./src/ThemeToggle.tsx",
       "types": "./src/ThemeToggle.tsx"
     },
-    "./TimestampInfo": {
-      "import": "./src/TimestampInfo/index.tsx",
-      "types": "./src/TimestampInfo/index.tsx"
-    },
     "./Toc": {
       "import": "./src/Toc/index.ts",
       "types": "./src/Toc/index.ts"
@@ -673,10 +669,6 @@
     "./Toc/types": {
       "import": "./src/Toc/types.ts",
       "types": "./src/Toc/types.ts"
-    },
-    "./TweetCard": {
-      "import": "./src/TweetCard/index.tsx",
-      "types": "./src/TweetCard/index.tsx"
     },
     "./admonition": {
       "import": "./src/admonition.tsx",
