@@ -163,6 +163,14 @@ const tamburinsGroup: Partial<NavMenuSection> = {
   ],
 }
 
+const zhiwuzhiGroup: Partial<NavMenuSection> = {
+  name: 'Zhiwuzhi 挚物志',
+  items: [
+    { name: 'Green Withering', url: '/shop/decants/green-withering' as `/${string}` },
+    { name: 'The Box of Time', url: '/shop/decants/the-box-of-time' as `/${string}` },
+  ],
+}
+
 const vanillaGroup: Partial<NavMenuSection> = {
   name: 'Chloé',
   items: [
@@ -198,7 +206,8 @@ export function getShopSidebarNav(pathname: string | null): NavMenuConstant {
           room1015Group,
           soulventGroup,
           stellarEssenceGroup,
-          tamburinsGroup
+          tamburinsGroup,
+          zhiwuzhiGroup
         ] }
     case 'catch-and-release':
       return { ...SHOP_SHELL, items: [browseGroup(), vanillaGroup] }
@@ -230,6 +239,14 @@ export const shopBreadcrumbNav: NavMenuConstant = {
           ],
         },
         {
+          name: 'Black Paw 黑爪',
+          items: [
+            { name: 'Dried Tangerine Peel', url: '/shop/decants/dried-tangerine-peel' as `/${string}` },
+            { name: 'Lotus Flower', url: '/shop/decants/lotus-flower' as `/${string}` },
+            { name: 'Old Study', url: '/shop/decants/old-study' as `/${string}` },
+          ],
+        },
+        {
           name: 'Byredo',
           items: [
             { name: 'Lil Fleur EDP', url: '/shop/decants/lil-fleur-edp' as `/${string}` },
@@ -241,12 +258,95 @@ export const shopBreadcrumbNav: NavMenuConstant = {
           ],
         },
         {
+          name: 'Chabaud',
+          items: [
+            { name: 'Lait de Vanille', url: '/shop/decants/lait-de-vanille' as `/${string}` },
+            { name: 'Lait et Chocolat', url: '/shop/decants/lait-et-chocolat' as `/${string}` },
+          ],
+        },
+        {
+          name: 'Dedcool',
+          items: [
+            { name: 'Mochi Milk', url: '/shop/decants/mochi-milk' as `/${string}` },
+          ],
+        },
+        {
+          name: 'Escentric Molecules',
+          items: [
+            { name: 'Molecule 01', url: '/shop/decants/molecule-01' as `/${string}` },
+            { name: 'Molecule 03', url: '/shop/decants/molecule-03' as `/${string}` },
+            { name: 'Molecule 04', url: '/shop/decants/molecule-04' as `/${string}` },
+            { name: 'Molecule 05', url: '/shop/decants/molecule-05' as `/${string}` },
+          ],
+        },
+        {
+          name: 'Essential Parfums',
+          items: [
+            { name: 'Fig Infusion', url: '/shop/decants/fig-infusion' as `/${string}` },
+            { name: 'The Musc', url: '/shop/decants/the-musc' as `/${string}` },
+          ],
+        },
+        {
+          name: 'Gabar',
+          items: [
+            { name: 'No. II Ground', url: '/shop/decants/no-ii-ground' as `/${string}` },
+            { name: 'No. III Swim', url: '/shop/decants/no-iii-swim' as `/${string}` },
+            { name: 'No. V Lull', url: '/shop/decants/no-v-lull' as `/${string}` },
+          ],
+        },
+        {
+          name: 'Goldfield & Banks',
+          items: [
+            { name: 'Ingenious Ginger', url: '/shop/decants/ingenious-ginger' as `/${string}` },
+            { name: 'Pacific Rock Moss', url: '/shop/decants/pacific-rock-moss' as `/${string}` },
+            { name: 'Silky Woods', url: '/shop/decants/silky-woods' as `/${string}` },
+            { name: 'Southern Bloom', url: '/shop/decants/southern-bloom' as `/${string}` },
+          ],
+        },
+        {
+          name: 'Maison Shan 银杉',
+          items: [
+            { name: 'Intellectual', url: '/shop/decants/intellectual' as `/${string}` },
+          ],
+        },
+        {
+          name: 'Mith',
+          items: [
+            { name: 'Ruddy Sparkle', url: '/shop/decants/ruddy-sparkle' as `/${string}` },
+          ],
+        },
+        {
+          name: 'Room 1015',
+          items: [
+            { name: 'Poppy Riot', url: '/shop/decants/poppy-riot' as `/${string}` },
+          ],
+        },
+        {
           name: 'Soulvent 所闻',
           items: [
             { name: 'Hugging', url: '/shop/decants/hugging' as `/${string}` },
             { name: 'Northern', url: '/shop/decants/northern' as `/${string}` },
           ],
         },
+        {
+          name: 'Stellar Essence',
+          items: [
+            { name: 'Wild Pine', url: '/shop/decants/wild-pine' as `/${string}` },
+          ],
+        },
+        {
+          name: 'Tamburins',
+          items: [
+            { name: 'Unknown Oud', url: '/shop/decants/unknown-oud' as `/${string}` },
+          ],
+        },
+        {
+          name: 'Zhiwuzhi 挚物志',
+          items: [
+            { name: 'Green Withering', url: '/shop/decants/green-withering' as `/${string}` },
+            { name: 'The Box of Time', url: '/shop/decants/the-box-of-time' as `/${string}` },
+          ],
+        }
       ],
     },
     {

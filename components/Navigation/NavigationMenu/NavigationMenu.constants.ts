@@ -208,6 +208,13 @@ export const decants: NavMenuConstant = {
         { name: 'Unknown Oud', url: '/shop/decants/unknown-oud' as `/${string}` },
       ],
     },
+    {
+      name: 'Zhiwuzhi 挚物志',
+      items: [
+        { name: 'Green Withering', url: '/shop/decants/green-withering' as `/${string}` },
+        { name: 'The Box of Time', url: '/shop/decants/the-box-of-time' as `/${string}` },
+      ],
+    },
   ],
 }
 
