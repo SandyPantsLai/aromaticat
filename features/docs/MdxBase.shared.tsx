@@ -13,6 +13,7 @@ import { CostWarning } from '~/components/AuthSmsProviderConfig/AuthSmsProviderC
 import ButtonCard from '~/components/ButtonCard'
 import { Extensions } from '~/components/Extensions'
 import { DecantInfo } from '~/components/DecantInfo'
+import { Fragram } from '~/components/Fragram'
 import { FragranceCost } from '~/components/FragranceCost'
 import { FragranceDescription } from '~/components/FragranceDescription'
 import { FragranceImage } from '~/components/FragranceImage'
@@ -52,6 +53,7 @@ const components = {
   CostWarning,
   DecantInfo,
   Extensions,
+  Fragram,
   FragranceCost,
   FragranceDescription,
   FragranceImage,
