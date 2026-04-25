@@ -5,7 +5,6 @@
  * DO NOT add new components to this file.
  */
 export * from './src/admonition'
-export * from './src/AuthenticatedDropdownMenu'
 export * from './src/Chart'
 export * from './src/CommandMenu'
 export * from './src/EmptyStatePresentational'

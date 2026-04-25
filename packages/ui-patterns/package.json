@@ -18,10 +18,6 @@
       "import": "./index.tsx",
       "types": "./index.tsx"
     },
-    "./AuthenticatedDropdownMenu": {
-      "import": "./src/AuthenticatedDropdownMenu/index.tsx",
-      "types": "./src/AuthenticatedDropdownMenu/index.tsx"
-    },
     "./Banners/Announcement": {
       "import": "./src/Banners/Announcement.tsx",
       "types": "./src/Banners/Announcement.tsx"
