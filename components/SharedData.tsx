@@ -1,10 +1,9 @@
 import { at } from 'lodash-es'
 import { ReactNode } from 'react'
-import { config, logConstants } from 'shared-data'
+import { config } from 'shared-data'
 
 const sharedData = {
   config,
-  logConstants,
 }
 
 /**
