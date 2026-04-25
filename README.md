@@ -1,6 +1,6 @@
 # AromatiCat
 
-AromatiCat is a [Next.js](https://nextjs.org/) application for fragrance-related content and tooling. The app includes areas such as guides, fragrance notes, a blog, and shop routes, and uses a [pnpm](https://pnpm.io/) monorepo with shared packages under `packages/*` (for example `ui`, `common`, and `config`).
+AromatiCat is a [Next.js](https://nextjs.org/) application for fragrance-related content and tooling. The app includes areas such as fragrance notes info and shop routes, and uses a [pnpm](https://pnpm.io/) monorepo with shared packages under `packages/*` (for example `ui`, `common`, and `config`).
 
 The UI is built with React and TypeScript. Data and auth integrate with [Supabase](https://supabase.com/) where configured.
 
@@ -42,6 +42,8 @@ For **`pnpm index:docs`**, set at least:
 
 - `NEXT_PUBLIC_SUPABASE_URL` — Supabase project URL
 - `SUPABASE_SERVICE_ROLE_KEY` — service role key (or `SUPABASE_SECRET_KEY` as an alternative name)
+- `DOCS_REVALIDATION_KEYS` - used when manually revalidating the cache after product catalog data changes
+- `DOCS_REVALIDATION_OVERRIDE_KEYS` - used to bypass the 6-hour cooldown period if you want to revalidate again before 6 hours has passed
 
 ### Fragrance catalog cache
 
