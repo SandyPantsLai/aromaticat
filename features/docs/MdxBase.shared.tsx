@@ -20,7 +20,6 @@ import { FragranceDescription } from '~/components/FragranceDescription'
 import { FragranceImage } from '~/components/FragranceImage'
 import { FragranceNotes } from '~/components/FragranceNotes'
 import Image, { type ImageProps } from '~/components/Image'
-import { JwtGenerator, JwtGeneratorSimple } from '~/components/JwtGenerator'
 import { MetricsStackCards } from '~/components/MetricsStackCards'
 import { NavData } from '~/components/NavData'
 import { Price } from '~/components/Price'
@@ -66,8 +65,6 @@ const components = {
   IconPanel,
   IconX: X,
   Image: (props: ImageProps) => <Image className="rounded-md w-full" {...props} />,
-  JwtGenerator,
-  JwtGeneratorSimple,
   Link,
   MetricsStackCards,
   NavData,
