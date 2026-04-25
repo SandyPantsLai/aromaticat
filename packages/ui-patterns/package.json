@@ -258,10 +258,6 @@
       "import": "./src/ComplexTabs/withSticky.utils.ts",
       "types": "./src/ComplexTabs/withSticky.utils.ts"
     },
-    "./ComputeBadge": {
-      "import": "./src/ComputeBadge/index.tsx",
-      "types": "./src/ComputeBadge/index.tsx"
-    },
     "./ConsentToast": {
       "import": "./src/ConsentToast/index.tsx",
       "types": "./src/ConsentToast/index.tsx"
