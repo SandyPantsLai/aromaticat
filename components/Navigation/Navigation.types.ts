@@ -11,7 +11,6 @@ export const MENU_ICON_KEYS = [
   'home',
   'fragrance',
   'shop',
-  'blog',
   'decants',
   'catchAndRelease',
   'bottles',

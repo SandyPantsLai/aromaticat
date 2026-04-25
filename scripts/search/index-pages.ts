@@ -113,7 +113,7 @@ async function upsertPageAndSections(
     checksum,
     meta: metaJson,
     type: source.type,
-    source: source.type === 'blog' ? 'blog' : 'markdown',
+    source: 'markdown',
     version: 'aromaticat-fts',
   }
 

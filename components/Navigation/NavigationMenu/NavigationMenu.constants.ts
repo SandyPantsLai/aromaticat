@@ -56,14 +56,6 @@ export const GLOBAL_MENU_ITEMS: GlobalMenuItems = [
       level: 'fragrance-notes',
     },
   ],
-  [
-    {
-      label: 'Blog',
-      icon: 'blog',
-      href: '/blog/overview',
-      level: 'blog',
-    },
-  ],
 ]
 
 export const fragrance: NavMenuConstant = {
@@ -118,21 +110,6 @@ export const catchAndRelease: NavMenuConstant = buildSectionNav('catch-and-relea
 
 /** Bottles section nav, derived from `SHOP_CATALOG`. */
 export const bottles: NavMenuConstant = buildSectionNav('bottles')
-
-export const blog: NavMenuConstant = {
-  icon: 'blog',
-  title: 'Blog',
-  url: '/blog/overview' as `/${string}`,
-  items: [
-    {
-      name: 'Posts',
-      items: [
-        { name: 'Overview', url: '/blog/overview' as `/${string}` },
-        { name: 'Welcome', url: '/blog/welcome' as `/${string}` },
-      ],
-    },
-  ],
-}
 
 export const MIGRATION_PAGES: Partial<NavMenuSection & ComponentProps<typeof IconPanel>>[] = []
 

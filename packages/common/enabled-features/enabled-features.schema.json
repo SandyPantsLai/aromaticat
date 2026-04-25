@@ -165,10 +165,6 @@
       "type": "boolean",
       "description": "Full auth security docs enabled"
     },
-    "docs:auth_blog": {
-      "type": "boolean",
-      "description": "Enable auth-related blog content in docs navigation"
-    },
     "docs:compliance": {
       "type": "boolean",
       "description": "Enable documentation on compliance"
@@ -454,7 +450,6 @@
     "docs:auth_configuration",
     "docs:auth_flows",
     "docs:auth_full_security",
-    "docs:auth_blog",
     "docs:compliance",
     "docs:fdw",
     "docs:footer",

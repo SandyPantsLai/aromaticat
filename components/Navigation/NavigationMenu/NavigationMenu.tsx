@@ -12,7 +12,6 @@ import { NavigationMenuGuideList } from './NavigationMenuGuideList'
 enum MenuId {
   Shop = 'shop',
   Fragrance = 'fragrance',
-  Blog = 'blog',
 }
 
 const KNOWN_MENU_IDS = new Set<string>(Object.values(MenuId))

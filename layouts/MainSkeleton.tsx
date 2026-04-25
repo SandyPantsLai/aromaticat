@@ -39,10 +39,6 @@ const levelsData: Record<
     icon: 'shop',
     name: 'Shop',
   },
-  blog: {
-    icon: 'blog',
-    name: 'Blog',
-  },
 }
 
 type MobileHeaderProps = { menuId: MenuId } | { menuName: string }

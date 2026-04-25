@@ -70,18 +70,6 @@ type Subsection {
   content: String
 }
 
-"""A blog article"""
-type BlogPost implements SearchResult {
-  """The title of the blog post"""
-  title: String
-
-  """The URL of the blog post"""
-  href: String
-
-  """The full content of the blog post"""
-  content: String
-}
-
 type RootQueryType {
   """Get the GraphQL schema for this endpoint"""
   schema: String!

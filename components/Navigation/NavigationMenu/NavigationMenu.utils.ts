@@ -14,7 +14,6 @@ export function getPathWithoutHash(relativePath: string) {
 export const getMenuId = (pathname: string | null) => {
   if (!pathname) return MenuId.Fragrance
   if (pathname.startsWith('/shop')) return MenuId.Shop
-  if (pathname.startsWith('/blog')) return MenuId.Blog
   return MenuId.Fragrance
 }
 

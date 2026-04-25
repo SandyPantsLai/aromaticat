@@ -89,7 +89,6 @@ const nextConfig = {
   outputFileTracingIncludes: {
     '/api/fragrance-notes-md/**/*': ['./public/docs/fragrance-notes/**/*'],
     '/fragrance-notes/**/*': ['./content/fragrance-notes/**/*'],
-    '/blog/**/*': ['./content/blog/**/*'],
     '/shop/**/*': ['./content/shop/**/*'],
   },
   async headers() {
@@ -164,12 +163,6 @@ const nextConfig = {
         destination: 'https://supabase.com/dashboard/:path*',
         basePath: false,
         permanent: false,
-      },
-
-      {
-        source: '/troubleshooting/:path*',
-        destination: '/blog/:path*',
-        permanent: true,
       },
     ]
   },

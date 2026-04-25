@@ -7,8 +7,6 @@ export const DOCS_DIRECTORY = process.cwd()
 export const CONTENT_DIRECTORY = join(DOCS_DIRECTORY, 'content')
 /** Fragrance MDX source; public URLs are `/fragrance-notes/...`. */
 export const FRAGRANCE_NOTES_DIRECTORY = join(CONTENT_DIRECTORY, 'fragrance-notes')
-/** Blog MDX source; public URLs are `/blog/...`. */
-export const BLOG_DIRECTORY = join(CONTENT_DIRECTORY, 'blog')
 /** Shop MDX source; URLs are `/shop/{bottles|decants|catch-and-release}/...`. */
 export const SHOP_DIRECTORY = join(CONTENT_DIRECTORY, 'shop')
 export const PARTIALS_DIRECTORY = join(CONTENT_DIRECTORY, '_partials')
