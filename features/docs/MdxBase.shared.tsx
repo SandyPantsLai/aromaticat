@@ -4,7 +4,6 @@ import { Badge, Button } from 'ui'
 import { Admonition, type AdmonitionProps } from 'ui-patterns/admonition'
 import { GlassPanel } from 'ui-patterns/GlassPanel'
 import { IconPanel } from 'ui-patterns/IconPanel'
-import SqlToRest from 'ui-patterns/SqlToRest'
 import { Heading } from 'ui/src/components/CustomHTMLElements'
 import { AppleSecretGenerator } from '~/components/AppleSecretGenerator'
 import AuthProviders from '~/components/AuthProviders'
@@ -73,7 +72,6 @@ const components = {
   SmartRegionsList,
   SharedData,
   ShowUntil,
-  SqlToRest,
   Tabs,
   TabPanel,
   InfoTooltip,

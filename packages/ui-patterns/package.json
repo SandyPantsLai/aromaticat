@@ -66,18 +66,6 @@
       "import": "./src/Chart/index.tsx",
       "types": "./src/Chart/index.tsx"
     },
-    "./CodeBlock/CodeBlock": {
-      "import": "./src/CodeBlock/CodeBlock.tsx",
-      "types": "./src/CodeBlock/CodeBlock.tsx"
-    },
-    "./CodeBlock/CodeBlock.utils": {
-      "import": "./src/CodeBlock/CodeBlock.utils.ts",
-      "types": "./src/CodeBlock/CodeBlock.utils.ts"
-    },
-    "./CodeBlock": {
-      "import": "./src/CodeBlock/index.tsx",
-      "types": "./src/CodeBlock/index.tsx"
-    },
     "./CommandMenu/api/Badges": {
       "import": "./src/CommandMenu/api/Badges.tsx",
       "types": "./src/CommandMenu/api/Badges.tsx"
@@ -410,10 +398,6 @@
       "import": "./src/LogsBarChart/index.tsx",
       "types": "./src/LogsBarChart/index.tsx"
     },
-    "./Markdown": {
-      "import": "./src/Markdown/index.tsx",
-      "types": "./src/Markdown/index.tsx"
-    },
     "./MobileSheetNav/MobileSheetNav.test": {
       "import": "./src/MobileSheetNav/MobileSheetNav.test.tsx",
       "types": "./src/MobileSheetNav/MobileSheetNav.test.tsx"
@@ -505,38 +489,6 @@
     "./SimpleCodeBlock/prism": {
       "import": "./src/SimpleCodeBlock/prism.ts",
       "types": "./src/SimpleCodeBlock/prism.ts"
-    },
-    "./SqlToRest/assumptions": {
-      "import": "./src/SqlToRest/assumptions.ts",
-      "types": "./src/SqlToRest/assumptions.ts"
-    },
-    "./SqlToRest/base-url-dialog": {
-      "import": "./src/SqlToRest/base-url-dialog.tsx",
-      "types": "./src/SqlToRest/base-url-dialog.tsx"
-    },
-    "./SqlToRest/faqs": {
-      "import": "./src/SqlToRest/faqs.ts",
-      "types": "./src/SqlToRest/faqs.ts"
-    },
-    "./SqlToRest": {
-      "import": "./src/SqlToRest/index.tsx",
-      "types": "./src/SqlToRest/index.tsx"
-    },
-    "./SqlToRest/sql-to-rest": {
-      "import": "./src/SqlToRest/sql-to-rest.tsx",
-      "types": "./src/SqlToRest/sql-to-rest.tsx"
-    },
-    "./SqlToRest/syntax-highlighter/framer-features": {
-      "import": "./src/SqlToRest/syntax-highlighter/framer-features.ts",
-      "types": "./src/SqlToRest/syntax-highlighter/framer-features.ts"
-    },
-    "./SqlToRest/syntax-highlighter/transform-renderer": {
-      "import": "./src/SqlToRest/syntax-highlighter/transform-renderer.tsx",
-      "types": "./src/SqlToRest/syntax-highlighter/transform-renderer.tsx"
-    },
-    "./SqlToRest/util": {
-      "import": "./src/SqlToRest/util.ts",
-      "types": "./src/SqlToRest/util.ts"
     },
     "./StatusCode": {
       "import": "./src/StatusCode/index.tsx",
@@ -673,12 +625,10 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
-    "@monaco-editor/react": "^4.6.0",
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-visually-hidden": "^1.1.3",
     "smol-toml": "^1.3.1",
     "@tanstack/react-table": "^8.21.3",
-    "@supabase/sql-to-rest": "^0.1.6",
     "@supabase/supabase-js": "catalog:",
     "@vitest/coverage-v8": "^3.2.0",
     "class-variance-authority": "^0.6.0",
@@ -690,12 +640,10 @@
     "framer-motion": "^11.1.9",
     "github-slugger": "^2.0.0",
     "icons": "workspace:*",
-    "highlightjs-curl": "^1.3.0",
     "js-yaml": "^3.14.1",
     "lodash": "catalog:",
     "lucide-react": "*",
     "mdast": "^3.0.0",
-    "monaco-editor": "*",
     "next-themes": "*",
     "prism-react-renderer": "^2.3.1",
     "react": "catalog:",
@@ -706,7 +654,6 @@
     "react-intersection-observer": "^9.8.2",
     "react-markdown": "^9.0.1",
     "react-medium-image-zoom": "^5.2.4",
-    "react-syntax-highlighter": "^15.6.6",
     "react-use": "^17.5.0",
     "recharts": "catalog:",
     "remark": "^15.0.1",
@@ -714,7 +661,6 @@
     "scroll-into-view-if-needed": "^3.1.0",
     "shared-data": "workspace:*",
     "sonner": "^1.5.0",
-    "sql-formatter": "^15.0.0",
     "tsconfig": "workspace:*",
     "ui": "workspace:*",
     "unist-util-visit": "^5.0.0",
@@ -733,7 +679,6 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@types/react-syntax-highlighter": "^15.5.13",
     "api-types": "workspace:*",
     "next-router-mock": "^0.9.13",
     "tsx": "catalog:",
