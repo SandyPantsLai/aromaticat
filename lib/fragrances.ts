@@ -5,7 +5,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { cache } from 'react'
 
 import { REVALIDATION_TAGS } from '~/features/helpers.fetch'
-import { ONE_DAY_IN_SECONDS } from '~/features/helpers.time'
+import { TIME_TO_CACHE } from '~/features/helpers.time'
 import { supabase } from '~/lib/supabase'
 
 import type { Database } from '~/lib/supabase'
@@ -46,7 +46,7 @@ const getFragranceByNameDataCached = unstable_cache(
   ['fragrance-by-name'],
   {
     tags: [REVALIDATION_TAGS.NOTION_FRAGRANCES],
-    revalidate: ONE_DAY_IN_SECONDS,
+    revalidate: TIME_TO_CACHE,
   }
 )
 
