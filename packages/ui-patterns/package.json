@@ -478,10 +478,6 @@
       "import": "./src/Mermaid/index.tsx",
       "types": "./src/Mermaid/index.tsx"
     },
-    "./MetricCard": {
-      "import": "./src/MetricCard/index.tsx",
-      "types": "./src/MetricCard/index.tsx"
-    },
     "./MobileSheetNav/MobileSheetNav.test": {
       "import": "./src/MobileSheetNav/MobileSheetNav.test.tsx",
       "types": "./src/MobileSheetNav/MobileSheetNav.test.tsx"

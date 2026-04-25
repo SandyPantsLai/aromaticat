@@ -66,7 +66,6 @@ const components = {
   IconX: X,
   Image: (props: ImageProps) => <Image className="rounded-md w-full" {...props} />,
   Link,
-  MetricsStackCards,
   NavData,
   ProjectConfigVariables,
   RealtimeLimitsEstimator,
