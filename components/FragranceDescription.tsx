@@ -2,9 +2,16 @@ import { cn } from 'ui'
 
 import { getFragranceByName } from '~/lib/fragrances'
 
-function displayDescription(value: string | null): string {
+function displayInfo(value: string | null): string {
   const t = value?.trim() ?? ''
   return t || '—'
+}
+
+function shouldShowPerfumerByline(perfumer: string | null): boolean {
+  const t = perfumer?.trim() ?? ''
+  if (!t) return false
+  if (t.toLowerCase() === 'unknown') return false
+  return true
 }
 
 /**
@@ -22,7 +29,10 @@ export async function FragranceDescription({
 
   return (
     <p className={cn('my-4 font-normal leading-7 text-foreground', className)}>
-      {displayDescription(row.description)}
+      {displayInfo(row.description)}
+      {shouldShowPerfumerByline(row.perfumer) ? (
+        <> A perfume by {displayInfo(row.perfumer)}.</>
+      ) : null}
     </p>
   )
 }
