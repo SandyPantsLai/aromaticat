@@ -42,10 +42,6 @@
       "import": "./src/Banners/AnnouncementBanner.tsx",
       "types": "./src/Banners/AnnouncementBanner.tsx"
     },
-    "./Banners/Countdown": {
-      "import": "./src/Banners/Countdown.tsx",
-      "types": "./src/Banners/Countdown.tsx"
-    },
     "./Banners/LW15Banner": {
       "import": "./src/Banners/LW15Banner.tsx",
       "types": "./src/Banners/LW15Banner.tsx"
@@ -249,14 +245,6 @@
     "./ConsentToast": {
       "import": "./src/ConsentToast/index.tsx",
       "types": "./src/ConsentToast/index.tsx"
-    },
-    "./CountdownWidget/CountdownStep": {
-      "import": "./src/CountdownWidget/CountdownStep.tsx",
-      "types": "./src/CountdownWidget/CountdownStep.tsx"
-    },
-    "./CountdownWidget": {
-      "import": "./src/CountdownWidget/index.tsx",
-      "types": "./src/CountdownWidget/index.tsx"
     },
     "./DataInputs/Input": {
       "import": "./src/DataInputs/Input.tsx",
@@ -647,7 +635,6 @@
     "next-themes": "*",
     "prism-react-renderer": "^2.3.1",
     "react": "catalog:",
-    "react-countdown": "^2.3.5",
     "react-dom": "catalog:",
     "react-error-boundary": "^4.0.12",
     "react-hook-form": "^7.45.0",

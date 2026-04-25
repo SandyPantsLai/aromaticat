@@ -947,9 +947,6 @@ importers:
       react:
         specifier: 'catalog:'
         version: 18.3.1
-      react-countdown:
-        specifier: ^2.3.5
-        version: 2.3.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-dom:
         specifier: 'catalog:'
         version: 18.3.1(react@18.3.1)
@@ -7740,12 +7737,6 @@ packages:
     resolution: {integrity: sha512-s+HrzLyJBxrpGTYXF15dTgMjAJpEPZT/Yp6NytAtZMRngejxt6Pt5WrfFxLAcsqUDU6sY1Jz6tyHwIicE1U2Xg==}
     peerDependencies:
       react: '>=15.3.0'
-
-  react-countdown@2.3.6:
-    resolution: {integrity: sha512-ZfX6S08Hb6x6W6eCn1hMDvxPICI/T30fd+gaeVTCR/2cGZ2WJ3f26e4ImNIMX1fHkopJrUdnRpWXP13/D39+gg==}
-    peerDependencies:
-      react: '>= 15'
-      react-dom: '>= 15'
 
   react-day-picker@9.14.0:
     resolution: {integrity: sha512-tBaoDWjPwe0M5pGrum4H0SR6Lyk+BO9oHnp9JbKpGKW2mlraNPgP9BMfsg5pWpwrssARmeqk7YBl2oXutZTaHA==}
@@ -17188,12 +17179,6 @@ snapshots:
       copy-to-clipboard: 3.3.3
       prop-types: 15.8.1
       react: 18.3.1
-
-  react-countdown@2.3.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      prop-types: 15.8.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
 
   react-day-picker@9.14.0(react@18.3.1):
     dependencies:
