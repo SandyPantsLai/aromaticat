@@ -43,6 +43,26 @@ For **`pnpm index:docs`**, set at least:
 - `NEXT_PUBLIC_SUPABASE_URL` — Supabase project URL
 - `SUPABASE_SERVICE_ROLE_KEY` — service role key (or `SUPABASE_SECRET_KEY` as an alternative name)
 
+### Fragrance catalog cache
+
+Shop and MDX code paths resolve rows from `notion.fragrances` via [`getFragranceByName`](lib/fragrances.ts) (`server-only`). That helper uses **React `cache()`** so the same trimmed name only hits the data layer once per request, and **Next.js `unstable_cache()`** so results are shared across users until they expire or are invalidated.
+
+- **TTL:** entries revalidate after one day (`TIME_TO_CACHE` in [`features/helpers.time.ts`](features/helpers.time.ts)) as a safety net.
+- **Tags:** the cache is tagged with `notion-fragrances` (see [`REVALIDATION_TAGS`](features/helpers.fetch.ts)). CLI scripts should keep using [`fetchFragranceByNameWithClient`](lib/fragrancesQuery.ts) directly so they are not tied to this cache.
+
+To **invalidate immediately** after catalog data changes, POST to **`/api/revalidate`** with a Bearer token from **`DOCS_REVALIDATION_KEYS`** or **`DOCS_REVALIDATION_OVERRIDE_KEYS`** (comma-separated lists are supported). Override keys bypass the six-hour per-tag cooldown enforced for basic keys. Valid `tags` values are: `graphql`, `partners`, `wrappers`, `notion-fragrances`.
+
+Example (local dev on port 3001):
+
+```bash
+curl -sS -X POST 'http://localhost:3001/api/revalidate' \
+  -H 'Authorization: Bearer YOUR_DOCS_REVALIDATION_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{"tags":["notion-fragrances"]}'
+```
+
+Use your deployed origin in production; if the app uses a path prefix, include `NEXT_PUBLIC_BASE_PATH` in the URL before `/api/revalidate`. A successful response is **204** with an empty body.
+
 ## Supabase
 
 SQL migrations live under [`supabase/migrations/`](supabase/migrations/). Apply them to your **hosted** project in either of these ways:

@@ -1,7 +1,11 @@
 import 'server-only'
 
+import { unstable_cache } from 'next/cache'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
+import { cache } from 'react'
 
+import { REVALIDATION_TAGS } from '~/features/helpers.fetch'
+import { ONE_DAY_IN_SECONDS } from '~/features/helpers.time'
 import { supabase } from '~/lib/supabase'
 
 import type { Database } from '~/lib/supabase'
@@ -36,13 +40,28 @@ function supabaseForFragrancesRead(): SupabaseClient<Database> {
   return supabase()
 }
 
+const getFragranceByNameDataCached = unstable_cache(
+  async (normalizedName: string) =>
+    fetchFragranceByNameWithClient(supabaseForFragrancesRead(), normalizedName),
+  ['fragrance-by-name'],
+  {
+    tags: [REVALIDATION_TAGS.NOTION_FRAGRANCES],
+    revalidate: ONE_DAY_IN_SECONDS,
+  }
+)
+
 /**
  * Loads a row where the Notion `name` title matches case-insensitively,
  * using a server-side JSON path filter on `notion.fragrances.attrs`.
  *
+ * Deduplicated per request via React `cache()`, and shared across users via Next
+ * `unstable_cache()` until `revalidate` TTL or `revalidateTag(REVALIDATION_TAGS.NOTION_FRAGRANCES)`.
+ *
  * Prefer `fetchFragranceByNameWithClient` from `~/lib/fragrancesQuery` in Node CLIs (e.g. `pnpm index:docs`)
  * to avoid importing this `server-only` module.
  */
-export async function getFragranceByName(name: string): Promise<FragranceRow | null> {
-  return fetchFragranceByNameWithClient(supabaseForFragrancesRead(), name)
-}
+export const getFragranceByName = cache(async (name: string): Promise<FragranceRow | null> => {
+  const q = name.trim()
+  if (!q) return null
+  return getFragranceByNameDataCached(q)
+})
