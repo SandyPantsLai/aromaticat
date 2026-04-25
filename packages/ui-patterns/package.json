@@ -414,70 +414,6 @@
       "import": "./src/Markdown/index.tsx",
       "types": "./src/Markdown/index.tsx"
     },
-    "./McpUrlBuilder/McpConfigPanel": {
-      "import": "./src/McpUrlBuilder/McpConfigPanel.tsx",
-      "types": "./src/McpUrlBuilder/McpConfigPanel.tsx"
-    },
-    "./McpUrlBuilder/components/ClientSelectDropdown": {
-      "import": "./src/McpUrlBuilder/components/ClientSelectDropdown.tsx",
-      "types": "./src/McpUrlBuilder/components/ClientSelectDropdown.tsx"
-    },
-    "./McpUrlBuilder/components/ConnectionIcon": {
-      "import": "./src/McpUrlBuilder/components/ConnectionIcon.tsx",
-      "types": "./src/McpUrlBuilder/components/ConnectionIcon.tsx"
-    },
-    "./McpUrlBuilder/components/McpConfigurationDisplay": {
-      "import": "./src/McpUrlBuilder/components/McpConfigurationDisplay.tsx",
-      "types": "./src/McpUrlBuilder/components/McpConfigurationDisplay.tsx"
-    },
-    "./McpUrlBuilder/components/McpConfigurationOptions": {
-      "import": "./src/McpUrlBuilder/components/McpConfigurationOptions.tsx",
-      "types": "./src/McpUrlBuilder/components/McpConfigurationOptions.tsx"
-    },
-    "./McpUrlBuilder/constants": {
-      "import": "./src/McpUrlBuilder/constants.tsx",
-      "types": "./src/McpUrlBuilder/constants.tsx"
-    },
-    "./McpUrlBuilder": {
-      "import": "./src/McpUrlBuilder/index.ts",
-      "types": "./src/McpUrlBuilder/index.ts"
-    },
-    "./McpUrlBuilder/types": {
-      "import": "./src/McpUrlBuilder/types.ts",
-      "types": "./src/McpUrlBuilder/types.ts"
-    },
-    "./McpUrlBuilder/utils/createMcpCopyHandler": {
-      "import": "./src/McpUrlBuilder/utils/createMcpCopyHandler.ts",
-      "types": "./src/McpUrlBuilder/utils/createMcpCopyHandler.ts"
-    },
-    "./McpUrlBuilder/utils/getMcpButtonData": {
-      "import": "./src/McpUrlBuilder/utils/getMcpButtonData.ts",
-      "types": "./src/McpUrlBuilder/utils/getMcpButtonData.ts"
-    },
-    "./McpUrlBuilder/utils/getMcpIconSrc.test": {
-      "import": "./src/McpUrlBuilder/utils/getMcpIconSrc.test.ts",
-      "types": "./src/McpUrlBuilder/utils/getMcpIconSrc.test.ts"
-    },
-    "./McpUrlBuilder/utils/getMcpIconSrc": {
-      "import": "./src/McpUrlBuilder/utils/getMcpIconSrc.ts",
-      "types": "./src/McpUrlBuilder/utils/getMcpIconSrc.ts"
-    },
-    "./McpUrlBuilder/utils/getMcpUrl": {
-      "import": "./src/McpUrlBuilder/utils/getMcpUrl.ts",
-      "types": "./src/McpUrlBuilder/utils/getMcpUrl.ts"
-    },
-    "./McpUrlBuilder/utils/mcpIconAssets": {
-      "import": "./src/McpUrlBuilder/utils/mcpIconAssets.ts",
-      "types": "./src/McpUrlBuilder/utils/mcpIconAssets.ts"
-    },
-    "./Mermaid/Mermaid": {
-      "import": "./src/Mermaid/Mermaid.tsx",
-      "types": "./src/Mermaid/Mermaid.tsx"
-    },
-    "./Mermaid": {
-      "import": "./src/Mermaid/index.tsx",
-      "types": "./src/Mermaid/index.tsx"
-    },
     "./MobileSheetNav/MobileSheetNav.test": {
       "import": "./src/MobileSheetNav/MobileSheetNav.test.tsx",
       "types": "./src/MobileSheetNav/MobileSheetNav.test.tsx"
@@ -758,7 +694,6 @@
     "js-yaml": "^3.14.1",
     "lodash": "catalog:",
     "lucide-react": "*",
-    "mermaid": "^11.12.1",
     "mdast": "^3.0.0",
     "monaco-editor": "*",
     "next-themes": "*",
