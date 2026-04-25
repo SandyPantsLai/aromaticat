@@ -18,14 +18,6 @@ const ftsRows = [
     subtitle: null,
     description: 'Another content',
   },
-  {
-    id: 3,
-    path: '/blog/foo',
-    type: 'blog',
-    title: 'Blog article',
-    subtitle: null,
-    description: 'Blog body',
-  },
 ]
 
 const rpcSpy = vi.fn().mockImplementation((funcName: string, params: { query?: string }) => {
@@ -75,7 +67,7 @@ describe('/api/graphql searchDocs', () => {
     expect(json.data).toBeDefined()
     expect(json.data.searchDocs).toBeDefined()
     expect(json.data.searchDocs.nodes).toBeInstanceOf(Array)
-    expect(json.data.searchDocs.nodes).toHaveLength(3)
+    expect(json.data.searchDocs.nodes).toHaveLength(2)
     expect(json.data.searchDocs.nodes[0]).toMatchObject({
       title: 'Test Guide',
       href: '/fragrance-notes/test',
@@ -186,41 +178,5 @@ describe('/api/graphql searchDocs', () => {
 
     expect(json.errors).toBeDefined()
     expect(json.errors[0].message).toContain('required')
-  })
-
-  it('should return blog hits with proper fields', async () => {
-    const searchQuery = `
-      query {
-        searchDocs(query: "SSO provider", limit: 3) {
-          nodes {
-            ... on BlogPost {
-              title
-              href
-              content
-            }
-          }
-        }
-      }
-    `
-    const request = new Request('http://localhost/api/graphql', {
-      method: 'POST',
-      body: JSON.stringify({ query: searchQuery }),
-    })
-
-    const response = await POST(request)
-    const json = await response.json()
-
-    expect(json.errors).toBeUndefined()
-    expect(json.data).toBeDefined()
-    expect(json.data.searchDocs).toBeDefined()
-    expect(json.data.searchDocs.nodes).toBeInstanceOf(Array)
-    expect(json.data.searchDocs.nodes).toHaveLength(3)
-
-    const blogNode = json.data.searchDocs.nodes[2]
-    expect(blogNode).toMatchObject({
-      title: 'Blog article',
-      href: '/blog/foo',
-      content: 'Blog body',
-    })
   })
 })

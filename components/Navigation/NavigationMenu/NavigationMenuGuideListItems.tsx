@@ -24,8 +24,7 @@ const HeaderLink = React.memo(function HeaderLink(props: {
   const pathname = usePathname()
   const isSectionActive =
     (props.id === 'fragrance' && pathname?.startsWith('/fragrance-notes')) ||
-    (props.id === 'shop' && pathname?.startsWith('/shop')) ||
-    (props.id === 'blog' && pathname?.startsWith('/blog'))
+    (props.id === 'shop' && pathname?.startsWith('/shop'))
   const isActive = props.url === pathname || isSectionActive
 
   return (

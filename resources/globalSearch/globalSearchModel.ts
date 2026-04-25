@@ -4,7 +4,6 @@ import { Result } from '~/features/helpers.fn'
 import { supabase, type DatabaseCorrected } from '~/lib/supabase'
 
 import { isFeatureEnabled } from 'common/enabled-features'
-import { BlogModel } from '../blog/blogModel'
 import { GuideModel } from '../guide/guideModel'
 import { SearchResultInterface } from './globalSearchInterface'
 
@@ -83,18 +82,6 @@ function createModelFromMatch({
         href,
         content,
         subsections,
-      })
-    case 'blog':
-      return new BlogModel({
-        title: page_title,
-        href,
-        content,
-      })
-    case 'troubleshooting':
-      return new BlogModel({
-        title: page_title,
-        href,
-        content,
       })
     default:
       return null

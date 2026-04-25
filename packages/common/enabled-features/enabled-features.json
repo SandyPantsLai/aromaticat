@@ -48,7 +48,6 @@
   "docs:auth_configuration": true,
   "docs:auth_flows": true,
   "docs:auth_full_security": true,
-  "docs:auth_blog": true,
   "docs:compliance": true,
   "docs:fdw": true,
   "docs:footer": true,

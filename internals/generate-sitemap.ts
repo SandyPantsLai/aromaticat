@@ -24,16 +24,6 @@ async function generate() {
     })
   )
 
-  const blogFiles = await globby(['content/blog/**/!(_)*.mdx'])
-  const blogPages = await Promise.all(
-    blogFiles.map(async (filePath) => {
-      return {
-        link: filePath.replace(/^content\//, '').replace(/\.mdx$/, ''),
-        priority: 1,
-      }
-    })
-  )
-
   const shopFiles = await globby(['content/shop/**/!(_)*.mdx'])
   const shopPages = await Promise.all(
     shopFiles.map(async (filePath) => {
@@ -44,9 +34,7 @@ async function generate() {
     })
   )
 
-  const allPages = (contentPages as Array<{ link: string; priority: number }>)
-    .concat(blogPages)
-    .concat(shopPages)
+  const allPages = (contentPages as Array<{ link: string; priority: number }>).concat(shopPages)
 
   const sitemap = `
     <?xml version="1.0" encoding="UTF-8"?>

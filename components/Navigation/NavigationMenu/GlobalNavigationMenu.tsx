@@ -47,10 +47,6 @@ export const useActiveMenuLabel = (menu: typeof GLOBAL_MENU_ITEMS) => {
         return setActiveLabel(section[0].label)
       }
 
-      if (section[0].level === 'blog' && pathname.startsWith('/blog')) {
-        return setActiveLabel(section[0].label)
-      }
-
       if (section[0].menuItems) {
         for (const menuItemGroup of normalizeMenuItemGroups(section[0].menuItems)) {
           for (const menuItem of menuItemGroup.filter((item) => item.enabled !== false)) {
