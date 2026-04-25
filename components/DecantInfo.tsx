@@ -1,16 +1,7 @@
 import { cn } from 'ui'
 
-import { getFragranceByName } from '~/lib/fragrances'
-
-function formatCadPerMl(value: number): string {
-  const formatted = new Intl.NumberFormat('en-CA', {
-    style: 'currency',
-    currency: 'CAD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(Math.abs(value))
-  return `${formatted}/ml`
-}
+import { formatCadPerMl } from '~/components/fragrance/format'
+import { loadFragranceByName } from '~/components/fragrance/loadFragrance'
 
 /**
  * Loads a fragrance row by `name` (must match `notion.fragrances.attrs.name`, case-insensitive).
@@ -22,7 +13,7 @@ export async function DecantInfo({
   name: string
   className?: string
 }) {
-  const row = await getFragranceByName(name.trim())
+  const row = await loadFragranceByName(name)
 
   if (!row) {
     return (

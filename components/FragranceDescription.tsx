@@ -1,11 +1,7 @@
 import { cn } from 'ui'
 
-import { getFragranceByName } from '~/lib/fragrances'
-
-function displayInfo(value: string | null): string {
-  const t = value?.trim() ?? ''
-  return t || '—'
-}
+import { displayInfo } from '~/components/fragrance/format'
+import { loadFragranceByName } from '~/components/fragrance/loadFragrance'
 
 function shouldShowPerfumerByline(perfumer: string | null): boolean {
   const t = perfumer?.trim() ?? ''
@@ -24,7 +20,7 @@ export async function FragranceDescription({
   name: string
   className?: string
 }) {
-  const row = await getFragranceByName(name.trim())
+  const row = await loadFragranceByName(name)
   if (!row) return null
 
   return (

@@ -15,15 +15,7 @@ enum MenuId {
   Blog = 'blog',
 }
 
-const menus: { id: MenuId }[] = [
-  { id: MenuId.Shop },
-  { id: MenuId.Fragrance },
-  { id: MenuId.Blog },
-]
-
-function getMenuById(id: MenuId) {
-  return menus.find((menu) => menu.id === id)
-}
+const KNOWN_MENU_IDS = new Set<string>(Object.values(MenuId))
 
 const NavigationMenu = ({
   menuId,
@@ -32,15 +24,12 @@ const NavigationMenu = ({
   menuId: MenuId
   additionalNavItems?: Record<string, Partial<NavMenuSection>[]>
 }) => {
-  const level = menuId
-  const menu = getMenuById(level)
-
   useCloseMenuOnRouteChange()
 
-  if (!menu) return null
+  if (!KNOWN_MENU_IDS.has(menuId)) return null
 
-  return <NavigationMenuGuideList id={menu.id} additionalNavItems={additionalNavItems} />
+  return <NavigationMenuGuideList id={menuId} additionalNavItems={additionalNavItems} />
 }
 
-export { getMenuById, MenuId }
+export { MenuId }
 export default memo(NavigationMenu)
