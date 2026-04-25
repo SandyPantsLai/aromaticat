@@ -502,14 +502,6 @@
       "import": "./src/MultiSelectDeprecated/index.tsx",
       "types": "./src/MultiSelectDeprecated/index.tsx"
     },
-    "./MultipleCodeBlock/index.test": {
-      "import": "./src/MultipleCodeBlock/index.test.tsx",
-      "types": "./src/MultipleCodeBlock/index.test.tsx"
-    },
-    "./MultipleCodeBlock": {
-      "import": "./src/MultipleCodeBlock/index.tsx",
-      "types": "./src/MultipleCodeBlock/index.tsx"
-    },
     "./PageContainer": {
       "import": "./src/PageContainer/index.tsx",
       "types": "./src/PageContainer/index.tsx"
