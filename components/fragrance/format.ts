@@ -9,7 +9,7 @@ export function formatCadPerMl(value: number): string {
   const formatted = new Intl.NumberFormat('en-CA', {
     style: 'currency',
     currency: 'CAD',
-    minimumFractionDigits: 2,
+    minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   }).format(Math.abs(value))
   return `${formatted}/ml`
