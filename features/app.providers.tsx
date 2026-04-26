@@ -4,6 +4,7 @@ import { DevToolbar, DevToolbarProvider } from 'dev-tools'
 import type { PropsWithChildren } from 'react'
 import { TooltipProvider } from 'ui'
 
+import { DmListProvider } from './shop/dmList/DmListProvider'
 import { DocsCommandMenu, DocsCommandProvider } from './command'
 import { QueryClientProvider } from './data/queryClient.client'
 import { Toaster } from './toaster'
@@ -22,13 +23,15 @@ function GlobalProviders({ children }: PropsWithChildren) {
           <ThemeProvider>
             <TooltipProvider delayDuration={0}>
               <DocsCommandProvider>
-                <div className="flex flex-col">
-                  <SiteLayout>
-                    {children}
-                    <DocsCommandMenu />
-                  </SiteLayout>
-                  <ThemeSandbox />
-                </div>
+                <DmListProvider>
+                  <div className="flex flex-col">
+                    <SiteLayout>
+                      {children}
+                      <DocsCommandMenu />
+                    </SiteLayout>
+                    <ThemeSandbox />
+                  </div>
+                </DmListProvider>
               </DocsCommandProvider>
               <Toaster />
               <DevToolbar />

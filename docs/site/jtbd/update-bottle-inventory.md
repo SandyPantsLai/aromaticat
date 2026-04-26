@@ -24,6 +24,16 @@ Tiles are **not** loaded from Notion. They come from **`config/shop/bottlesOverv
 2. Create **`content/shop/bottles/{slug}.mdx`** with frontmatter (**`title`** required) and body content.
 3. The public URL is **`/shop/bottles/{slug}`**.
 
+### Add to “your list” on the detail page (optional)
+
+If this bottle already has a **tile** in **`BOTTLES_OVERVIEW_INVENTORY`** with **`href`** set to that same path (e.g. `/shop/bottles/lotus-flower`), you can add a line to the MDX body (for example after **`FragranceLinks`**):
+
+```mdx
+<BottleAddToListFromInventory pageId="lotus-flower" />
+```
+
+Use the same segment as the MDX filename (without **`.mdx`**) for **`pageId`**. The component resolves pricing from the inventory row via [`config/shop/bottlesLookup.ts`](../../../config/shop/bottlesLookup.ts). The overview grid already has add-to-list on tiles; this wires the same data on the detail page.
+
 ---
 
 ## 3. List the bottle in the shop sidebar (optional)
@@ -41,4 +51,4 @@ If **`href`** in the grid points to a slug that has no MDX file, the link will 4
 2. If **`href`** is set — link opens the right URL and the detail page exists when internal.
 3. Sidebar — product appears under Bottles if you updated **`SHOP_CATALOG`**.
 
-Troubleshooting: [When a page does not show up or 404s](./when-a-page-does-not-show-up-or-404s.md).
+Troubleshooting: [Troubleshooting: missing pages and 404s](./troubleshooting-missing-pages-and-404s.md).

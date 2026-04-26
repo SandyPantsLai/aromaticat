@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 import { Card, CardContent, cn } from 'ui'
 
+import { AddBottleToDmListButton } from '~/components/dmList/AddToDmListButtons'
 import { FragranceCatalogImage } from '~/components/fragrance/FragranceCatalogImage'
 import { isSafeHttpUrl } from '~/components/fragrance/format'
 import { BOTTLES_OVERVIEW_INVENTORY } from '~/config/shop/bottlesOverviewInventory'
@@ -37,23 +39,9 @@ function BottleTileImage({ src, alt }: { src: string; alt: string }) {
   )
 }
 
-function BottleInventoryCard({
-  entry,
-  className,
-}: {
-  entry: (typeof BOTTLES_OVERVIEW_INVENTORY)[number]
-  className?: string
-}) {
-  const alt = [entry.brand, entry.name].filter(Boolean).join(' ').trim() || 'Bottle'
-  const media = <BottleTileImage src={entry.image} alt={alt} />
-
-  const cardInner = (
-    <Card
-      className={cn(
-        'flex h-full min-h-0 flex-col overflow-hidden border border-default bg-surface-100 p-0 shadow-sm transition-colors',
-        entry.href ? 'group-hover:border-overlay' : ''
-      )}
-    >
+function BottleCardBody({ entry, media }: { entry: (typeof BOTTLES_OVERVIEW_INVENTORY)[number]; media: ReactNode }) {
+  return (
+    <>
       <div className="relative shrink-0">{media}</div>
       <CardContent className="flex flex-1 flex-col border-b-0 px-4 pb-2 pt-4 text-center">
         <p className="m-0 text-xs text-foreground-lighter line-clamp-1">{entry.brand}</p>
@@ -73,27 +61,53 @@ function BottleInventoryCard({
           </p>
         </div>
       </CardContent>
-    </Card>
+    </>
   )
+}
 
-  if (entry.href?.trim()) {
-    const href = entry.href.trim()
-    const isExternal = /^https?:\/\//i.test(href)
-    return (
-      <Link
-        href={href}
+function BottleInventoryCard({
+  entry,
+  className,
+}: {
+  entry: (typeof BOTTLES_OVERVIEW_INVENTORY)[number]
+  className?: string
+}) {
+  const alt = [entry.brand, entry.name].filter(Boolean).join(' ').trim() || 'Bottle'
+  const media = <BottleTileImage src={entry.image} alt={alt} />
+  const body = <BottleCardBody entry={entry} media={media} />
+  const href = entry.href?.trim()
+
+  return (
+    <div
+      className={cn(
+        'group h-full min-h-0',
+        'rounded-lg focus-within:ring-2 focus-within:ring-brand focus-within:ring-offset-2 focus-within:ring-offset-background',
+        className
+      )}
+    >
+      <Card
         className={cn(
-          'group block h-full min-h-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-          className
+          'flex h-full min-h-0 flex-col overflow-hidden border border-default bg-surface-100 p-0 shadow-sm',
+          'transition-colors group-hover:border-overlay'
         )}
-        {...(isExternal ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
       >
-        {cardInner}
-      </Link>
-    )
-  }
-
-  return <div className={cn('h-full min-h-0 min-w-0', className)}>{cardInner}</div>
+        {href ? (
+          <Link
+            href={href}
+            className="flex min-h-0 min-w-0 flex-1 flex-col text-inherit no-underline focus-visible:outline-none"
+            {...(/^https?:\/\//i.test(href) ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+          >
+            {body}
+          </Link>
+        ) : (
+          body
+        )}
+        <div className="shrink-0 border-t border-default p-2">
+          <AddBottleToDmListButton entry={entry} />
+        </div>
+      </Card>
+    </div>
+  )
 }
 
 /**

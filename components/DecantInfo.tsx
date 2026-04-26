@@ -1,6 +1,7 @@
 import { cn } from 'ui'
 
-import { formatCadPerMl } from '~/components/fragrance/format'
+import { AddDecantToDmListButton } from '~/components/dmList/AddToDmListButtons'
+import { describeCostPerMl, displayInfo } from '~/components/fragrance/format'
 import { loadFragranceByName } from '~/components/fragrance/loadFragrance'
 
 /**
@@ -31,6 +32,8 @@ export async function DecantInfo({
   }
 
   const title = 'Decant Info'
+  const decantPath = `/shop/decants/${row.slug}`
+  const rateForList = describeCostPerMl(row.cost_per_ml)
 
   return (
     <aside
@@ -41,22 +44,29 @@ export async function DecantInfo({
       aria-label={`Decant facts for ${title}`}
     >
       <p className="font-medium text-foreground">{title}</p>
-      <dl className="mt-2 grid gap-1 sm:grid-cols-3">
-        {row.cost_per_ml != null && (
-          <div>
-            <dt className="text-foreground-lighter">Cost</dt>
-            <dd className="text-foreground" translate="no">
-              {formatCadPerMl(row.cost_per_ml)}
-            </dd>
-          </div>
-        )}
-        <div>
-          <dt className="text-foreground-lighter">Available Sizes</dt>
-          <dd className="text-foreground">3/5/10ml</dd>
+      <dl className="mt-2 grid grid-cols-1 gap-x-3 gap-y-3 sm:grid-cols-3 sm:items-start">
+        <div className="min-w-0 sm:min-h-0">
+          <dt className="text-foreground-lighter">Available sizes (ml)</dt>
+          <dd className="m-0 mt-1.5 min-w-0 p-0 sm:mt-1">
+            <AddDecantToDmListButton
+              slug={row.slug}
+              brand={displayInfo(row.brand)}
+              name={displayInfo(row.name)}
+              rateLabel={rateForList}
+              href={decantPath}
+              costPerMl={row.cost_per_ml}
+            />
+          </dd>
         </div>
-        <div>
-          <dt className="text-foreground-lighter">Bottle Type</dt>
-          <dd className="text-foreground">Glass, screw-top from Evrair</dd>
+        <div className="min-w-0 sm:min-h-0">
+          <dt className="text-foreground-lighter">Cost</dt>
+          <dd className="m-0 mt-1.5 text-foreground sm:mt-1" translate="no">
+            {describeCostPerMl(row.cost_per_ml)}
+          </dd>
+        </div>
+        <div className="min-w-0 sm:min-h-0">
+          <dt className="text-foreground-lighter">Bottle type</dt>
+          <dd className="m-0 mt-1.5 text-foreground sm:mt-1">Glass, screw-top from Evrair</dd>
         </div>
       </dl>
     </aside>

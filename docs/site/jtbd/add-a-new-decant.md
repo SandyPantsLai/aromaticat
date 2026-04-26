@@ -11,6 +11,8 @@
 3. Add YAML frontmatter with at least **`title`** (required for all guide MDX). See [`lib/docs.ts`](../../../lib/docs.ts) (`GuideFrontmatter`).
 4. Copy body structure from **`content/shop/decants/_template.mdx`** and replace the placeholder **`Frag Name`** with the exact **`name`** you will use in Notion (next step).
 
+**Visitor list (no checkout):** The template includes **`<DecantInfo />`**, which lets people pick **3 / 5 / 10 ml** and add the line to a **browser-only list** (local storage; they screenshot and contact you). **Decant overview** cards are browse-only and do not add to that list.
+
 **Important:** Every component that takes **`name="..."`** (e.g. `<FragranceCost name="…" />`, `<FragranceImage name="…" />`) must use the **same string** as the fragrance **title** in Notion (`notion.fragrances`). Matching is **case-insensitive**.
 
 ---
@@ -18,7 +20,7 @@
 ## 2. Align Notion (catalog source)
 
 1. In Notion, set the fragrance **title** property to match the **`name=`** strings in your MDX (spacing and punctuation matter for display; lookup is case-insensitive).
-2. After bulk catalog edits, you may need to **invalidate the Next cache** so decant cards update everywhere — see [When Notion catalog looks stale](./when-notion-catalog-looks-stale.md).
+2. After bulk catalog edits, you may need to **invalidate the Next cache** so decant cards update everywhere — see [Refresh the fragrances catalog](./refresh-the-fragrances-catalog.md).
 
 ---
 
@@ -54,4 +56,4 @@ If you skip this step, the page can still load at **`/shop/decants/{slug}`**, bu
 2. Open **`/shop/decants/overview`** — your section shows the card if you added it in step 3.
 3. Open Shop from the header — decants nav includes the product if you did step 4.
 
-If something fails, use [When a page does not show up or 404s](./when-a-page-does-not-show-up-or-404s.md).
+If something fails, use [Troubleshooting: missing pages and 404s](./troubleshooting-missing-pages-and-404s.md).

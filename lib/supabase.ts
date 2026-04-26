@@ -1,6 +1,9 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
-import { type Database as DatabaseGenerated, getSupabasePublicApiKey } from 'common'
+// Import from package entrypoints, not `common` barrel, so Edge bundles (e.g. GraphQL route) do
+// not pull `consent-state` → valtio/react, which fail with `useRef` from `react` in edge SSR.
+import type { Database as DatabaseGenerated } from 'common/database-types'
+import { getSupabasePublicApiKey } from 'common/supabasePublicClientKey'
 
 export type Database = {
   content: DatabaseGenerated['content']
