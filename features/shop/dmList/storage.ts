@@ -46,18 +46,23 @@ function mapItem(v: DmListItem): DmListItem {
 /**
  * Read and parse stored list, or an empty list if missing or invalid.
  */
+function emptyAsMutable(): DmListItem[] {
+  return EMPTY as DmListItem[]
+}
+
 export function readDmList(): DmListItem[] {
-  if (typeof window === 'undefined') return []
+  if (typeof window === 'undefined') return emptyAsMutable()
   try {
     const raw = localStorage.getItem(DM_LIST_STORAGE_KEY)
-    if (raw == null) return []
+    if (raw == null) return emptyAsMutable()
     const parsed: unknown = JSON.parse(raw)
-    if (!Array.isArray(parsed)) return []
-    return parsed
+    if (!Array.isArray(parsed)) return emptyAsMutable()
+    const out = parsed
       .filter(isDmListItem)
       .map((it) => mapItem(it as DmListItem))
+    return out.length > 0 ? out : emptyAsMutable()
   } catch {
-    return []
+    return emptyAsMutable()
   }
 }
 
