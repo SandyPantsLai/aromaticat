@@ -43,7 +43,7 @@ export const GLOBAL_MENU_ITEMS: GlobalMenuItems = [
       menuItems: [
         {
           label: 'Overview',
-          href: '/shop/overview',
+          href: '/shop',
           level: 'shop',
         },
         ...SHOP_CATALOG.map((section) => ({
