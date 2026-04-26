@@ -264,7 +264,6 @@ export * from './src/components/shadcn/ui/sidebar'
 export * from './src/components/StatusIcon'
 
 // export icons
-export * from './src/components/Icon/icons/IconBasenotes'
 export * from './src/components/Icon/icons/IconBriefcase2'
 export * from './src/components/Icon/icons/IconBroadcast'
 export * from './src/components/Icon/icons/IconChangelog'

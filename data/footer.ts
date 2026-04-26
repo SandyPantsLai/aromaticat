@@ -22,9 +22,6 @@ export const primaryLinks: FooterPrimaryLink[] = [
   },
   {
     featherIcon: AtSign,
-    text: 'Have questions?',
-    ctaLabel: 'DM Sandy Pants on Facebook!',
-    // Add your Facebook profile or Messenger URL when ready.
-    // url: 'https://www.facebook.com/...',
+    text: 'Have questions? DM Sandy Pants!',
   },
 ]
