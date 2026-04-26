@@ -50,16 +50,16 @@ export function AddDecantToDmListButton({
     return { lineTotalCents: c, lineTotalLabel: formatCadFromCents(c) }
   }, [costPerMl, sizeMl, disabled])
 
-  /** `gap-1` (0.25rem) ×2 + 3 equal chips — total bar width; add button matches this width. */
+  /** Fills the Available sizes column; three equal `flex-1` chips and a full-width add row. */
   return (
     <div
       className={cn(
-        'flex w-[7.7rem] max-w-full shrink-0 flex-col gap-1.5 min-w-0',
+        'flex w-full min-w-0 max-w-full flex-col gap-2',
         className
       )}
     >
       <div
-        className="flex w-full min-w-0 items-stretch gap-1"
+        className="flex w-full min-w-0 min-h-[2.5rem] items-stretch gap-1.5 sm:gap-2"
         role="group"
         aria-label="Decant size in milliliters"
       >
@@ -67,7 +67,7 @@ export function AddDecantToDmListButton({
           <Button
             key={s}
             type={sizeMl === s ? 'primary' : 'outline'}
-            className="h-8 min-h-0 min-w-0 flex-1 basis-0 px-1.5 text-xs"
+            className="h-10 min-h-0 min-w-0 flex-1 basis-0 px-2 text-sm"
             onClick={() => setSizeMl(s)}
             htmlType="button"
             disabled={disabled}
@@ -79,7 +79,7 @@ export function AddDecantToDmListButton({
         ))}
       </div>
       <p
-        className="m-0 w-full min-w-0 break-words text-center text-xs leading-snug text-foreground-muted [overflow-wrap:anywhere]"
+        className="m-0 w-full min-w-0 break-words text-center text-sm leading-snug text-foreground-muted [overflow-wrap:anywhere]"
         translate="no"
         aria-live="polite"
       >
@@ -89,7 +89,7 @@ export function AddDecantToDmListButton({
       </p>
       <Button
         type="outline"
-        className="h-9 w-full min-w-0 text-xs"
+        className="h-10 w-full min-w-0 text-sm sm:h-11"
         disabled={disabled}
         onClick={() => {
           const item: DmListDecantItem = {

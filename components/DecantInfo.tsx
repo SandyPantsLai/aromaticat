@@ -44,9 +44,9 @@ export async function DecantInfo({
       aria-label={`Decant facts for ${title}`}
     >
       <p className="font-medium text-foreground">{title}</p>
-      <dl className="mt-2 grid grid-cols-1 gap-x-3 gap-y-3 sm:grid-cols-3 sm:items-start">
+      <dl className="mt-2 grid grid-cols-1 gap-x-3 gap-y-3 sm:grid-cols-[2fr_1fr_1fr] sm:items-start">
         <div className="min-w-0 sm:min-h-0">
-          <dt className="text-foreground-lighter">Available sizes (ml)</dt>
+          <dt className="text-foreground-lighter">Available Sizes</dt>
           <dd className="m-0 mt-1.5 min-w-0 p-0 sm:mt-1">
             <AddDecantToDmListButton
               slug={row.slug}
