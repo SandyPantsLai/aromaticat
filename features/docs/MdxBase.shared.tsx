@@ -8,6 +8,8 @@ import { Heading } from 'ui/src/components/CustomHTMLElements'
 import ButtonCard from '~/components/ButtonCard'
 import { Extensions } from '~/components/Extensions'
 import { DecantInfo } from '~/components/DecantInfo'
+import { DecantProductCard } from '~/components/DecantProductCard'
+import { DecantsOverviewSection } from '~/components/DecantsOverviewSection'
 import { Fragram } from '~/components/Fragram'
 import { FragranceAudience } from '~/components/FragranceAudience'
 import { FragranceCost } from '~/components/FragranceCost'
@@ -36,6 +38,8 @@ const components = {
   Button,
   ButtonCard,
   DecantInfo,
+  DecantProductCard,
+  DecantsOverviewSection,
   Extensions,
   Fragram,
   FragranceAudience,

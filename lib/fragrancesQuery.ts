@@ -233,3 +233,77 @@ export async function fetchFragranceByNameWithClient(
 
   return data ? notionFragranceRowToCatalog(data) : null
 }
+
+/** JSON path on `notion.fragrances` used for title lookup (same as `fetchFragranceByNameWithClient`). */
+export const FRAGRANCE_NAME_JSON_PATH = 'attrs->properties->name->title->0->>plain_text'
+
+/**
+ * Max names per batched OR filter. PostgREST builds a long query string; keep lists small (hub grids).
+ * @see fetchFragrancesByNamesWithClient
+ */
+export const FRAGRANCE_BATCH_NAME_LIMIT = 30
+
+/**
+ * Trim, drop empties, dedupe case-insensitively (keep first spelling).
+ * Caps length at {@link FRAGRANCE_BATCH_NAME_LIMIT}.
+ */
+export function normalizeFragranceNamesForBatch(names: readonly string[]): string[] {
+  const seen = new Set<string>()
+  const out: string[] = []
+  for (const raw of names) {
+    const t = raw.trim()
+    if (!t) continue
+    const k = t.toLowerCase()
+    if (seen.has(k)) continue
+    seen.add(k)
+    out.push(t)
+    if (out.length >= FRAGRANCE_BATCH_NAME_LIMIT) break
+  }
+  return out
+}
+
+/**
+ * Double-quote a value for PostgREST filter syntax (`"` → `""`).
+ */
+export function quotePostgrestFilterString(value: string): string {
+  return `"${value.replace(/"/g, '""')}"`
+}
+
+/**
+ * Builds the `.or(...)` filter string for multiple `ilike` clauses on the name JSON path.
+ * Returns `null` when there is nothing to query.
+ */
+export function buildFragranceNamesOrFilter(names: readonly string[]): string | null {
+  const normalized = normalizeFragranceNamesForBatch(names)
+  if (normalized.length === 0) return null
+
+  const col = FRAGRANCE_NAME_JSON_PATH
+  const parts = normalized.map((n) => `${col}.ilike.${quotePostgrestFilterString(n)}`)
+  return parts.join(',')
+}
+
+/**
+ * Loads all rows whose Notion `name` title matches any of the given names (case-insensitive),
+ * in one round trip via PostgREST `or`.
+ */
+export async function fetchFragrancesByNamesWithClient(
+  client: SupabaseClient<Database>,
+  names: readonly string[]
+): Promise<FragranceRow[]> {
+  const orFilter = buildFragranceNamesOrFilter(names)
+  if (!orFilter) return []
+
+  const { data, error } = await client
+    .schema('notion')
+    .from('fragrances')
+    .select('id,url,created_time,last_edited_time,archived,attrs')
+    .or(orFilter)
+
+  if (error) {
+    console.error('[fragrances] fetchFragrancesByNamesWithClient', error.message)
+    return []
+  }
+
+  if (!data?.length) return []
+  return data.map((row) => notionFragranceRowToCatalog(row))
+}

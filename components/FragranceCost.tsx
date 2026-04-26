@@ -1,14 +1,7 @@
 import { cn } from 'ui'
 
-import { formatCadPerMl } from '~/components/fragrance/format'
+import { describeCostPerMl } from '~/components/fragrance/format'
 import { loadFragranceByName } from '~/components/fragrance/loadFragrance'
-
-function describe(value: number | null | undefined): string {
-  if (value == null) return '—'
-  if (value < 0) return 'n/a'
-  if (value === 0) return '$0.00/ml (gift or sample)'
-  return formatCadPerMl(value)
-}
 
 /**
  * Renders `cost_per_ml` for a fragrance looked up by name from `notion.fragrances`.
@@ -26,7 +19,7 @@ export async function FragranceCost({
   className?: string
 }) {
   const row = await loadFragranceByName(name)
-  const text = describe(row?.cost_per_ml ?? null)
+  const text = describeCostPerMl(row?.cost_per_ml ?? null)
 
   if (variant === 'badge') {
     return (

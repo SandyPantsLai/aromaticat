@@ -15,6 +15,14 @@ export function formatCadPerMl(value: number): string {
   return `${formatted}/ml`
 }
 
+/** Human-readable `cost_per_ml` for inline UI (matches `FragranceCost`). */
+export function describeCostPerMl(value: number | null | undefined): string {
+  if (value == null) return '—'
+  if (value < 0) return 'n/a'
+  if (value === 0) return '$0.00/ml (gift or sample)'
+  return formatCadPerMl(value)
+}
+
 /** Allows only `http(s):` URLs; everything else (data:, javascript:, etc.) is rejected. */
 export function isSafeHttpUrl(url: string): boolean {
   try {
