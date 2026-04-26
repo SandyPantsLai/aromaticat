@@ -199,7 +199,7 @@ export function notionFragranceRowToCatalog(row: NotionFragrancesRow): Fragrance
     review: richTextProp(props, 'review'),
     comments: richTextProp(props, 'comments'),
     parfumo: urlProp(props, 'parfumo'),
-    fragrantica: urlProp(props, 'fragantica'),
+    fragrantica: urlProp(props, 'fragrantica'),
     image: fileUrlProp(props, 'image'),
     fragram: fileUrlProp(props, 'fragram'),
     created_at: row.created_time?.trim() || '',

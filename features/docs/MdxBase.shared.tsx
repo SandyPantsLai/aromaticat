@@ -14,6 +14,7 @@ import { DecantsOverviewSection } from '~/components/DecantsOverviewSection'
 import { Fragram } from '~/components/Fragram'
 import { FragranceAudience } from '~/components/FragranceAudience'
 import { FragranceCost } from '~/components/FragranceCost'
+import { FragranceLinks } from '~/components/FragranceLinks'
 import { FragranceDescription } from '~/components/FragranceDescription'
 import { FragranceImage } from '~/components/FragranceImage'
 import { FragranceNotes } from '~/components/FragranceNotes'
@@ -46,6 +47,7 @@ const components = {
   Fragram,
   FragranceAudience,
   FragranceCost,
+  FragranceLinks,
   FragranceDescription,
   FragranceImage,
   FragranceNotes,
