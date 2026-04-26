@@ -46,10 +46,11 @@ const ShopPage = () => (
         </Link>
       ))}
     </div>
-    <h3 className="scroll-mt-18">Trading Minimums</h3>
+    <h3 className="scroll-mt-18">Trading Info</h3>
     <p>If we're trading decants, the minimum is 3 decants to minimize shipping costs.</p>
-    <h3 className="scroll-mt-18">Shipping Info</h3>
-    <p>I ship internationally. Shipping costs are calculated based on the weight of the items and the destination country.</p>
+    <p>The easiest trades are if we are trading for different scents of the same brand and line. But just send me your trade list!</p>
+    <h3 className="scroll-mt-18">Pickup + Shipping Info</h3>
+    <p>Pickup available in Toronto (west end). Shipping starts at $4 for untracked lettermail and $20 for tracked shipping. I don't ship internationally.</p>
     <h3 className="scroll-mt-18">Liability Info</h3>
     <p>Breakage/loss/leakage is on the buyer, but I pack well and send pics of packing before shipping.</p>
     <h3 className="scroll-mt-18">Payment Options</h3>

@@ -57,8 +57,27 @@ export const SHOP_CATALOG: readonly ShopSectionEntry[] = [
         ],
       },
       {
+        name: 'D\'Annam',
+        products: [
+          { name: 'Matcha Soft Serve', slug: 'matcha-soft-serve' },
+          { name: 'Princess of China', slug: 'princess-of-china' },
+        ],
+
+      },
+      {
         name: 'Dedcool',
         products: [{ name: 'Mochi Milk', slug: 'mochi-milk' }],
+      },
+      {
+        name: 'Diptyque',
+        products: [
+          { name: 'Benjoin Bohème EDP Intense', slug: 'benjoin-boheme-edp-intense' },
+          { name: 'Do Son EDP', slug: 'do-son-edp' },
+          { name: 'Eau Capitale EDP', slug: 'eau-capitale-edp' },
+          { name: 'Eau Moheli EDT', slug: 'eau-moheli-edt' },
+          { name: 'L\'Ombre Fans L\'Eau EDT', slug: 'lombre-dans-leau-edt' },
+          { name: 'Orphéon EDP', slug: 'orpheon-edp' },
+        ],
       },
       {
         name: 'Escentric Molecules',
