@@ -11,7 +11,7 @@
 3. Add YAML frontmatter with at least **`title`** (required for all guide MDX). See [`lib/docs.ts`](../../../lib/docs.ts) (`GuideFrontmatter`).
 4. Copy body structure from **`content/shop/decants/_template.mdx`** and replace the placeholder **`Frag Name`** with the exact **`name`** you will use in Notion (next step).
 
-**Visitor list (no checkout):** The template includes **`<DecantInfo />`**, which lets people pick **3 / 5 / 10 ml** and add the line to a **browser-only list** (local storage; they screenshot and contact you). **Decant overview** cards are browse-only and do not add to that list.
+**Visitor list (no checkout):** The template includes **`<DecantInfo />`**, which lets people pick **3 / 5 / 10 ml** and add the line to a **browser-only list** (local storage; they open the list from the header, use **Copy list** to paste into a message, or take a screenshot, then contact you). **Decant overview** cards are browse-only and do not add to that list.
 
 **Important:** Every component that takes **`name="..."`** (e.g. `<FragranceCost name="…" />`, `<FragranceImage name="…" />`) must use the **same string** as the fragrance **title** in Notion (`notion.fragrances`). Matching is **case-insensitive**.
 
