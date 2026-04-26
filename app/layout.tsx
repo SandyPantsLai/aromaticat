@@ -7,7 +7,7 @@ import '../styles/prism-okaidia.scss'
 
 import { GlobalProviders } from '~/features/app.providers'
 import { TopNavSkeleton } from '~/layouts/MainSkeleton'
-import { BASE_PATH, IS_PRODUCTION } from '~/lib/constants'
+import { BASE_PATH, IS_PRODUCTION, METADATA_BASE } from '~/lib/constants'
 import { getCustomContent } from '~/lib/custom-content/getCustomContent'
 import { genFaviconData } from 'common/MetaFavicons/app-router'
 import type { Metadata, Viewport } from 'next'
@@ -18,6 +18,7 @@ const { metadataApplicationName, metadataTitle } = getCustomContent([
 ])
 
 const metadata: Metadata = {
+  metadataBase: METADATA_BASE,
   applicationName: metadataApplicationName,
   title: metadataTitle,
   description:

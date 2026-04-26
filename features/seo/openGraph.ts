@@ -1,10 +1,7 @@
-import { BASE_PATH } from '~/lib/constants'
+import { BASE_PATH, getPublicSiteOrigin } from '~/lib/constants'
 
 function docsSiteOrigin(): string {
-  const site = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '')
-  if (site) return site
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
-  return ''
+  return getPublicSiteOrigin()
 }
 
 export function generateOpenGraphImageMeta({

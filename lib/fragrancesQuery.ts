@@ -238,14 +238,15 @@ export async function fetchFragranceByNameWithClient(
 export const FRAGRANCE_NAME_JSON_PATH = 'attrs->properties->name->title->0->>plain_text'
 
 /**
- * Max names per batched OR filter. PostgREST builds a long query string; keep lists small (hub grids).
+ * Max names per PostgREST `.or(...)` chunk. Longer lists run multiple requests in sequence.
  * @see fetchFragrancesByNamesWithClient
  */
 export const FRAGRANCE_BATCH_NAME_LIMIT = 30
 
 /**
  * Trim, drop empties, dedupe case-insensitively (keep first spelling).
- * Caps length at {@link FRAGRANCE_BATCH_NAME_LIMIT}.
+ * No length cap — {@link fetchFragrancesByNamesWithClient} chunks to {@link FRAGRANCE_BATCH_NAME_LIMIT}
+ * per PostgREST request so long grids stay within URL / filter limits.
  */
 export function normalizeFragranceNamesForBatch(names: readonly string[]): string[] {
   const seen = new Set<string>()
@@ -257,7 +258,6 @@ export function normalizeFragranceNamesForBatch(names: readonly string[]): strin
     if (seen.has(k)) continue
     seen.add(k)
     out.push(t)
-    if (out.length >= FRAGRANCE_BATCH_NAME_LIMIT) break
   }
   return out
 }
@@ -271,39 +271,62 @@ export function quotePostgrestFilterString(value: string): string {
 
 /**
  * Builds the `.or(...)` filter string for multiple `ilike` clauses on the name JSON path.
- * Returns `null` when there is nothing to query.
+ * `normalized` must already be trimmed/deduped (e.g. from {@link normalizeFragranceNamesForBatch}).
+ * Prefer chunks of at most {@link FRAGRANCE_BATCH_NAME_LIMIT} entries for PostgREST URL safety.
  */
-export function buildFragranceNamesOrFilter(names: readonly string[]): string | null {
-  const normalized = normalizeFragranceNamesForBatch(names)
+export function buildFragranceNamesOrFilterFromNormalized(
+  normalized: readonly string[]
+): string | null {
   if (normalized.length === 0) return null
-
   const col = FRAGRANCE_NAME_JSON_PATH
   const parts = normalized.map((n) => `${col}.ilike.${quotePostgrestFilterString(n)}`)
   return parts.join(',')
 }
 
 /**
- * Loads all rows whose Notion `name` title matches any of the given names (case-insensitive),
- * in one round trip via PostgREST `or`.
+ * Builds the `.or(...)` filter for a full name list (normalizes first).
+ * For large lists, {@link fetchFragrancesByNamesWithClient} uses chunked requests instead of one giant filter.
+ */
+export function buildFragranceNamesOrFilter(names: readonly string[]): string | null {
+  const normalized = normalizeFragranceNamesForBatch(names)
+  return buildFragranceNamesOrFilterFromNormalized(normalized)
+}
+
+/**
+ * Loads all rows whose Notion `name` title matches any of the given names (case-insensitive).
+ * Names are split into chunks of {@link FRAGRANCE_BATCH_NAME_LIMIT} so each PostgREST `.or(...)` stays bounded.
  */
 export async function fetchFragrancesByNamesWithClient(
   client: SupabaseClient<Database>,
   names: readonly string[]
 ): Promise<FragranceRow[]> {
-  const orFilter = buildFragranceNamesOrFilter(names)
-  if (!orFilter) return []
+  const normalized = normalizeFragranceNamesForBatch(names)
+  if (normalized.length === 0) return []
 
-  const { data, error } = await client
-    .schema('notion')
-    .from('fragrances')
-    .select('id,url,created_time,last_edited_time,archived,attrs')
-    .or(orFilter)
+  const byId = new Map<string, FragranceRow>()
 
-  if (error) {
-    console.error('[fragrances] fetchFragrancesByNamesWithClient', error.message)
-    return []
+  for (let i = 0; i < normalized.length; i += FRAGRANCE_BATCH_NAME_LIMIT) {
+    const chunk = normalized.slice(i, i + FRAGRANCE_BATCH_NAME_LIMIT)
+    const orFilter = buildFragranceNamesOrFilterFromNormalized(chunk)
+    if (!orFilter) continue
+
+    const { data, error } = await client
+      .schema('notion')
+      .from('fragrances')
+      .select('id,url,created_time,last_edited_time,archived,attrs')
+      .or(orFilter)
+
+    if (error) {
+      console.error('[fragrances] fetchFragrancesByNamesWithClient', error.message)
+      continue
+    }
+
+    if (!data?.length) continue
+    for (const row of data) {
+      const catalog = notionFragranceRowToCatalog(row)
+      byId.set(catalog.id, catalog)
+    }
   }
 
-  if (!data?.length) return []
-  return data.map((row) => notionFragranceRowToCatalog(row))
+  return [...byId.values()]
 }

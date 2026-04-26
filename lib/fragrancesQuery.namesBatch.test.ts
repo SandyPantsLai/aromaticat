@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import {
   buildFragranceNamesOrFilter,
+  buildFragranceNamesOrFilterFromNormalized,
   FRAGRANCE_BATCH_NAME_LIMIT,
   FRAGRANCE_NAME_JSON_PATH,
   normalizeFragranceNamesForBatch,
@@ -31,9 +32,9 @@ describe('normalizeFragranceNamesForBatch', () => {
     expect(normalizeFragranceNamesForBatch(['B', 'a', 'b'])).toEqual(['B', 'a'])
   })
 
-  it('caps at FRAGRANCE_BATCH_NAME_LIMIT', () => {
+  it('keeps every unique name (no silent cap)', () => {
     const many = Array.from({ length: FRAGRANCE_BATCH_NAME_LIMIT + 5 }, (_, i) => `n${i}`)
-    expect(normalizeFragranceNamesForBatch(many).length).toBe(FRAGRANCE_BATCH_NAME_LIMIT)
+    expect(normalizeFragranceNamesForBatch(many).length).toBe(FRAGRANCE_BATCH_NAME_LIMIT + 5)
   })
 })
 
@@ -46,8 +47,14 @@ describe('buildFragranceNamesOrFilter', () => {
   it('joins ilike clauses with comma', () => {
     const col = FRAGRANCE_NAME_JSON_PATH
     const out = buildFragranceNamesOrFilter(['Northern', 'Pomelo'])
-    expect(out).toBe(
-      `${col}.ilike."Northern",${col}.ilike."Pomelo"`
+    expect(out).toBe(`${col}.ilike."Northern",${col}.ilike."Pomelo"`)
+  })
+
+  it('buildFragranceNamesOrFilterFromNormalized matches slice of normalized list', () => {
+    const col = FRAGRANCE_NAME_JSON_PATH
+    const norm = normalizeFragranceNamesForBatch(['a', 'b'])
+    expect(buildFragranceNamesOrFilterFromNormalized(norm)).toBe(
+      `${col}.ilike."a",${col}.ilike."b"`
     )
   })
 
