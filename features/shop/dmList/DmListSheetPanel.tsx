@@ -1,15 +1,16 @@
 'use client'
 
-import { Trash2, X } from 'lucide-react'
+import { Copy, Trash2, X } from 'lucide-react'
 import Link from 'next/link'
-import { useLayoutEffect, useMemo, useState } from 'react'
+import { useCallback, useLayoutEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { toast } from 'sonner'
 import { Badge, Button, buttonVariants, cn } from 'ui'
 
 import { formatCadFromCents } from '~/components/fragrance/format'
 
 import { useDmList } from './dmListContext'
-import { breakdownListMoney } from './money'
+import { breakdownListMoney, type DmListMoneyBreakdown } from './money'
 import type { DmListItem } from './types'
 
 const BACKDROP_Z = 200
@@ -103,6 +104,75 @@ function formatSubline(item: DmListItem): string {
     .join(' · ')
 }
 
+function typeLabel(t: DmListItem['type']): string {
+  return t === 'decant' ? 'Decant' : t === 'bottle' ? 'Bottle' : 'C&R'
+}
+
+function buildPlainTextList(
+  items: readonly DmListItem[],
+  money: DmListMoneyBreakdown
+): string {
+  const body = items
+    .map(
+      (it, i) =>
+        `${i + 1}. ${typeLabel(it.type)} — ${formatTitle(it)}\n   ${formatSubline(it)}`
+    )
+    .join('\n\n')
+  if (items.length === 0) {
+    return body
+  }
+  if (money.knownLineCount === 0 && money.unknownLineCount === 0) {
+    return body
+  }
+  const parts: string[] = [body, '']
+  if (money.knownLineCount > 0) {
+    if (money.subtotalCents > 0) {
+      if (money.decantCents > 0) parts.push(`Decants: ${formatCadFromCents(money.decantCents)}`)
+      if (money.bottleCents > 0) parts.push(`Bottles: ${formatCadFromCents(money.bottleCents)}`)
+      if (money.cnrCents > 0) {
+        parts.push(`Catch & Release: ${formatCadFromCents(money.cnrCents)}`)
+      }
+    }
+    if (money.knownLineCount > 0) {
+      parts.push(`Total Before Shipping: ${formatCadFromCents(money.subtotalCents)}`)
+    }
+  }
+  if (money.unknownLineCount > 0) {
+    if (parts[parts.length - 1] !== '') parts.push('')
+    parts.push(
+      `Not in total: ${money.unknownLineCount} line${
+        money.unknownLineCount > 1 ? 's' : ''
+      } with no parseable $ in the row (bottle or C&R), or no $/ml rate to compute a decant line price.`
+    )
+  }
+  return parts.join('\n')
+}
+
+async function copyTextToClipboard(text: string): Promise<boolean> {
+  if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(text)
+      return true
+    } catch {
+      /* fall back */
+    }
+  }
+  try {
+    const ta = document.createElement('textarea')
+    ta.value = text
+    ta.setAttribute('readonly', '')
+    ta.style.position = 'fixed'
+    ta.style.left = '-9999px'
+    document.body.appendChild(ta)
+    ta.select()
+    const ok = document.execCommand('copy')
+    document.body.removeChild(ta)
+    return ok
+  } catch {
+    return false
+  }
+}
+
 /**
  * Body-portaled slide-over (avoids shared Sheet/Radix stacking and flex height quirks on desktop).
  */
@@ -110,6 +180,17 @@ export function DmListSheetPanel() {
   const { items, remove, clear, isOpen, setOpen } = useDmList()
   const [mounted, setMounted] = useState(false)
   const money = useMemo(() => breakdownListMoney(items), [items])
+  const plainText = useMemo(() => buildPlainTextList(items, money), [items, money])
+
+  const copyList = useCallback(async () => {
+    if (items.length === 0) return
+    const ok = await copyTextToClipboard(plainText)
+    if (ok) {
+      toast('List copied to clipboard')
+    } else {
+      toast.error('Could not copy. Try again or copy the list by hand.')
+    }
+  }, [items.length, plainText])
 
   useLayoutEffect(() => {
     setMounted(true)
@@ -164,8 +245,8 @@ export function DmListSheetPanel() {
             Your List
           </h2>
           <p id="dm-list-desc" className="m-0 text-sm text-foreground">
-            This site has no checkout. Add items here, then take a screenshot of the list and
-            message Sandy Pants to order.
+            This site has no checkout. Add items here, then use <strong className="font-medium">Copy list</strong> below
+            (or a screenshot) and message Sandy Pants to order.
           </p>
         </div>
 
@@ -208,7 +289,7 @@ export function DmListSheetPanel() {
                   </p>
                 ) : null}
                 <p className="m-0 font-semibold" translate="no">
-                  Total (est.): {formatCadFromCents(money.subtotalCents)} CAD
+                  Total Before Shipping: {formatCadFromCents(money.subtotalCents)}
                 </p>
               </>
             ) : null}
@@ -224,8 +305,16 @@ export function DmListSheetPanel() {
 
         {items.length > 0 ? (
           <div className="shrink-0 border-t border-default bg-surface-100 p-3">
-            <div className="flex justify-end">
-              <Button type="default" onClick={clear} className="w-full sm:w-auto">
+            <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
+              <Button
+                type="default"
+                onClick={copyList}
+                className="w-full sm:order-1 sm:w-auto"
+                title="Copy the full list as plain text to paste into a message"
+              >
+                Copy List
+              </Button>
+              <Button type="outline" onClick={clear} className="w-full sm:order-2 sm:w-auto">
                 Clear List
               </Button>
             </div>
