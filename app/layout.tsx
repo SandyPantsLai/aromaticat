@@ -21,8 +21,7 @@ const metadata: Metadata = {
   applicationName: metadataApplicationName,
   title: metadataTitle,
   description:
-    'Supabase is the Postgres development platform providing all the backend features you need to build a product.',
-  metadataBase: new URL('https://supabase.com'),
+    'AromatiCat is a fragrance decant trade site for fragrance lovers.',
   icons: genFaviconData(BASE_PATH),
   robots: {
     index: IS_PRODUCTION,
@@ -30,17 +29,11 @@ const metadata: Metadata = {
   },
   openGraph: {
     type: 'article',
-    authors: 'Supabase',
+    authors: 'AromatiCat',
     url: `${BASE_PATH}`,
     images: `${BASE_PATH}/aromaticat-long-logo.svg`,
     publishedTime: new Date().toISOString(),
     modifiedTime: new Date().toISOString(),
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@supabase',
-    creator: '@supabase',
-    images: `${BASE_PATH}/aromaticat-long-logo.svg`,
   },
 }
 
