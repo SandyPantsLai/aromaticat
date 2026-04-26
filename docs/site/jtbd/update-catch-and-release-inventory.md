@@ -4,24 +4,25 @@
 
 ---
 
-## 1. Edit the overview MDX
+## 1. Edit the TypeScript inventory (source of truth)
 
-1. Open **`content/shop/catch-and-release/overview.mdx`**.
-2. Update the **GitHub-flavored markdown pipe table** (header row, separator row, one row per line item).
+1. Open **`config/shop/catchAndReleaseInventory.ts`**.
+2. Add, remove, or edit objects in **`CATCH_AND_RELEASE_INVENTORY`** (fields: **`brand`**, **`name`**, **`remainingMl`**, **`bottleSizeMl`**, **`cost`**, **`comments`** — all strings for display).
 3. Save. In dev, refresh the page; in production, deploy the change.
 
-There is **no** separate TypeScript inventory file for this section today — the table lives entirely in MDX.
+The MDX file **`content/shop/catch-and-release/overview.mdx`** should keep **`<CatchAndReleaseInventoryTable />`**, which reads that list and renders a table with an **Add to your list** action per row (client-only list, no checkout).
 
 ---
 
 ## 2. Optional: change intro copy
 
-Same file: edit any paragraphs above or below the table.
+Edit paragraphs in **`content/shop/catch-and-release/overview.mdx`** (frontmatter and body above the shortcode).
 
 ---
 
 ## 3. Verify
 
-Open **`/shop/catch-and-release/overview`** and confirm the table renders and columns read correctly on mobile (horizontal scroll inside prose if the table is wide).
+1. Open **`/shop/catch-and-release/overview`** and confirm the table matches **`catchAndReleaseInventory.ts`** and columns read correctly on mobile (horizontal scroll if the table is wide).
+2. Spot-check **Add to your list** for a row if you care about the fake-cart flow (see [Add a new decant](./add-a-new-decant.md) for how the list behaves site-wide).
 
-If the whole route 404s, see [When a page does not show up or 404s](./when-a-page-does-not-show-up-or-404s.md).
+If the whole route 404s, see [Troubleshooting: missing pages and 404s](./troubleshooting-missing-pages-and-404s.md).

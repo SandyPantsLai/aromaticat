@@ -5,7 +5,9 @@ import { Admonition, type AdmonitionProps } from 'ui-patterns/admonition'
 import { GlassPanel } from 'ui-patterns/GlassPanel'
 import { IconPanel } from 'ui-patterns/IconPanel'
 import { Heading } from 'ui/src/components/CustomHTMLElements'
+import { BottleAddToListFromInventory } from '~/components/BottleAddToListFromInventory'
 import { BottlesOverviewGrid } from '~/components/BottlesOverviewGrid'
+import { CatchAndReleaseInventoryTable } from '~/components/CatchAndReleaseInventoryTable'
 import ButtonCard from '~/components/ButtonCard'
 import { Extensions } from '~/components/Extensions'
 import { DecantInfo } from '~/components/DecantInfo'
@@ -39,7 +41,9 @@ const components = {
   Admonition: AdmonitionWithMargin,
   Badge,
   BottlesOverviewGrid,
+  BottleAddToListFromInventory,
   Button,
+  CatchAndReleaseInventoryTable,
   ButtonCard,
   DecantInfo,
   DecantProductCard,

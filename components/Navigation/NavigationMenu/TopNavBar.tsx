@@ -9,6 +9,7 @@ import { memo, useState } from 'react'
 import { isFeatureEnabled } from 'common/enabled-features'
 import { CommandMenuTriggerInput } from 'ui-patterns'
 import { buttonVariants, cn } from 'ui'
+import { DmListTrigger } from '~/features/shop/dmList/DmListTrigger'
 import { getCustomContent } from '../../../lib/custom-content/getCustomContent'
 import GlobalNavigationMenu from './GlobalNavigationMenu'
 
@@ -40,6 +41,9 @@ const TopNavBar: FC = () => {
             <div className="min-w-[12rem] max-w-lg flex-1 pl-2">
               <CommandMenuTriggerInput className="w-full" placeholder={searchPlaceholder} />
             </div>
+            <div className="shrink-0">
+              <DmListTrigger />
+            </div>
           </div>
 
           {/* Mobile: logo + search + hamburger menu */}
@@ -47,6 +51,7 @@ const TopNavBar: FC = () => {
             <HeaderLogo />
             <div className="flex gap-2 items-center shrink-0">
               <CommandMenuTriggerInput placeholder={searchPlaceholder} />
+              <DmListTrigger />
               <button
                 title="Menu dropdown button"
                 className={cn(

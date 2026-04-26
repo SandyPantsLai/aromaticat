@@ -242,6 +242,9 @@ importers:
       shared-data:
         specifier: workspace:*
         version: link:packages/shared-data
+      sonner:
+        specifier: ^1.5.0
+        version: 1.7.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       ui:
         specifier: workspace:*
         version: link:packages/ui

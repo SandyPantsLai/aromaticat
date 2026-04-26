@@ -27,16 +27,16 @@ export async function FragranceNotes({
       <p className="font-medium text-foreground">Fragrance Notes</p>
       <dl className={cn('grid gap-2 mt-2 sm:grid-cols-3')}>
         <div>
-          <dt className="text-foreground-lighter">Top</dt>
-          <dd className="text-foreground">{displayInfo(row.top)}</dd>
+          <dt className="text-foreground-lighter text-left">Top</dt>
+          <dd className="text-foreground text-left">{displayInfo(row.top)}</dd>
         </div>
         <div>
-          <dt className="text-foreground-lighter">Middle</dt>
-          <dd className="text-foreground">{displayInfo(row.mid)}</dd>
+          <dt className="text-foreground-lighter text-center">Middle</dt>
+          <dd className="text-foreground text-center">{displayInfo(row.mid)}</dd>
         </div>
         <div>
-          <dt className="text-foreground-lighter">Base</dt>
-          <dd className="text-foreground">{displayInfo(row.base)}</dd>
+          <dt className="text-foreground-lighter text-right">Base</dt>
+          <dd className="text-foreground text-right">{displayInfo(row.base)}</dd>
         </div>
       </dl>
     </aside>

@@ -59,11 +59,11 @@ New **`content/`** files require **deployment** (and static params generation in
 
 ### I. Search index out of date
 
-FTS is separate from the page existing — see [When I need search to see new content](./when-i-need-search-to-see-new-content.md).
+FTS is separate from the page existing — see [When I need search to see new content](./search-to-see-new-content.md).
 
 ### J. Stale Notion fields on decant UI
 
-See [When Notion catalog looks stale](./when-notion-catalog-looks-stale.md).
+See [Refresh the fragrances catalog](./refresh-the-fragrances-catalog.md).
 
 ---
 

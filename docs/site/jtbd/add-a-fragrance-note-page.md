@@ -31,4 +31,4 @@ If the nav marks a path disabled, the app will **404** that guide even if the MD
 1. Open **`/fragrance-notes/{your-path}`** in the browser.
 2. Confirm the new item appears in the header or mobile Fragrance Notes menu.
 
-Troubleshooting: [When a page does not show up or 404s](./when-a-page-does-not-show-up-or-404s.md).
+Troubleshooting: [Troubleshooting: missing pages and 404s](./troubleshooting-missing-pages-and-404s.md).

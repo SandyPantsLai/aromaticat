@@ -26,6 +26,10 @@ export const SHOP_CATALOG: readonly ShopSectionEntry[] = [
     icon: 'decants',
     brands: [
       {
+        name: '19-69',
+        products: [{ name: 'Capri', slug: 'capri' }],
+      },
+      {
         name: 'Aromag 岩兰',
         products: [{ name: 'Distant Love', slug: 'distant-love' }],
       },
@@ -53,8 +57,27 @@ export const SHOP_CATALOG: readonly ShopSectionEntry[] = [
         ],
       },
       {
+        name: 'D\'Annam',
+        products: [
+          { name: 'Matcha Soft Serve', slug: 'matcha-soft-serve' },
+          { name: 'Princess of China', slug: 'princess-of-china' },
+        ],
+
+      },
+      {
         name: 'Dedcool',
         products: [{ name: 'Mochi Milk', slug: 'mochi-milk' }],
+      },
+      {
+        name: 'Diptyque',
+        products: [
+          { name: 'Benjoin Bohème EDP Intense', slug: 'benjoin-boheme-edp-intense' },
+          { name: 'Do Son EDP', slug: 'do-son-edp' },
+          { name: 'Eau Capitale EDP', slug: 'eau-capitale-edp' },
+          { name: 'Eau Moheli EDT', slug: 'eau-moheli-edt' },
+          { name: 'L\'Ombre Dans L\'Eau EDT', slug: 'lombre-dans-leau-edt' },
+          { name: 'Orphéon EDP', slug: 'orpheon-edp' },
+        ],
       },
       {
         name: 'Escentric Molecules',
@@ -96,12 +119,32 @@ export const SHOP_CATALOG: readonly ShopSectionEntry[] = [
         ],
       },
       {
+        name: 'Le Labo',
+        products: [
+          { name: 'Ambrette 9', slug: 'ambrette-9' },
+          { name: 'Bergamote 22', slug: 'bergamote-22' },
+          { name: 'Jasmin 17', slug: 'jasmin-17' },
+          { name: 'Labdanum 18', slug: 'labdanum-18' },
+          { name: 'Lys 41', slug: 'lys-41' },
+        ],
+      },
+      {
         name: 'Maison Shan 银杉',
         products: [{ name: 'Intellectual', slug: 'intellectual' }],
       },
       {
         name: 'Mith',
         products: [{ name: 'Ruddy Sparkle', slug: 'ruddy-sparkle' }],
+      },
+      {
+        name: 'Odette',
+        products: [
+          { name: 'Amants Maudits', slug: 'amants-maudits' },
+          { name: 'Grande Battement', slug: 'grande-battement' },
+          { name: 'Lapinou', slug: 'lapinou' },
+          { name: 'Pas de Chat', slug: 'pas-de-chat' },
+          { name: 'Petit Gâteau', slug: 'petit-gateau' },
+        ],
       },
       {
         name: 'Room 1015',
