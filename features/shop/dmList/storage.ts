@@ -85,8 +85,32 @@ export function removeById(items: readonly DmListItem[], id: string): DmListItem
   return items.filter((e) => e.id !== id)
 }
 
-export function makeDecantId(slug: string, sizeMl: DecantSizeMl) {
-  return `decant:${slug.trim().toLowerCase()}--${sizeMl}ml`
+export type MakeDecantIdOptions = { name?: string; catalogId?: string }
+
+/**
+ * List line id for a decant. Prefer the URL `slug` when set; if it is empty, many frags
+ * would otherwise all become `decant:--3ml` and look like “already in list” when adding
+ * a different one — fall back to name, then a stable **catalog** id (e.g. Notion row `id`).
+ */
+export function makeDecantId(
+  slug: string,
+  sizeMl: DecantSizeMl,
+  options?: MakeDecantIdOptions
+) {
+  const t = typeof slug === 'string' ? slug.trim() : ''
+  if (t) {
+    return `decant:${t.toLowerCase()}--${sizeMl}ml`
+  }
+  const fromName = options?.name ? slugPart(options.name) : ''
+  if (fromName) {
+    return `decant:${fromName}--${sizeMl}ml`
+  }
+  const cid = options?.catalogId?.trim()
+  if (cid) {
+    const short = cid.replace(/-/g, '').slice(0, 16) || 'x'
+    return `decant:cid-${short}--${sizeMl}ml`
+  }
+  return `decant:item--${sizeMl}ml`
 }
 
 export function makeBottleId(brand: string, name: string) {

@@ -14,14 +14,14 @@ export function DmListTrigger() {
   return (
     <button
       type="button"
-      title="Open your list (screenshot to order)"
+      title="Open Your List (Screenshot to Order)"
       onClick={() => setOpen(true)}
       className={cn(
         buttonVariants({ type: 'default' }),
         'relative flex h-[30px] w-[30px] min-w-[30px] shrink-0 items-center justify-center rounded-md border border-default',
         'bg-surface-100/75 p-0 text-foreground-light hover:bg-overlay-hover/20'
       )}
-      aria-label={`Open your list, ${items.length} items`}
+      aria-label={`Open Your List, ${items.length} items`}
     >
       <ClipboardList size={18} strokeWidth={1.5} aria-hidden />
       {items.length > 0 ? (

@@ -66,6 +66,13 @@ describe('make*Id', () => {
     expect(makeBottleId('A', 'B')).toMatch(/^bottle:/)
     expect(makeCatchReleaseId('A', 'B')).toMatch(/^cnr:/)
   })
+
+  it('makeDecantId uses unique catalog id when slug is empty', () => {
+    expect(makeDecantId('', 3, { catalogId: '550e8400-e29b-41d4-a716-446655440000' })).toBe(
+      'decant:cid-550e8400e29b41d4--3ml'
+    )
+    expect(makeDecantId('', 5, { name: 'Foo Bar' })).toBe('decant:foo-bar--5ml')
+  })
 })
 
 describe('isDmListItem', () => {

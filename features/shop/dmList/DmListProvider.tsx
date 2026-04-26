@@ -4,6 +4,7 @@ import {
   useCallback,
   useLayoutEffect,
   useMemo,
+  useRef,
   useState,
   useSyncExternalStore,
   type PropsWithChildren,
@@ -26,7 +27,12 @@ import {
 
 export { useDmList, useDmListOptional } from './dmListContext'
 
+/** Suppress a second add with the same id in the same burst (e.g. double `onClick`), which would wrongly toast "Already…" after a real "Added…". */
+const DEDUPE_SAME_ID_MS = 150
+
 export function DmListProvider({ children }: PropsWithChildren) {
+  const lastAddById = useRef(new Map<string, number>())
+
   const items = useSyncExternalStore(
     subscribeDmList,
     getDmListSnapshot,
@@ -47,10 +53,19 @@ export function DmListProvider({ children }: PropsWithChildren) {
   }, [])
 
   const add = useCallback((item: DmListItem) => {
-    const wasPresent = getDmListSnapshot().some((i) => i.id === item.id)
-    addOrUpdateDmListItem(item)
-    if (wasPresent) toast('Already on your list')
-    else toast('Added to your list')
+    const now = Date.now()
+    const last = lastAddById.current.get(item.id) ?? 0
+    if (now - last < DEDUPE_SAME_ID_MS) {
+      return
+    }
+    lastAddById.current.set(item.id, now)
+
+    const { wasInList } = addOrUpdateDmListItem(item)
+    if (wasInList) {
+      toast('Already on your list')
+    } else {
+      toast('Added to your list')
+    }
   }, [])
 
   const remove = useCallback((id: string) => {

@@ -26,6 +26,10 @@ export const SHOP_CATALOG: readonly ShopSectionEntry[] = [
     icon: 'decants',
     brands: [
       {
+        name: '19-69',
+        products: [{ name: 'Capri', slug: 'capri' }],
+      },
+      {
         name: 'Aromag 岩兰',
         products: [{ name: 'Distant Love', slug: 'distant-love' }],
       },

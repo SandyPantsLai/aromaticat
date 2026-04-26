@@ -15,6 +15,8 @@ type AddDecantProps = {
   slug: string
   brand: string
   name: string
+  /** e.g. Notion / catalog row `id` — used when `slug` is empty so list ids stay unique. */
+  catalogId?: string
   /** e.g. `$3.25/ml` for display, must match the tile. */
   rateLabel: string
   href: string
@@ -30,6 +32,7 @@ export function AddDecantToDmListButton({
   slug,
   brand,
   name,
+  catalogId,
   rateLabel,
   href,
   costPerMl,
@@ -91,7 +94,7 @@ export function AddDecantToDmListButton({
         onClick={() => {
           const item: DmListDecantItem = {
             type: 'decant',
-            id: makeDecantId(slug, sizeMl),
+            id: makeDecantId(slug, sizeMl, { name, catalogId }),
             brand: brand || '—',
             name: name || '—',
             href,

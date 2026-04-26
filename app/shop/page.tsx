@@ -24,8 +24,9 @@ const generateMetadata = async (_, parent: ResolvingMetadata): Promise<Metadata>
 
 const ShopPage = () => (
   <article className="prose max-w-none">
-    <h1 className="scroll-mt-24">Shop</h1>
+    <h1 className="scroll-mt-24">How to Order</h1>
     <p>Explore the decants, catch and releases and bottles I have for sale or trade.</p>
+    <p>You can add stuff to your cart/list but there is no checkout. Take a screenshot of the list and message Sandy Pants to order.</p>
     <div className="not-prose mt-3 flex flex-wrap gap-2">
       {SHOP_CATALOG.map((section) => (
         <Link

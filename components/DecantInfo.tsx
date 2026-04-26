@@ -52,6 +52,7 @@ export async function DecantInfo({
               slug={row.slug}
               brand={displayInfo(row.brand)}
               name={displayInfo(row.name)}
+              catalogId={row.id}
               rateLabel={rateForList}
               href={decantPath}
               costPerMl={row.cost_per_ml}

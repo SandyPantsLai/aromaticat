@@ -161,7 +161,7 @@ export function DmListSheetPanel() {
       >
         <div className="shrink-0 space-y-1 border-b border-default bg-surface-100 px-5 py-4 pr-10 text-left">
           <h2 id="dm-list-title" className="m-0 text-lg font-semibold text-foreground">
-            Your list
+            Your List
           </h2>
           <p id="dm-list-desc" className="m-0 text-sm text-foreground">
             This site has no checkout. Add items here, then take a screenshot of the list and
