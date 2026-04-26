@@ -51,8 +51,8 @@ const HomePage = () => (
           ))}
         </ul>
       </section>
-      <DecantsOverviewSection category="featured" />
-      <DecantsOverviewSection category="new" />
+      <DecantsOverviewSection category="featured" layout="carousel" />
+      <DecantsOverviewSection category="new" layout="carousel" />
     </div>
   </HomeLayout>
 )

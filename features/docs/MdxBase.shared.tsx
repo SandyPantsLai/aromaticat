@@ -9,6 +9,7 @@ import ButtonCard from '~/components/ButtonCard'
 import { Extensions } from '~/components/Extensions'
 import { DecantInfo } from '~/components/DecantInfo'
 import { DecantProductCard } from '~/components/DecantProductCard'
+import { DecantProductCardGrid } from '~/components/DecantProductCardGrid'
 import { DecantsOverviewSection } from '~/components/DecantsOverviewSection'
 import { Fragram } from '~/components/Fragram'
 import { FragranceAudience } from '~/components/FragranceAudience'
@@ -39,6 +40,7 @@ const components = {
   ButtonCard,
   DecantInfo,
   DecantProductCard,
+  DecantProductCardGrid,
   DecantsOverviewSection,
   Extensions,
   Fragram,

@@ -22,8 +22,8 @@ const generateMetadata = async (_, parent: ResolvingMetadata): Promise<Metadata>
 const ShopPage = () => (
   <article className="prose max-w-none">
     <h1 className="scroll-mt-24">Shop</h1>
-    <DecantsOverviewSection category="featured" />
-    <DecantsOverviewSection category="new" />
+    <DecantsOverviewSection category="featured" layout="carousel" />
+    <DecantsOverviewSection category="new" layout="carousel" />
   </article>
 )
 
