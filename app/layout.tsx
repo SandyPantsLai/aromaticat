@@ -7,7 +7,7 @@ import '../styles/prism-okaidia.scss'
 
 import { GlobalProviders } from '~/features/app.providers'
 import { TopNavSkeleton } from '~/layouts/MainSkeleton'
-import { BASE_PATH, IS_PRODUCTION } from '~/lib/constants'
+import { BASE_PATH, IS_PRODUCTION, METADATA_BASE } from '~/lib/constants'
 import { getCustomContent } from '~/lib/custom-content/getCustomContent'
 import { genFaviconData } from 'common/MetaFavicons/app-router'
 import type { Metadata, Viewport } from 'next'
@@ -18,29 +18,27 @@ const { metadataApplicationName, metadataTitle } = getCustomContent([
 ])
 
 const metadata: Metadata = {
+  metadataBase: METADATA_BASE,
   applicationName: metadataApplicationName,
   title: metadataTitle,
   description:
-    'Supabase is the Postgres development platform providing all the backend features you need to build a product.',
-  metadataBase: new URL('https://supabase.com'),
+    'AromatiCat is a fragrance decant trade site for fragrance lovers.',
   icons: genFaviconData(BASE_PATH),
+  manifest: `${BASE_PATH}/favicon/manifest.json`,
+  other: {
+    'msapplication-config': `${BASE_PATH}/favicon/browserconfig.xml`,
+  },
   robots: {
     index: IS_PRODUCTION,
     follow: IS_PRODUCTION,
   },
   openGraph: {
     type: 'article',
-    authors: 'Supabase',
+    authors: 'AromatiCat',
     url: `${BASE_PATH}`,
     images: `${BASE_PATH}/aromaticat-long-logo.svg`,
     publishedTime: new Date().toISOString(),
     modifiedTime: new Date().toISOString(),
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@supabase',
-    creator: '@supabase',
-    images: `${BASE_PATH}/aromaticat-long-logo.svg`,
   },
 }
 

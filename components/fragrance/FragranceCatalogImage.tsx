@@ -10,6 +10,11 @@ interface FragranceCatalogImageProps {
    * Tailwind aspect-ratio class fragment, e.g. `3/4` for portrait bottles or `1/1` for fragrams.
    */
   aspect: string
+  /**
+   * `default`: doc-style block with vertical margin and max width.
+   * `grid`: full width, no outer margin — for product tiles and dense layouts.
+   */
+  variant?: 'default' | 'grid'
   className?: string
 }
 
@@ -23,15 +28,21 @@ export function FragranceCatalogImage({
   url,
   alt,
   aspect,
+  variant = 'default',
   className,
 }: FragranceCatalogImageProps) {
   if (!url || !isSafeHttpUrl(url)) {
     return null
   }
+  const outer =
+    variant === 'grid'
+      ? 'not-prose w-full'
+      : 'not-prose my-6 w-full max-w-sm'
+  const frameRadius = variant === 'grid' ? 'rounded-none' : 'rounded-md'
   return (
-    <div className={cn('not-prose my-6 w-full max-w-sm', className)}>
+    <div className={cn(outer, className)}>
       <div
-        className="relative w-full overflow-hidden rounded-md"
+        className={cn('relative w-full overflow-hidden bg-surface-200', frameRadius)}
         style={{ aspectRatio: aspect.replace('/', ' / ') }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element -- arbitrary https catalog URLs */}

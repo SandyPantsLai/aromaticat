@@ -11,7 +11,7 @@ import { Accordion, cn } from 'ui'
 import { getCustomContent } from '~/lib/custom-content/getCustomContent'
 import { normalizeMenuItemGroups, type DropdownMenuItem } from '../Navigation.types'
 import { MenuItem, useActiveMenuLabel } from './GlobalNavigationMenu'
-import { GLOBAL_MENU_ITEMS } from './NavigationMenu.constants'
+import { GLOBAL_TOP_NAV_MENU_ITEMS } from './NavigationMenu.constants'
 
 const DEFAULT_EASE = [0.24, 0.25, 0.05, 1]
 
@@ -31,7 +31,7 @@ const itemClassName =
   'block py-2 pl-2 pr-3.5 text-sm text-foreground-light hover:bg-surface-200 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-foreground-lighter focus-visible:rounded'
 
 const AccordionMenuItem = ({ section }: { section: DropdownMenuItem[] }) => {
-  const activeLabel = useActiveMenuLabel(GLOBAL_MENU_ITEMS)
+  const activeLabel = useActiveMenuLabel(GLOBAL_TOP_NAV_MENU_ITEMS)
 
   return (
     <m.div
@@ -94,7 +94,7 @@ const Menu = () => (
     justified
     chevronAlign="right"
   >
-    {GLOBAL_MENU_ITEMS.filter((section) => section[0].enabled !== false).map((section) => (
+    {GLOBAL_TOP_NAV_MENU_ITEMS.filter((section) => section[0].enabled !== false).map((section) => (
       <AccordionMenuItem key={section[0].label} section={section} />
     ))}
   </Accordion>

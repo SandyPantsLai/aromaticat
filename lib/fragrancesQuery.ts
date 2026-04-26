@@ -199,7 +199,7 @@ export function notionFragranceRowToCatalog(row: NotionFragrancesRow): Fragrance
     review: richTextProp(props, 'review'),
     comments: richTextProp(props, 'comments'),
     parfumo: urlProp(props, 'parfumo'),
-    fragrantica: urlProp(props, 'fragantica'),
+    fragrantica: urlProp(props, 'fragrantica'),
     image: fileUrlProp(props, 'image'),
     fragram: fileUrlProp(props, 'fragram'),
     created_at: row.created_time?.trim() || '',
@@ -232,4 +232,101 @@ export async function fetchFragranceByNameWithClient(
   }
 
   return data ? notionFragranceRowToCatalog(data) : null
+}
+
+/** JSON path on `notion.fragrances` used for title lookup (same as `fetchFragranceByNameWithClient`). */
+export const FRAGRANCE_NAME_JSON_PATH = 'attrs->properties->name->title->0->>plain_text'
+
+/**
+ * Max names per PostgREST `.or(...)` chunk. Longer lists run multiple requests in sequence.
+ * @see fetchFragrancesByNamesWithClient
+ */
+export const FRAGRANCE_BATCH_NAME_LIMIT = 30
+
+/**
+ * Trim, drop empties, dedupe case-insensitively (keep first spelling).
+ * No length cap — {@link fetchFragrancesByNamesWithClient} chunks to {@link FRAGRANCE_BATCH_NAME_LIMIT}
+ * per PostgREST request so long grids stay within URL / filter limits.
+ */
+export function normalizeFragranceNamesForBatch(names: readonly string[]): string[] {
+  const seen = new Set<string>()
+  const out: string[] = []
+  for (const raw of names) {
+    const t = raw.trim()
+    if (!t) continue
+    const k = t.toLowerCase()
+    if (seen.has(k)) continue
+    seen.add(k)
+    out.push(t)
+  }
+  return out
+}
+
+/**
+ * Double-quote a value for PostgREST filter syntax (`"` → `""`).
+ */
+export function quotePostgrestFilterString(value: string): string {
+  return `"${value.replace(/"/g, '""')}"`
+}
+
+/**
+ * Builds the `.or(...)` filter string for multiple `ilike` clauses on the name JSON path.
+ * `normalized` must already be trimmed/deduped (e.g. from {@link normalizeFragranceNamesForBatch}).
+ * Prefer chunks of at most {@link FRAGRANCE_BATCH_NAME_LIMIT} entries for PostgREST URL safety.
+ */
+export function buildFragranceNamesOrFilterFromNormalized(
+  normalized: readonly string[]
+): string | null {
+  if (normalized.length === 0) return null
+  const col = FRAGRANCE_NAME_JSON_PATH
+  const parts = normalized.map((n) => `${col}.ilike.${quotePostgrestFilterString(n)}`)
+  return parts.join(',')
+}
+
+/**
+ * Builds the `.or(...)` filter for a full name list (normalizes first).
+ * For large lists, {@link fetchFragrancesByNamesWithClient} uses chunked requests instead of one giant filter.
+ */
+export function buildFragranceNamesOrFilter(names: readonly string[]): string | null {
+  const normalized = normalizeFragranceNamesForBatch(names)
+  return buildFragranceNamesOrFilterFromNormalized(normalized)
+}
+
+/**
+ * Loads all rows whose Notion `name` title matches any of the given names (case-insensitive).
+ * Names are split into chunks of {@link FRAGRANCE_BATCH_NAME_LIMIT} so each PostgREST `.or(...)` stays bounded.
+ */
+export async function fetchFragrancesByNamesWithClient(
+  client: SupabaseClient<Database>,
+  names: readonly string[]
+): Promise<FragranceRow[]> {
+  const normalized = normalizeFragranceNamesForBatch(names)
+  if (normalized.length === 0) return []
+
+  const byId = new Map<string, FragranceRow>()
+
+  for (let i = 0; i < normalized.length; i += FRAGRANCE_BATCH_NAME_LIMIT) {
+    const chunk = normalized.slice(i, i + FRAGRANCE_BATCH_NAME_LIMIT)
+    const orFilter = buildFragranceNamesOrFilterFromNormalized(chunk)
+    if (!orFilter) continue
+
+    const { data, error } = await client
+      .schema('notion')
+      .from('fragrances')
+      .select('id,url,created_time,last_edited_time,archived,attrs')
+      .or(orFilter)
+
+    if (error) {
+      console.error('[fragrances] fetchFragrancesByNamesWithClient', error.message)
+      continue
+    }
+
+    if (!data?.length) continue
+    for (const row of data) {
+      const catalog = notionFragranceRowToCatalog(row)
+      byId.set(catalog.id, catalog)
+    }
+  }
+
+  return [...byId.values()]
 }

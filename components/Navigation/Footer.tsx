@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { cn, IconBasenotes, IconFragrantica, IconParfumo } from 'ui'
+import { cn, IconFragrantica, IconParfumo } from 'ui'
 import { primaryLinks } from '~/data/footer'
 import { LayoutMainContent } from '~/layouts/DefaultLayout'
 
@@ -54,14 +54,6 @@ const Footer = ({ className }: { className?: string }) => (
           >
             <span className="sr-only">Fragrantica</span>
             <IconFragrantica size={14} />
-          </a>
-
-          <a
-            href="https://basenotes.com/"
-            className="text-foreground-muted hover:text-foreground transition"
-          >
-            <span className="sr-only">Basenotes</span>
-            <IconBasenotes size={14} />
           </a>
         </div>
       </div>

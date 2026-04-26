@@ -16,14 +16,14 @@ import {
   navigationMenuTriggerStyle,
 } from 'ui'
 
-import { normalizeMenuItemGroups, type MenuIconKey } from '../Navigation.types'
+import { normalizeMenuItemGroups, type GlobalMenuItems, type MenuIconKey } from '../Navigation.types'
 import MenuIconPicker from './MenuIconPicker'
-import { GLOBAL_MENU_ITEMS } from './NavigationMenu.constants'
+import { GLOBAL_TOP_NAV_MENU_ITEMS } from './NavigationMenu.constants'
 
 /**
  * Get TopNav active label based on current pathname
  */
-export const useActiveMenuLabel = (menu: typeof GLOBAL_MENU_ITEMS) => {
+export const useActiveMenuLabel = (menu: GlobalMenuItems) => {
   const pathname = usePathname()
   const [activeLabel, setActiveLabel] = useState('')
 
@@ -63,7 +63,7 @@ export const useActiveMenuLabel = (menu: typeof GLOBAL_MENU_ITEMS) => {
 }
 
 const GlobalNavigationMenu: FC = () => {
-  const activeLabel = useActiveMenuLabel(GLOBAL_MENU_ITEMS)
+  const activeLabel = useActiveMenuLabel(GLOBAL_TOP_NAV_MENU_ITEMS)
   const triggerClassName =
     'h-[var(--header-height)] p-2 bg-transparent border-0 border-b-2 border-transparent font-normal rounded-none text-foreground-light hover:text-foreground data-[state=open]:!text-foreground data-[radix-collection-item]:focus-visible:ring-2 data-[radix-collection-item]:focus-visible:ring-foreground-lighter data-[radix-collection-item]:focus-visible:text-foreground h-full focus-visible:rounded !shadow-none outline-none transition-all outline-0 focus-visible:outline-4 focus-visible:outline-offset-1 focus-visible:outline-brand-600'
 
@@ -77,7 +77,7 @@ const GlobalNavigationMenu: FC = () => {
         viewportClassName="mt-0 max-w-screen overflow-hidden border-0 rounded-none mt-1.5 rounded-md !border-x"
       >
         <NavigationMenuList className="px-6 space-x-2 h-[var(--header-height)]">
-          {GLOBAL_MENU_ITEMS.filter((section) => section[0].enabled !== false).map(
+          {GLOBAL_TOP_NAV_MENU_ITEMS.filter((section) => section[0].enabled !== false).map(
             (section, sectionIdx) =>
               section[0].menuItems ? (
                 <NavigationMenuItem

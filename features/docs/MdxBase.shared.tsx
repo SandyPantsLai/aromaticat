@@ -5,12 +5,17 @@ import { Admonition, type AdmonitionProps } from 'ui-patterns/admonition'
 import { GlassPanel } from 'ui-patterns/GlassPanel'
 import { IconPanel } from 'ui-patterns/IconPanel'
 import { Heading } from 'ui/src/components/CustomHTMLElements'
+import { BottlesOverviewGrid } from '~/components/BottlesOverviewGrid'
 import ButtonCard from '~/components/ButtonCard'
 import { Extensions } from '~/components/Extensions'
 import { DecantInfo } from '~/components/DecantInfo'
+import { DecantProductCard } from '~/components/DecantProductCard'
+import { DecantProductCardGrid } from '~/components/DecantProductCardGrid'
+import { DecantsOverviewSection } from '~/components/DecantsOverviewSection'
 import { Fragram } from '~/components/Fragram'
 import { FragranceAudience } from '~/components/FragranceAudience'
 import { FragranceCost } from '~/components/FragranceCost'
+import { FragranceLinks } from '~/components/FragranceLinks'
 import { FragranceDescription } from '~/components/FragranceDescription'
 import { FragranceImage } from '~/components/FragranceImage'
 import { FragranceNotes } from '~/components/FragranceNotes'
@@ -33,13 +38,18 @@ const components = {
   AccordionItem,
   Admonition: AdmonitionWithMargin,
   Badge,
+  BottlesOverviewGrid,
   Button,
   ButtonCard,
   DecantInfo,
+  DecantProductCard,
+  DecantProductCardGrid,
+  DecantsOverviewSection,
   Extensions,
   Fragram,
   FragranceAudience,
   FragranceCost,
+  FragranceLinks,
   FragranceDescription,
   FragranceImage,
   FragranceNotes,
