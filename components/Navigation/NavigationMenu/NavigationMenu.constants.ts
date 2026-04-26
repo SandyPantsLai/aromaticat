@@ -20,6 +20,12 @@ import {
 export { getShopSection, getShopSidebarNav, shopBreadcrumbNav }
 
 /**
+ * Top bar only. Set to `true` to show **Fragrance Notes** in the header again.
+ * Does not remove routes, sidebar data, or `fragrance` nav constant — only desktop/mobile top nav.
+ */
+export const SHOW_FRAGRANCE_NOTES_IN_TOP_NAV = false
+
+/**
  * Top-level navigation for the fragrance-only documentation site.
  */
 export const GLOBAL_MENU_ITEMS: GlobalMenuItems = [
@@ -57,6 +63,11 @@ export const GLOBAL_MENU_ITEMS: GlobalMenuItems = [
     },
   ],
 ]
+
+/** Menu sections rendered in the desktop + mobile top nav (subset of {@link GLOBAL_MENU_ITEMS}). */
+export const GLOBAL_TOP_NAV_MENU_ITEMS: GlobalMenuItems = SHOW_FRAGRANCE_NOTES_IN_TOP_NAV
+  ? GLOBAL_MENU_ITEMS
+  : GLOBAL_MENU_ITEMS.filter((section) => section[0]?.level !== 'fragrance-notes')
 
 export const fragrance: NavMenuConstant = {
   icon: 'fragrance',
