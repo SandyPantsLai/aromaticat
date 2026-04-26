@@ -24,6 +24,10 @@ const metadata: Metadata = {
   description:
     'AromatiCat is a fragrance decant trade site for fragrance lovers.',
   icons: genFaviconData(BASE_PATH),
+  manifest: `${BASE_PATH}/favicon/manifest.json`,
+  other: {
+    'msapplication-config': `${BASE_PATH}/favicon/browserconfig.xml`,
+  },
   robots: {
     index: IS_PRODUCTION,
     follow: IS_PRODUCTION,
