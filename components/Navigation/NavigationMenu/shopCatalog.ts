@@ -75,7 +75,7 @@ export const SHOP_CATALOG: readonly ShopSectionEntry[] = [
           { name: 'Do Son EDP', slug: 'do-son-edp' },
           { name: 'Eau Capitale EDP', slug: 'eau-capitale-edp' },
           { name: 'Eau Moheli EDT', slug: 'eau-moheli-edt' },
-          { name: 'L\'Ombre Fans L\'Eau EDT', slug: 'lombre-dans-leau-edt' },
+          { name: 'L\'Ombre Dans L\'Eau EDT', slug: 'lombre-dans-leau-edt' },
           { name: 'Orphéon EDP', slug: 'orpheon-edp' },
         ],
       },
@@ -119,12 +119,32 @@ export const SHOP_CATALOG: readonly ShopSectionEntry[] = [
         ],
       },
       {
+        name: 'Le Labo',
+        products: [
+          { name: 'Ambrette 9', slug: 'ambrette-9' },
+          { name: 'Bergamote 22', slug: 'bergamote-22' },
+          { name: 'Jasmin 17', slug: 'jasmin-17' },
+          { name: 'Labdanum 18', slug: 'labdanum-18' },
+          { name: 'Lys 41', slug: 'lys-41' },
+        ],
+      },
+      {
         name: 'Maison Shan 银杉',
         products: [{ name: 'Intellectual', slug: 'intellectual' }],
       },
       {
         name: 'Mith',
         products: [{ name: 'Ruddy Sparkle', slug: 'ruddy-sparkle' }],
+      },
+      {
+        name: 'Odette',
+        products: [
+          { name: 'Amants Maudits', slug: 'amants-maudits' },
+          { name: 'Grande Battement', slug: 'grande-battement' },
+          { name: 'Lapinou', slug: 'lapinou' },
+          { name: 'Pas de Chat', slug: 'pas-de-chat' },
+          { name: 'Petit Gâteau', slug: 'petit-gateau' },
+        ],
       },
       {
         name: 'Room 1015',
